@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Anvoxa — The voice behind the work.</title>
+<meta name="description" content="Research guides, supporting writers, and technical researchers — alongside you on the work you want to see published." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --red: #E8401C;
+  --red-dark: #C83410;
+  --ink: #1A1A18;
+  --ink-mid: #2E2E2A;
+  --ink-soft: #444440;
+  --muted: #7A7A72;
+  --line: #E2E0D8;
+  --bg: #F5F4F0;
+  --white: #FFFFFF;
+  --card-bg: #EDECEA;
+
+  --display: 'Syne', sans-serif;
+  --body: 'DM Sans', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--body);
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; }
+
+/* ─── NAV ───────────────────────────────────────────── */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  background: var(--ink);
+  z-index: 100;
+  transition: box-shadow 0.2s;
+}
+.nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.25); }
+.nav-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 40px;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+.nav-brand {
+  font-family: var(--display);
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -0.5px;
+}
+.nav-brand span { color: var(--red); }
+
+.nav-links {
+  display: flex;
+  gap: 36px;
+  align-items: center;
+}
+.nav-link {
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+  font-weight: 400;
+  letter-spacing: 0.3px;
+  transition: color 0.15s;
+  text-transform: uppercase;
+}
+.nav-link:hover { color: var(--white); }
+.nav-link.active { color: var(--white); }
+
+.nav-cta {
+  background: var(--red);
+  color: #fff;
+  padding: 10px 24px;
+  border-radius: 4px;
+  font-size: 13px;
+  border: none;
+  font-weight: 500;
+  font-family: var(--display);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  transition: background 0.15s, transform 0.15s;
+}
+.nav-cta:hover { background: var(--red-dark); transform: translateY(-1px); }
+
+.nav-toggle { display: none; background: none; border: none; padding: 4px; }
+.nav-toggle span {
+  display: block; width: 24px; height: 2px;
+  background: var(--white); margin: 5px 0; border-radius: 2px;
+}
+
+/* ─── HERO ──────────────────────────────────────────── */
+.hero {
+  background: var(--ink);
+  min-height: 480px;
+  display: flex;
+  align-items: center;
+  padding: 140px 40px 80px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.025'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  top: -20%; right: -5%;
+  width: 560px; height: 560px;
+  background: radial-gradient(circle, rgba(232,64,28,0.18) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--red);
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 28px;
+  font-family: var(--display);
+}
+.hero-eyebrow::before {
+  content: '';
+  width: 32px; height: 2px;
+  background: var(--red);
+}
+.hero-title {
+  font-family: var(--display);
+  font-size: 76px;
+  font-weight: 800;
+  line-height: 1.0;
+  letter-spacing: -2.5px;
+  color: var(--white);
+  margin-bottom: 28px;
+  max-width: 15ch;
+}
+.hero-title em {
+  font-style: italic;
+  color: var(--red);
+  font-weight: 700;
+}
+.hero-sub {
+  font-size: 17px;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.65);
+  max-width: 540px;
+  margin-bottom: 48px;
+  font-weight: 300;
+}
+.hero-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 64px;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 32px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--display);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  border: none;
+  transition: all 0.15s;
+}
+.btn-primary { background: var(--red); color: #fff; }
+.btn-primary:hover { background: var(--red-dark); transform: translateY(-2px); }
+.btn-ghost { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.3); }
+.btn-ghost:hover { border-color: #fff; background: rgba(255,255,255,0.08); }
+
+.hero-publishers {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding-top: 40px;
+  border-top: 1px solid rgba(255,255,255,0.12);
+}
+.hero-publishers-label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.publisher-pill {
+  font-size: 12px;
+  color: rgba(255,255,255,0.6);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 3px;
+  padding: 5px 14px;
+  letter-spacing: 0.5px;
+  font-family: var(--display);
+  font-weight: 600;
+}
+
+/* ─── SECTIONS ──────────────────────────────────────── */
+section { padding: 110px 40px; }
+.wrap { max-width: 1280px; margin: 0 auto; }
+.wrap-narrow { max-width: 860px; margin: 0 auto; }
+
+.section-header { margin-bottom: 64px; }
+.section-header.center { text-align: center; }
+.section-header.center .lead { margin: 0 auto; }
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--red);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-family: var(--display);
+  margin-bottom: 20px;
+}
+.eyebrow::before {
+  content: '';
+  width: 24px; height: 2px;
+  background: var(--red);
+}
+
+.section-title {
+  font-family: var(--display);
+  font-size: 52px;
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -1.8px;
+  color: var(--ink);
+  margin-bottom: 20px;
+}
+.section-title em {
+  font-style: italic;
+  color: var(--red);
+}
+.lead {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--muted);
+  max-width: 580px;
+  font-weight: 300;
+}
+
+/* ─── WHO WE ARE ────────────────────────────────────── */
+.who { background: var(--white); border-top: 4px solid var(--red); }
+.who-text {
+  font-size: 21px;
+  line-height: 1.6;
+  color: var(--ink);
+  margin-bottom: 24px;
+  font-weight: 300;
+  letter-spacing: -0.3px;
+}
+.who-text-body {
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--ink-soft);
+  margin-bottom: 20px;
+}
+.who-callout {
+  margin-top: 48px;
+  padding: 40px 44px;
+  background: var(--ink);
+  border-left: 5px solid var(--red);
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 27px;
+  font-weight: 600;
+  color: var(--white);
+  line-height: 1.3;
+  letter-spacing: -0.4px;
+}
+
+/* ─── WHAT WE DO ────────────────────────────────────── */
+.what-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.what-card {
+  border-radius: 6px;
+  padding: 48px 44px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s, box-shadow 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+.what-card::before {
+  content: '';
+  position: absolute;
+  bottom: -30px; right: -30px;
+  width: 180px; height: 180px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.05);
+}
+.what-card:hover { transform: translateY(-5px); box-shadow: 0 20px 48px rgba(0,0,0,0.15); }
+.what-card.red-card { background: var(--red); }
+.what-card.dark-card { background: var(--ink); }
+
+.what-num {
+  font-size: 11px;
+  letter-spacing: 2px;
+  font-weight: 700;
+  opacity: 0.7;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  font-family: var(--display);
+}
+.what-title {
+  font-family: var(--display);
+  font-size: 30px;
+  font-weight: 800;
+  margin-bottom: 18px;
+  line-height: 1.1;
+  letter-spacing: -0.8px;
+}
+.what-title em { font-style: italic; font-weight: 600; }
+.what-desc {
+  font-size: 14.5px;
+  line-height: 1.7;
+  margin-bottom: 36px;
+  opacity: 0.88;
+  font-weight: 300;
+}
+.what-list {
+  list-style: none;
+  border-top: 1px solid rgba(255,255,255,0.18);
+  padding-top: 24px;
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.what-list li {
+  font-size: 13.5px;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.what-list li::before {
+  content: '→';
+  font-size: 12px;
+  opacity: 0.6;
+  flex-shrink: 0;
+}
+
+/* ─── STEPS ─────────────────────────────────────────── */
+.steps { background: var(--ink); }
+.steps .section-title { color: var(--white); }
+.steps .eyebrow { color: var(--red); }
+.steps .lead { color: rgba(255,255,255,0.55); }
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(255,255,255,0.1);
+  border-top: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  margin-top: 64px;
+}
+.step {
+  background: var(--ink);
+  padding: 48px 36px;
+  transition: background 0.2s;
+}
+.step:hover { background: var(--ink-mid); }
+.step-num {
+  font-family: var(--display);
+  font-size: 64px;
+  font-weight: 800;
+  color: var(--red);
+  line-height: 1;
+  margin-bottom: 20px;
+  letter-spacing: -3px;
+}
+.step-title {
+  font-family: var(--display);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 12px;
+  letter-spacing: -0.3px;
+}
+.step-desc {
+  font-size: 14px;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.65;
+  font-weight: 300;
+}
+.future-note {
+  margin-top: 48px;
+  font-size: 14px;
+  color: rgba(255,255,255,0.4);
+  font-style: italic;
+  max-width: 820px;
+  line-height: 1.6;
+  font-family: var(--display);
+  border-left: 3px solid rgba(232,64,28,0.4);
+  padding-left: 20px;
+}
+
+/* ─── DOMAINS ────────────────────────────────────────── */
+.domains-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.domain-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 36px 32px;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.25s;
+  cursor: default;
+  position: relative;
+  overflow: hidden;
+}
+.domain-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 4px; height: 100%;
+  background: var(--red);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.25s;
+}
+.domain-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 36px rgba(0,0,0,0.09);
+  border-color: transparent;
+}
+.domain-card:hover::after { transform: scaleY(1); }
+
+.domain-num {
+  font-size: 11px;
+  letter-spacing: 2px;
+  font-weight: 700;
+  color: var(--red);
+  text-transform: uppercase;
+  font-family: var(--display);
+  margin-bottom: auto;
+}
+.domain-name {
+  font-family: var(--display);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 10px;
+  margin-top: 28px;
+  line-height: 1.2;
+  letter-spacing: -0.4px;
+}
+.domain-tags {
+  font-size: 12.5px;
+  color: var(--muted);
+  letter-spacing: 0.2px;
+  line-height: 1.55;
+}
+
+.venues {
+  margin-top: 56px;
+  padding: 28px 36px;
+  background: var(--ink);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.venues-label {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--red);
+  font-weight: 700;
+  font-family: var(--display);
+  flex-shrink: 0;
+}
+.venues-list { font-size: 14px; color: rgba(255,255,255,0.7); }
+.outside-note {
+  margin-top: 28px;
+  font-size: 14px;
+  color: var(--muted);
+  font-style: italic;
+  max-width: 720px;
+  line-height: 1.65;
+}
+
+/* ─── PRINCIPLES ────────────────────────────────────── */
+.principles { background: var(--card-bg); }
+.principles-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.principle {
+  background: var(--white);
+  border-radius: 6px;
+  padding: 40px 32px;
+  transition: all 0.2s;
+  border: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+}
+.principle:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+}
+.principle.dark-p {
+  background: var(--ink);
+  border-color: var(--ink);
+}
+.principle.red-p {
+  background: var(--red);
+  border-color: var(--red);
+}
+.principle-num {
+  font-family: var(--display);
+  font-size: 48px;
+  font-weight: 800;
+  color: var(--red);
+  line-height: 1;
+  margin-bottom: 20px;
+  letter-spacing: -2px;
+}
+.dark-p .principle-num { color: rgba(255,255,255,0.2); }
+.red-p .principle-num { color: rgba(255,255,255,0.35); }
+
+.principle-title {
+  font-family: var(--display);
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 14px;
+  letter-spacing: -0.3px;
+  line-height: 1.2;
+  color: var(--ink);
+}
+.dark-p .principle-title { color: var(--white); }
+.red-p .principle-title { color: var(--white); }
+
+.principle-desc {
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+.dark-p .principle-desc { color: rgba(255,255,255,0.55); }
+.red-p .principle-desc { color: rgba(255,255,255,0.85); }
+
+.principle-wide {
+  grid-column: span 2;
+  flex-direction: row;
+  align-items: center;
+  gap: 40px;
+}
+.principle-wide .principle-num { margin-bottom: 0; flex-shrink: 0; font-size: 72px; }
+
+/* ─── ARCHETYPES ────────────────────────────────────── */
+.archetypes-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.archetype {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 40px 36px;
+  transition: all 0.2s;
+  position: relative;
+}
+.archetype::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: var(--red);
+  border-radius: 6px 6px 0 0;
+  transform: scaleX(0);
+  transition: transform 0.25s;
+}
+.archetype:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 36px rgba(0,0,0,0.08);
+}
+.archetype:hover::before { transform: scaleX(1); }
+.archetype-num {
+  font-family: var(--display);
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--line);
+  line-height: 1;
+  margin-bottom: 20px;
+  letter-spacing: -1.5px;
+}
+.archetype-title {
+  font-family: var(--display);
+  font-size: 21px;
+  font-weight: 700;
+  margin-bottom: 14px;
+  letter-spacing: -0.3px;
+  line-height: 1.2;
+  color: var(--ink);
+}
+.archetype-desc {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+  font-weight: 300;
+}
+.not-sure {
+  margin-top: 52px;
+  text-align: center;
+  font-size: 16px;
+  color: var(--ink-soft);
+}
+.not-sure a {
+  color: var(--red);
+  font-weight: 600;
+  font-family: var(--display);
+  border-bottom: 2px solid var(--red);
+  padding-bottom: 1px;
+}
+.not-sure a:hover { color: var(--red-dark); border-color: var(--red-dark); }
+
+/* ─── CONTACT ───────────────────────────────────────── */
+.contact { background: var(--ink); }
+.contact-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.contact-left .section-title { color: var(--white); }
+.contact-left .eyebrow { color: var(--red); }
+.contact-tag {
+  font-size: 16px;
+  color: rgba(255,255,255,0.5);
+  margin-top: -8px;
+  margin-bottom: 40px;
+  font-style: italic;
+}
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+.contact-email {
+  font-family: var(--display);
+  font-size: 28px;
+  color: var(--white);
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  transition: color 0.15s;
+}
+.contact-email:hover { color: var(--red); }
+.contact-phone {
+  font-size: 15px;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.5px;
+}
+.contact-note {
+  font-size: 14px;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.7;
+  font-style: italic;
+  max-width: 440px;
+}
+.contact-right {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 6px;
+  padding: 48px;
+}
+.contact-right h3 {
+  font-family: var(--display);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 32px;
+  letter-spacing: -0.4px;
+}
+.contact-divider {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.3);
+  text-transform: uppercase;
+  margin-bottom: 32px;
+  font-family: var(--display);
+}
+.contact-cta {
+  margin-top: 32px;
+}
+.contact-cta .btn-primary {
+  width: 100%;
+  justify-content: center;
+  padding: 16px 32px;
+  font-size: 14px;
+}
+
+/* ─── FOOTER ────────────────────────────────────────── */
+.footer {
+  background: #0F0F0E;
+  padding: 80px 40px 40px;
+  color: rgba(255,255,255,0.4);
+}
+.footer-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  gap: 48px;
+  padding-bottom: 56px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  margin-bottom: 40px;
+}
+.footer-brand {
+  font-family: var(--display);
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -0.5px;
+  margin-bottom: 16px;
+}
+.footer-brand span { color: var(--red); }
+.footer-desc {
+  font-size: 13.5px;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+.footer-col h4 {
+  font-family: var(--display);
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.6);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+}
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-col ul li a {
+  font-size: 13.5px;
+  color: rgba(255,255,255,0.4);
+  transition: color 0.15s;
+}
+.footer-col ul li a:hover { color: var(--red); }
+.footer-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13.5px;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 10px;
+}
+.footer-contact-item::before {
+  content: '→';
+  color: var(--red);
+  font-size: 12px;
+  flex-shrink: 0;
+}
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.footer-copy {
+  font-size: 12.5px;
+  color: rgba(255,255,255,0.3);
+}
+.footer-copy a { color: var(--red); }
+
+/* ─── RESPONSIVE ────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .steps-grid { grid-template-columns: repeat(2, 1fr); }
+  .domains-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 900px) {
+  .nav-inner { padding: 0 20px; }
+  .nav-links { display: none; position: absolute; top: 68px; left: 0; right: 0; background: var(--ink); flex-direction: column; padding: 24px 20px; gap: 20px; border-top: 1px solid rgba(255,255,255,0.1); }
+  .nav-links.open { display: flex; }
+  .nav-toggle { display: block; }
+  section { padding: 72px 24px; }
+  .hero { padding: 120px 24px 64px; }
+  .hero-title { font-size: 48px; letter-spacing: -1.5px; }
+  .section-title { font-size: 38px; letter-spacing: -1.2px; }
+  .what-grid { grid-template-columns: 1fr; }
+  .steps-grid { grid-template-columns: 1fr; gap: 1px; }
+  .domains-grid { grid-template-columns: 1fr; }
+  .principles-grid { grid-template-columns: 1fr; }
+  .principle-wide { grid-column: span 1; flex-direction: column; align-items: start; gap: 16px; }
+  .principle-wide .principle-num { font-size: 48px; }
+  .archetypes-grid { grid-template-columns: 1fr; }
+  .contact-inner { grid-template-columns: 1fr; gap: 40px; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+  .footer-top > div:first-child { grid-column: span 2; }
+}
+@media (max-width: 600px) {
+  .footer-top { grid-template-columns: 1fr; }
+  .footer-top > div:first-child { grid-column: span 1; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#top" class="nav-brand">Anvoxa<span>.</span></a>
+    <div class="nav-links" id="nav-links">
+      <a href="#what" class="nav-link">What we do</a>
+      <a href="#steps" class="nav-link">Process</a>
+      <a href="#domains" class="nav-link">Domains</a>
+      <a href="#principles" class="nav-link">Principles</a>
+      <a href="#help" class="nav-link">Who we help</a>
+      <a href="#contact" class="nav-link">Contact</a>
+      <button class="nav-cta" onclick="goAuth()" id="nav-cta">Get started</button>
+    </div>
+    <button class="nav-toggle" onclick="toggleNav()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">An introduction · 2026</div>
+    <h1 class="hero-title">Every great idea needs a <em>voice</em>.</h1>
+    <p class="hero-sub">
+      Research guides, supporting writers, and technical researchers — alongside
+      you on the work you want to see published.
+    </p>
+    <div class="hero-actions">
+      <button class="btn btn-primary" onclick="startEngagement()">Begin a conversation</button>
+      <a href="#what" class="btn btn-ghost">What we do</a>
+    </div>
+    <div class="hero-publishers">
+      <span class="hero-publishers-label">We write for</span>
+      <span class="publisher-pill">IEEE</span>
+      <span class="publisher-pill">Springer</span>
+      <span class="publisher-pill">Elsevier</span>
+      <span class="publisher-pill">ACM</span>
+    </div>
+  </div>
+</section>
+
+<!-- WHO WE ARE -->
+<section class="who" id="who">
+  <div class="wrap-narrow">
+    <div class="eyebrow">Who we are</div>
+    <h2 class="section-title">Every great idea<br>needs a <em>voice</em>.</h2>
+    <p class="who-text">
+      For years, we have worked quietly alongside researchers, students, and technical
+      teams — as guides and supporting writers for people who had something worth
+      publishing but not the time, the structure, or the craft to see it through on
+      their own. We did it the real way: no shortcuts, no templates, no content mills.
+    </p>
+    <p class="who-text-body">
+      Today, Anvoxa is a focused team of research guides, supporting writers, coders,
+      and technical researchers. We support the writing. We support the code. We
+      support the research itself when a client wants a second mind on the problem.
+      The engagement is shaped around what the work actually needs — and around
+      the parts you'd rather not carry alone.
+    </p>
+    <p class="who-text-body">
+      The instinct is the same one we started with. Support the work well. Earn the
+      next conversation.
+    </p>
+    <div class="who-callout">
+      The work stays yours. We support you wherever you need us along the way.
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE DO -->
+<section id="what">
+  <div class="wrap">
+    <div class="section-header center">
+      <div class="eyebrow">What we do</div>
+      <h2 class="section-title">Two ways we can <em>support you</em>.</h2>
+      <p class="lead">
+        Everything we offer today sits in one of two places: supporting you on the
+        writing, or supporting you on the work the paper is about. Often both.
+      </p>
+    </div>
+    <div class="what-grid">
+      <div class="what-card red-card">
+        <div class="what-num">01 · Writing</div>
+        <h3 class="what-title">Supporting Writers<br>& <em>Research Guides</em></h3>
+        <p class="what-desc">
+          We sit alongside you through the structure, the argument, the literature,
+          the drafting, and the revisions — supporting the parts you don't have
+          time for, aren't sure how to handle, or want a second mind on.
+        </p>
+        <ul class="what-list">
+          <li>Research papers & conference manuscripts</li>
+          <li>Journal submissions & revisions</li>
+          <li>Whitepapers & technical articles</li>
+          <li>Thesis & dissertation support</li>
+          <li>Literature reviews & reference work</li>
+          <li>Technical blogs & documentation</li>
+        </ul>
+      </div>
+      <div class="what-card dark-card">
+        <div class="what-num">02 · Code</div>
+        <h3 class="what-title">Supporting Coders<br>& <em>Technical Researchers</em></h3>
+        <p class="what-desc">
+          Coders and technical researchers who work alongside you on the actual
+          problem — so the paper is backed by work you can stand behind. Bring
+          the idea and the direction; we support you in getting it to results.
+        </p>
+        <ul class="what-list">
+          <li>Helping implement research ideas in code</li>
+          <li>Support with model training, fine-tuning, evaluation</li>
+          <li>Experiments, benchmarks & ablations</li>
+          <li>Data analysis & visualization</li>
+          <li>Reproducibility: clean scripts, notebooks</li>
+          <li>Reviewer-response & revision cycles</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STEPS -->
+<section id="steps" class="steps">
+  <div class="wrap">
+    <div class="section-header center">
+      <div class="eyebrow">How an engagement starts</div>
+      <h2 class="section-title">Four steps. <em>Honest ones.</em></h2>
+      <p class="lead">
+        No mystery process. Here's how it actually works from first message to hand-off.
+      </p>
+    </div>
+    <div class="steps-grid">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-title">A conversation.</div>
+        <div class="step-desc">
+          Tell us where the work is — idea, draft, or somewhere between. We
+          listen first.
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-title">A scope.</div>
+        <div class="step-desc">
+          What kind of support is needed, who works on it, how long, what it
+          costs. Written down. Agreed.
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-title">The support.</div>
+        <div class="step-desc">
+          Drafting, research, code, iteration — alongside you. Weekly check-ins.
+          No silent stretches.
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-title">Hand-off.</div>
+        <div class="step-desc">
+          Everything we worked on, in your hands, ready for you to take forward
+          and submit.
+        </div>
+      </div>
+    </div>
+    <p class="future-note">
+      A note on the future — Anvoxa has a longer plan. We are not talking about
+      it here. What this page describes is what we deliver today; we would rather
+      earn the right to say more by doing the current work well first.
+    </p>
+  </div>
+</section>
+
+<!-- DOMAINS -->
+<section id="domains">
+  <div class="wrap">
+    <div class="section-header center">
+      <div class="eyebrow">Where we work</div>
+      <h2 class="section-title">Domains we <em>know well</em>.</h2>
+      <p class="lead">
+        The technical areas where our writers and researchers are most at home.
+        We take work inside these domains, and decline work that sits too far outside them.
+      </p>
+    </div>
+    <div class="domains-grid">
+      <div class="domain-card">
+        <div class="domain-num">01</div>
+        <div>
+          <div class="domain-name">Machine Learning &amp; Deep Learning</div>
+          <div class="domain-tags">Architectures · Training · Fine-tuning · Evaluation</div>
+        </div>
+      </div>
+      <div class="domain-card">
+        <div class="domain-num">02</div>
+        <div>
+          <div class="domain-name">Natural Language Processing</div>
+          <div class="domain-tags">Transformers · LLMs · Embeddings · Classification</div>
+        </div>
+      </div>
+      <div class="domain-card">
+        <div class="domain-num">03</div>
+        <div>
+          <div class="domain-name">Reinforcement &amp; Multimodal Learning</div>
+          <div class="domain-tags">RL agents · Policy learning · Multimodal</div>
+        </div>
+      </div>
+      <div class="domain-card">
+        <div class="domain-num">04</div>
+        <div>
+          <div class="domain-name">Data Analysis &amp; Visualization</div>
+          <div class="domain-tags">Exploratory · Statistical · Model comparison</div>
+        </div>
+      </div>
+      <div class="domain-card">
+        <div class="domain-num">05</div>
+        <div>
+          <div class="domain-name">Networks &amp; Systems</div>
+          <div class="domain-tags">Wireless sensor · UAV optimisation · Edge / IoT</div>
+        </div>
+      </div>
+      <div class="domain-card">
+        <div class="domain-num">06</div>
+        <div>
+          <div class="domain-name">Cloud &amp; Infrastructure</div>
+          <div class="domain-tags">Multi-cloud · Hybrid cloud · Deployment</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="venues">
+      <span class="venues-label">Venues we write for</span>
+      <span class="venues-list">IEEE · Springer · Elsevier · ACM · Conferences · Industry journals</span>
+    </div>
+
+    <p class="outside-note">
+      Outside these areas? Tell us anyway. If the work is genuinely interesting
+      we'll find the right person — or say so plainly and point you elsewhere.
+    </p>
+  </div>
+</section>
+
+<!-- PRINCIPLES -->
+<section id="principles" class="principles">
+  <div class="wrap">
+    <div class="section-header center">
+      <div class="eyebrow">How we work</div>
+      <h2 class="section-title">Five principles, <em>no exceptions</em>.</h2>
+      <p class="lead">
+        They are why clients come back — and why we sometimes turn down work
+        that doesn't fit.
+      </p>
+    </div>
+    <div class="principles-grid">
+      <div class="principle dark-p">
+        <div class="principle-num">01</div>
+        <h3 class="principle-title">Real over fast.</h3>
+        <p class="principle-desc">
+          No shortcuts. No AI-filler dressed up as research. Deadlines matter —
+          integrity matters more.
+        </p>
+      </div>
+      <div class="principle">
+        <div class="principle-num">02</div>
+        <h3 class="principle-title">Voice stays yours.</h3>
+        <p class="principle-desc">
+          The paper reads like you wrote it, because the thinking is yours.
+          We guide, support, and revise — never overwrite.
+        </p>
+      </div>
+      <div class="principle red-p">
+        <div class="principle-num">03</div>
+        <h3 class="principle-title">Honest scope.</h3>
+        <p class="principle-desc">
+          Up front: what we can support on, how long it takes, what it costs.
+          No mystery add-ons.
+        </p>
+      </div>
+      <div class="principle">
+        <div class="principle-num">04</div>
+        <h3 class="principle-title">Originality first.</h3>
+        <p class="principle-desc">
+          Proper citations. Plagiarism-aware workflow. Work that holds up under review.
+        </p>
+      </div>
+      <div class="principle dark-p principle-wide">
+        <div class="principle-num">05</div>
+        <div>
+          <h3 class="principle-title">One team, all the way through.</h3>
+          <p class="principle-desc">
+            Writer, researcher, and coder work on the same engagement — not three
+            separate vendors you have to coordinate. The person supporting the
+            Methods section knows what the code actually did.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO WE HELP -->
+<section id="help">
+  <div class="wrap">
+    <div class="section-header center">
+      <div class="eyebrow">Who we help</div>
+      <h2 class="section-title">If one of these is you, <em>let's talk</em>.</h2>
+      <p class="lead">
+        We work best with a specific kind of collaborator. If you recognise
+        yourself here, the conversation usually moves fast.
+      </p>
+    </div>
+    <div class="archetypes-grid">
+      <div class="archetype">
+        <div class="archetype-num">01</div>
+        <h3 class="archetype-title">The researcher with a paper to finish.</h3>
+        <p class="archetype-desc">
+          You have the idea, some results, maybe a rough draft. You'd like a
+          research guide and a supporting writer alongside you — to help move
+          it from messy notes toward a submission-ready manuscript.
+        </p>
+      </div>
+      <div class="archetype">
+        <div class="archetype-num">02</div>
+        <h3 class="archetype-title">The researcher with an idea, not yet the results.</h3>
+        <p class="archetype-desc">
+          You have a hypothesis and a direction. You'd like coders and technical
+          researchers working alongside you — supporting the implementation and
+          running the experiments with you.
+        </p>
+      </div>
+      <div class="archetype">
+        <div class="archetype-num">03</div>
+        <h3 class="archetype-title">The student or PhD juggling too much.</h3>
+        <p class="archetype-desc">
+          Coursework, teaching, life. You need structured support through a
+          thesis, journal paper, or conference submission — without losing
+          authorship of your own work.
+        </p>
+      </div>
+      <div class="archetype">
+        <div class="archetype-num">04</div>
+        <h3 class="archetype-title">The team that publishes technical work.</h3>
+        <p class="archetype-desc">
+          A firm, lab, or team shipping whitepapers, technical blogs, or
+          documentation. You need a partner who supports your authors with
+          quality at a reasonable pace.
+        </p>
+      </div>
+    </div>
+    <p class="not-sure">
+      Not sure which fits? Write anyway — <a href="mailto:hello@anvoxa.com">hello@anvoxa.com</a> — a paragraph is plenty.
+    </p>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="contact-inner">
+      <div class="contact-left">
+        <div class="eyebrow">Get in touch</div>
+        <h2 class="section-title" style="color:#fff;">Let's support<br>your <em>next paper</em>.</h2>
+        <p class="contact-tag">The voice behind the work.</p>
+        <div class="contact-info">
+          <a href="mailto:hello@anvoxa.com" class="contact-email">hello@anvoxa.com</a>
+          <div class="contact-phone">+91 62918 81019</div>
+        </div>
+        <p class="contact-note">
+          A paragraph describing where the work is and what you need is enough to
+          start. We reply within two working days.
+        </p>
+      </div>
+      <div class="contact-right">
+        <h3>Begin a conversation</h3>
+        <div class="contact-divider">— To get started —</div>
+        <div class="contact-cta">
+          <button class="btn btn-primary" onclick="startEngagement()">Send us a message</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">Anvoxa<span>.</span></div>
+        <p class="footer-desc">
+          Research guides, supporting writers, and technical researchers —
+          alongside you on the work you want to see published.
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="#what">What we do</a></li>
+          <li><a href="#steps">Process</a></li>
+          <li><a href="#domains">Domains</a></li>
+          <li><a href="#principles">Principles</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#who">About us</a></li>
+          <li><a href="#help">Who we help</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-contact-item">hello@anvoxa.com</div>
+        <div class="footer-contact-item">+91 62918 81019</div>
+        <div class="footer-contact-item">IEEE · Springer · Elsevier · ACM</div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Anvoxa · The voice behind the work · <a href="mailto:hello@anvoxa.com">hello@anvoxa.com</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ── Auth guard: redirect to sign-in if not authenticated ──
+  (function () {
+    if (!localStorage.getItem('accessToken')) {
+      sessionStorage.setItem('postLoginRedirect', '/home');
+      window.location.replace('/');
+    }
+  })();
+
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 30) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  });
+
+  function toggleNav() {
+    document.getElementById('nav-links').classList.toggle('open');
+  }
+
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      document.getElementById('nav-links').classList.remove('open');
+    });
+  });
+
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  function updateActiveLink() {
+    let current = '';
+    sections.forEach(s => {
+      const top = s.getBoundingClientRect().top;
+      if (top <= 130) current = s.id;
+    });
+    navLinks.forEach(l => {
+      l.classList.toggle('active', l.getAttribute('href') === '#' + current);
+    });
+  }
+  window.addEventListener('scroll', updateActiveLink, { passive: true });
+  updateActiveLink();
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', e => {
+      const href = link.getAttribute('href');
+      if (href && href.startsWith('#')) {
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) {
+          const offset = target.getBoundingClientRect().top + window.scrollY - 68;
+          window.scrollTo({ top: offset, behavior: 'smooth' });
+        }
+      }
+    });
+  });
+
+  function isSignedIn() {
+    return !!localStorage.getItem('accessToken');
+  }
+  function refreshNavCta() {
+    const cta = document.getElementById('nav-cta');
+    cta.textContent = 'Get started';
+  }
+  refreshNavCta();
+  function scrollToSection(id) {
+    const target = document.getElementById(id);
+    if (target) {
+      const offset = target.getBoundingClientRect().top + window.scrollY - 68;
+      window.scrollTo({ top: offset, behavior: 'smooth' });
+    }
+  }
+  function goAuth() { scrollToSection('contact'); }
+  function startEngagement() { scrollToSection('contact'); }
+
+  document.querySelector('.btn-ghost')?.addEventListener('click', function(e) {
+    e.preventDefault();
+    scrollToSection('what');
+  });
+</script>
+</body>
+</html>
