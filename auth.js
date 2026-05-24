@@ -43,7 +43,7 @@ async function findOrCreateUser(decoded, role) {
   const dbRole = mapRole(role);
 
   // 1. Try to find by google_id (Firebase UID)
-  let { data: user } = await supabase
+  let { data: user } = await getSupabase()
     .from('users')
     .select('*')
     .eq('google_id', firebaseUid)
@@ -92,7 +92,7 @@ async function findOrCreateUser(decoded, role) {
   }
 
   // No user found — create a new one (Supabase auto-generates the UUID id)
-  const { data: created, error: createError } = await supabase
+  const { data: created, error: createError } = await getSupabase()
     .from('users')
     .insert({
       email,
@@ -191,3 +191,4 @@ router.post('/logout', async (req, res) => {
 
 module.exports = router;
 // redeploy
+
