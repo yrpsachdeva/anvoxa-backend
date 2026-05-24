@@ -54,7 +54,6 @@ button { font-family: inherit; cursor: pointer; }
 
 /* ─── CUSTOM CURSOR ─────────────────────────────────── */
 *, *::before, *::after { cursor: none !important; }
-.cursor-dot {
   position: fixed;
   width: 8px; height: 8px;
   background: var(--amber);
@@ -63,7 +62,6 @@ button { font-family: inherit; cursor: pointer; }
   z-index: 9999;
   transition: transform 0.1s;
   transform: translate(-50%, -50%);
-}
 .cursor-ring {
   position: fixed;
   width: 36px; height: 36px;
@@ -2342,7 +2340,7 @@ section{
     <span class="logo-text">Anvoxa</span>
     <span class="logo-dot">.</span>
 </div>
-<div class="cursor-dot" id="cursorDot"></div>
+
 <div class="cursor-ring" id="cursorRing"></div>
 
 <!-- Scroll Progress -->
@@ -2852,7 +2850,6 @@ section{
   })();
 
   /* ── Custom Cursor ──────────────────────────────────── */
-  const dot  = document.getElementById('cursorDot');
   const ring = document.getElementById('cursorRing');
   let mx = 0, my = 0, rx = 0, ry = 0;
   document.addEventListener('mousemove', e => {
