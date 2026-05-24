@@ -4,7 +4,7 @@ require('dotenv').config();
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
-const supabase = require('./supabase');
+const getSupabase = require('./supabase');
 
 // ─────────────────────────────────────────────────────────────
 // requireAuth — middleware that verifies the access token
@@ -30,7 +30,7 @@ function requireAuth(req, res, next) {
 // ─────────────────────────────────────────────────────────────
 router.get('/engagements', requireAuth, async (req, res) => {
   try {
-    let query = supabase.from('engagements').select('*').order('created_at', { ascending: false });
+    let query = getSupabase().from('engagements').select('*').order('created_at', { ascending: false });
     if (req.userRole !== 'team') {
       query = query.eq('client_id', req.userId);
     }
@@ -103,7 +103,7 @@ router.patch('/profile', requireAuth, async (req, res) => {
       if (error) throw error;
       userRow = data;
     } else {
-      const { data } = await supabase.from('users').select('*').eq('id', req.userId).single();
+      const { data } = await getSupabase().from('users').select('*').eq('id', req.userId).single();
       userRow = data;
     }
 
@@ -177,3 +177,4 @@ router.get('/me', requireAuth, async (req, res) => {
 });
 
 module.exports = router;
+

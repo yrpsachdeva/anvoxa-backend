@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const { v4: uuidv4 } = require('uuid');
 const bcrypt = require('bcrypt');
-const supabase = require('./supabase');
+const getSupabase = require('./supabase');
 
 // ── Generate short-lived access token (15 min) ──────────────
 function generateAccessToken(user) {
@@ -17,7 +17,7 @@ async function generateRefreshToken(userId, deviceInfo, ipAddress) {
   const raw = uuidv4() + uuidv4();              // 72-char random string
   const hashed = await bcrypt.hash(raw, 10);
 
-  const { error } = await supabase.from('sessions').insert({
+  const { error } = await getSupabase().from('sessions').insert({
     user_id: userId,
     refresh_token: hashed,
     device_info: deviceInfo,
@@ -48,7 +48,7 @@ async function rotateRefreshToken(rawToken, userId, deviceInfo, ip) {
   if (!matched) throw new Error('Refresh token invalid or expired');
 
   // revoke old session
-  await supabase.from('sessions').update({ revoked: true }).eq('id', matched.id);
+  await getSupabase().from('sessions').update({ revoked: true }).eq('id', matched.id);
 
   // issue new
   return generateRefreshToken(userId, deviceInfo, ip);
@@ -56,7 +56,7 @@ async function rotateRefreshToken(rawToken, userId, deviceInfo, ip) {
 
 // ── Revoke all sessions for a user (full logout) ─────────────
 async function revokeAllSessions(userId) {
-  await supabase.from('sessions').update({ revoked: true }).eq('user_id', userId);
+  await getSupabase().from('sessions').update({ revoked: true }).eq('user_id', userId);
 }
 
 module.exports = {
@@ -65,3 +65,4 @@ module.exports = {
   rotateRefreshToken,
   revokeAllSessions,
 };
+

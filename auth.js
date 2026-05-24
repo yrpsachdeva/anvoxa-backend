@@ -5,14 +5,14 @@ const express = require('express');
 const admin = require('firebase-admin');
 const router = express.Router();
 const { generateAccessToken, generateRefreshToken, rotateRefreshToken, revokeAllSessions } = require('./tokenService');
-const supabase = require('./supabase');
+const getSupabase = require('./supabase');
 
 // ─────────────────────────────────────────────────────────────
 // Firebase Admin init
 // ─────────────────────────────────────────────────────────────
 if (!admin.apps.length) {
   admin.initializeApp({
-    credential: admin.credential.cert(require('./firebase-service-account.json')),
+    credential: admin.credential.cert(JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_JSON)),
   });
 }
 
@@ -166,7 +166,7 @@ router.post('/refresh', async (req, res) => {
       req.ip
     );
 
-    const { data: user } = await supabase.from('users').select('*').eq('id', userId).single();
+    const { data: user } = await getSupabase().from('users').select('*').eq('id', userId).single();
     const accessToken = generateAccessToken(user);
 
     res.json({ accessToken, refreshToken: newRefreshToken });

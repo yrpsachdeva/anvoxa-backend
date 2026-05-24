@@ -1,8 +1,12 @@
 const { createClient } = require('@supabase/supabase-js');
-
-const supabase = createClient(
-  process.env.SUPABASE_URL,
-  process.env.SUPABASE_SERVICE_ROLE_KEY  // server-side only — never send to frontend
-);
-
-module.exports = supabase;
+let supabase;
+function getSupabase() {
+  if (!supabase) {
+    const url = process.env.SUPABASE_URL;
+    const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+    if (!url || !key) throw new Error('Supabase env vars missing');
+    supabase = createClient(url, key);
+  }
+  return supabase;
+}
+module.exports = getSupabase;
