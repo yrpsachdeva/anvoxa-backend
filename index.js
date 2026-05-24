@@ -10,7 +10,12 @@ const app = express();
 
 // ── Middleware ────────────────────────────────────────────────
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:4000',
+  origin: [
+    'https://www.anvoxa.com',
+    'https://anvoxa.com',
+    'https://anvoxa-backend-production.up.railway.app',
+    process.env.FRONTEND_URL || 'http://localhost:4000',
+  ],
   credentials: true,
 }));
 app.use(express.json());
