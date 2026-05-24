@@ -51,7 +51,7 @@ async function findOrCreateUser(decoded, role) {
 
   // 2. Fall back to email
   if (!user && email) {
-    const { data } = await supabase
+    const { data } = await getSupabase()
       .from('users')
       .select('*')
       .eq('email', email)
@@ -61,7 +61,7 @@ async function findOrCreateUser(decoded, role) {
 
   // 3. Fall back to phone
   if (!user && phone) {
-    const { data } = await supabase
+    const { data } = await getSupabase()
       .from('users')
       .select('*')
       .eq('phone', phone)
@@ -71,7 +71,7 @@ async function findOrCreateUser(decoded, role) {
 
   if (user) {
     // Existing user — update missing fields & last_login
-    const { data: updated, error } = await supabase
+    const { data: updated, error } = await getSupabase()
       .from('users')
       .update({
         google_id: user.google_id || firebaseUid,
@@ -191,4 +191,5 @@ router.post('/logout', async (req, res) => {
 
 module.exports = router;
 // redeploy
+
 
