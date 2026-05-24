@@ -48,6 +48,17 @@ app.use(express.static(path.join(__dirname, 'public'), { index: false }));
 
 // 404 catch-all
 app.use((req, res) => res.status(404).json({ error: 'Route not found' }));
+app.get('/run', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'run.html'));
+});
+
+app.get('/write', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'write.html'));
+});
+
+app.get('/deploy', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'deploy.html'));
+});
 
 // Global error handler
 app.use((err, req, res, _next) => {
