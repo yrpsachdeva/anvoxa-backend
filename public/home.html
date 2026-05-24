@@ -179,7 +179,7 @@ button { font-family: inherit; cursor: pointer; }
 }
 .nav-brand:hover::after { width: 100%; }
 
-.nav-links {
+.nav-links { flex-wrap: nowrap; white-space: nowrap;
   display: flex;
   gap: 36px;
   align-items: center;
@@ -304,7 +304,7 @@ button { font-family: inherit; cursor: pointer; }
 }
 
 .hero-inner {
-  max-width: 1280px;
+  max-width: 1200px;
   margin: 0 auto;
   width: 100%;
   position: relative;
@@ -339,7 +339,7 @@ button { font-family: inherit; cursor: pointer; }
 
 .hero-title {
   font-family: var(--display);
-  font-size: 100px;
+  font-size: 80px;
   font-weight: 900;
   line-height: 0.95;
   letter-spacing: -6px;
@@ -682,7 +682,7 @@ section { position: relative; overflow: hidden; }
 }
 .wrap-narrow {
   width: 95%;
-  max-width: 1280px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -728,7 +728,7 @@ section { position: relative; overflow: hidden; }
   font-size: 19px;
   line-height: 1.8;
   color: var(--cream);
-  max-width: 1280px;
+  max-width: 1200px;
   font-weight: 300;
 }
 .lead.dark { color: var(--cream); }
@@ -1144,7 +1144,7 @@ section { position: relative; overflow: hidden; }
   font-size: 20px;
   color: rgba(0, 0, 0, 0.65);
   font-style: italic;
-  max-width: 1280px;
+  max-width: 1200px;
   line-height: 1.75;
   font-family: var(--display);
   border-left: 3px solid var(--amber);
@@ -1521,7 +1521,7 @@ section { position: relative; overflow: hidden; }
   padding: 100px 48px 48px;
   color: rgba(245,230,200,0.35);
 }
-.footer-inner { max-width: 1280px; margin: 0 auto; }
+.footer-inner { max-width: 1200px; margin: 0 auto; }
 .footer-top {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1.5fr;
@@ -1602,7 +1602,7 @@ section { position: relative; overflow: hidden; }
 }
 @media (max-width: 900px) {
   .nav-inner { padding: 0 24px; }
-  .nav-links {
+  .nav-links { flex-wrap: nowrap; white-space: nowrap;
     display: none; position: absolute; top: 76px; left: 0; right: 0;
     background: rgba(26,17,8,0.98); flex-direction: column;
     padding: 28px 24px; gap: 22px;
@@ -1680,7 +1680,7 @@ section { position: relative; overflow: hidden; }
 
 .hero-inner {
   width: 100%;
-  max-width: 1280px;
+  max-width: 1200px;
   position: relative;
   z-index: 2;
   display: flex;
@@ -1703,10 +1703,10 @@ section { position: relative; overflow: hidden; }
 
 .hero-arc {
   position: relative;
-  width: 1400px;
-  height: 900px;
-  border-top-left-radius: 1400px;
-  border-top-right-radius: 1400px;
+  width: 1100px;
+  height: 720px;
+  border-top-left-radius: 1100px;
+  border-top-right-radius: 1100px;
   border: 2px solid rgba(212,176,93,0.45);
   border-bottom: none;
   margin-top: 160px;
@@ -1747,7 +1747,7 @@ section { position: relative; overflow: hidden; }
   position: relative;
   z-index: 2;
   width: 100%;
-  max-width: 1280px;
+  max-width: 1200px;
   text-align: center;
   margin-top: 240px;
 }
@@ -1762,7 +1762,7 @@ section { position: relative; overflow: hidden; }
 
 .hero-title {
   color: #ffffff;
-  font-size: 100px;
+  font-size: 80px;
   line-height: 1.52;
   font-weight: 600;
   letter-spacing: -6px;
@@ -3180,7 +3180,7 @@ document.addEventListener("DOMContentLoaded", () => {
 .archetypes-grid,
 .contact-inner{
     width:95% !important;
-    max-width:1280px !important;
+    max-width:1200px !important;
     margin-left:auto !important;
     margin-right:auto !important;
 }
