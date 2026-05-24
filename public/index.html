@@ -10,393 +10,448 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Poppins:wght@300;400;500;600&family=Cormorant+Garamond:wght@600;700&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
 
   <style>
-    :root {
-      --cream: #F2EDE4;
-      --cream-deep: #E8DDC8;
-      --ink: #1A1A18;
-      --ink-soft: #2C2A26;
-      --muted: #7A7468;
-      --line: #D9CFC0;
-      --line-soft: #E5DDD0;
-      --bronze: #8B6F47;
-      --terracotta: #D4926A;
-      --serif: 'Instrument Serif', Georgia, serif;
-      --sans: 'Inter', -apple-system, sans-serif;
-    }
-
+    /* ── Reset ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    body {
-      font-family: var(--sans);
-      background: var(--cream);
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      color: var(--ink);
-    }
-
-    .back-home {
-      position: fixed;
-      top: 24px;
-      left: 24px;
-      font-size: 13px;
-      color: var(--muted);
-      letter-spacing: 0.3px;
-      transition: color 0.15s;
-    }
-    .back-home:hover { color: var(--bronze); }
-
-    .card {
-      display: flex;
-      width: 100%;
-      max-width: 860px;
-      min-height: 560px;
-      border-radius: 24px;
+    html, body {
+      width: 100%; height: 100%;
       overflow: hidden;
-      box-shadow: 0 24px 60px rgba(26,26,24,0.12), 0 4px 16px rgba(26,26,24,0.06);
-      background: #fff;
+      font-family: 'Poppins', sans-serif;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* ── Left ── */
+    /* ── Gold top line ── */
+    .top-line {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #a0620a, #D4A843, #a0620a);
+      z-index: 99;
+    }
+
+    /* ── Two-column full-screen ── */
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    /* ══════════════ LEFT — dark ══════════════ */
     .left {
-      background: var(--ink);
-      width: 44%;
-      padding: 56px 44px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      color: #fff;
+      background: #0D0D0D;
       position: relative;
       overflow: hidden;
+      border-right: 1px solid rgba(212,168,67,0.2);
     }
+
+    /* Ambient glow top-right */
     .left::before {
       content: '';
       position: absolute;
-      top: -30%; right: -30%;
-      width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(212,146,106,0.22) 0%, transparent 60%);
+      top: -120px; right: -120px;
+      width: 550px; height: 550px;
+      background: radial-gradient(circle, rgba(212,168,67,0.15) 0%, transparent 60%);
       pointer-events: none;
     }
-    .left > * { position: relative; }
+    /* Warm glow bottom-left */
+    .left::after {
+      content: '';
+      position: absolute;
+      bottom: -100px; left: -100px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(180,70,20,0.08) 0%, transparent 65%);
+      pointer-events: none;
+    }
 
+    /* Logo — fixed top-left */
     .logo {
-      font-family: var(--sans);
-      font-size: 18px;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      color: #fff;
+      position: absolute;
+      top: 48px; left: 64px;
+      z-index: 2;
+      animation: fadeUp 0.5s 0.1s ease both;
     }
-    .tagline {
-      font-size: 11px;
-      letter-spacing: 1.5px;
-      color: rgba(255,255,255,0.55);
-      margin-top: 6px;
+    .logo-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 62px;
+      font-weight: 700;
+      letter-spacing: -2px;
+      color: #F0EBE0;
+      line-height: 1;
+    }
+    .logo-name span { color: #D4A843; }
+    .logo-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 20px;
+      letter-spacing: 3px;
       text-transform: uppercase;
-      font-weight: 500;
+      color: rgba(240,235,224,0.3);
+      margin-top: 9px;
     }
 
-    .hero-text {
-      font-family: var(--sans);
-      font-size: 36px;
-      line-height: 1.05;
-      color: #fff;
-      font-weight: 600;
-      letter-spacing: -1.2px;
+    /* Publishers — fixed bottom-left */
+    .publishers {
+      position: absolute;
+      bottom: 52px; left: 64px;
+      z-index: 2;
+      animation: fadeUp 0.5s 0.45s ease both;
     }
-    .hero-text em {
-      font-family: var(--serif);
+    .pub-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 20px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.3);
+      margin-bottom: 16px;
+    }
+    .pub-pills { display: flex; gap: 10px; flex-wrap: wrap; }
+    .pub-pill {
+      font-family: 'DM Mono', monospace;
+      font-size: 20px;
+      color: rgba(240,235,224,0.5);
+      border: 1px solid rgba(212,168,67,0.25);
+      padding: 9px 22px;
+      letter-spacing: 1px;
+      transition: all 0.2s;
+    }
+    .pub-pill:hover { border-color: #D4A843; color: #D4A843; }
+
+    /* Hero — centered in left panel */
+    .hero-center {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      display: flex;
+      align-items: center;
+      padding: 0 64px;
+      z-index: 2;
+      animation: fadeUp 0.6s 0.25s ease both;
+    }
+    .hero-inner {}
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-family: 'DM Mono', monospace;
+      font-size: 20px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #D4A843;
+      margin-bottom: 28px;
+    }
+    .eyebrow::before {
+      content: '';
+      width: 32px; height: 1.5px;
+      background: #D4A843;
+      flex-shrink: 0;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(54px, 5.8vw, 88px);
+      font-weight: 900;
+      line-height: 1.02;
+      letter-spacing: -2.5px;
+      color: #F5F2EC;
+      margin-bottom: 28px;
+    }
+    .hero-title em {
       font-style: italic;
-      font-weight: 400;
-      color: var(--terracotta);
+      color: #D4A843;
+      display: block;
     }
 
-    .write-for {
-      font-size: 11px;
-      letter-spacing: 1.5px;
-      color: rgba(255,255,255,0.5);
-      text-transform: uppercase;
-      margin-bottom: 12px;
-      font-weight: 500;
-    }
-    .publishers { display: flex; gap: 8px; flex-wrap: wrap; }
-    .pill {
-      border: 1px solid rgba(255,255,255,0.18);
-      border-radius: 999px;
-      padding: 5px 14px;
-      font-size: 11.5px;
-      color: rgba(255,255,255,0.75);
-      letter-spacing: 0.3px;
+    .hero-desc {
+      font-size: 16px;
+      line-height: 1.9;
+      color: rgba(240,235,224,0.55);
+      font-weight: 300;
+      max-width: 420px;
     }
 
-    /* ── Right ── */
+    /* ══════════════ RIGHT — white ══════════════ */
     .right {
-      background: #fff;
-      flex: 1;
-      padding: 56px 48px;
-      display: flex;
-      flex-direction: column;
-    }
-    h1 {
-      font-family: var(--sans);
-      font-size: 32px;
-      color: var(--ink);
-      font-weight: 600;
-      margin-bottom: 6px;
-      letter-spacing: -1px;
-    }
-    h1 em { font-family: var(--serif); font-style: italic; font-weight: 400; }
-    .sub { font-size: 14px; color: var(--muted); margin-bottom: 32px; }
-
-    .tabs {
-      display: flex;
-      background: var(--cream);
-      border-radius: 999px;
-      overflow: hidden;
-      margin-bottom: 24px;
-      padding: 4px;
-      gap: 4px;
-    }
-    .tab {
-      flex: 1;
-      padding: 10px;
-      text-align: center;
-      font-size: 13px;
-      cursor: pointer;
-      border: none;
-      background: transparent;
-      color: var(--muted);
-      transition: all 0.15s;
-      border-radius: 999px;
-      font-weight: 500;
-      font-family: var(--sans);
-    }
-    .tab.active {
-      background: var(--ink);
-      color: #fff;
-    }
-
-    .role-label {
-      font-size: 11px;
-      letter-spacing: 1.5px;
-      color: var(--muted);
-      text-transform: uppercase;
-      margin-bottom: 8px;
-      font-weight: 500;
-    }
-    .role-toggle {
-      display: flex;
-      background: var(--cream);
-      border-radius: 999px;
-      overflow: hidden;
-      margin-bottom: 24px;
-      padding: 4px;
-      gap: 4px;
-    }
-    .role-btn {
-      flex: 1;
-      padding: 10px;
-      text-align: center;
-      font-size: 13px;
-      cursor: pointer;
-      border: none;
-      background: transparent;
-      color: var(--muted);
-      transition: all 0.15s;
-      border-radius: 999px;
-      font-weight: 500;
-      font-family: var(--sans);
-    }
-    .role-btn.active {
-      background: var(--terracotta);
-      color: #fff;
-    }
-
-    .input-label {
-      font-size: 11px;
-      letter-spacing: 1.5px;
-      color: var(--muted);
-      text-transform: uppercase;
-      margin-bottom: 8px;
-      font-weight: 500;
-    }
-
-    .text-input {
-      width: 100%;
-      border: 1.5px solid var(--line);
-      border-radius: 10px;
-      padding: 13px 16px;
-      font-size: 14px;
-      color: var(--ink);
-      background: #fff;
-      outline: none;
-      margin-bottom: 14px;
-      transition: border-color 0.15s;
-      font-family: var(--sans);
-    }
-    .text-input:focus { border-color: var(--ink); }
-
-    .btn-primary {
-      width: 100%;
-      padding: 14px;
-      background: var(--ink);
-      color: #fff;
-      border: none;
-      border-radius: 999px;
-      font-size: 14px;
-      font-weight: 500;
-      cursor: pointer;
-      margin-bottom: 10px;
-      transition: all 0.15s;
-      font-family: var(--sans);
-    }
-    .btn-primary:hover { background: var(--ink-soft); transform: translateY(-1px); }
-
-    .btn-google {
-      width: 100%;
-      padding: 13px;
-      background: #fff;
-      color: var(--ink);
-      border: 1.5px solid var(--line);
-      border-radius: 999px;
-      font-size: 14px;
-      cursor: pointer;
+      background: #ffffff;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
+      padding: 0 96px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Subtle warm tint top-right corner */
+    .right::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 320px; height: 320px;
+      background: radial-gradient(circle, rgba(212,168,67,0.06) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .form-box {
+      width: 100%;
+      animation: fadeIn 0.6s 0.3s ease both;
+    }
+
+    /* Sign in heading */
+    .form-head { margin-bottom: 48px; }
+    .form-head h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(54px, 5.5vw, 80px);
+      font-weight: 900;
+      letter-spacing: -3px;
+      line-height: 1;
+      color: #111111;
+      margin-bottom: 14px;
+    }
+    .form-head h1 em {
+      font-style: italic;
+      color: #D4A843;
+    }
+    .form-sub {
+      font-size: 22px;
+      color: #888888;
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
+    /* Role toggle */
+    .role-wrap { margin-bottom: 32px; }
+    .role-lbl {
+      font-family: 'DM Mono', monospace;
+      font-size: 20px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #aaaaaa;
       margin-bottom: 12px;
-      transition: all 0.15s;
-      font-family: var(--sans);
+    }
+    .role-toggle {
+      display: flex;
+      border: 1.5px solid #E0E0E0;
+      background: #F8F8F8;
+      padding: 5px;
+      gap: 5px;
+    }
+    .role-btn {
+      flex: 1;
+      padding: 16px;
+      border: none;
+      background: transparent;
+      font-family: 'Poppins', sans-serif;
+      font-size: 20px;
+      font-weight: 500;
+      color: #999999;
+      cursor: pointer;
+      transition: all 0.18s;
+      letter-spacing: 0.2px;
+    }
+    .role-btn.active {
+      background: #D4A843;
+      color: #111111;
+      font-weight: 600;
+    }
+    .role-btn:not(.active):hover {
+      color: #D4A843;
+      background: rgba(212,168,67,0.07);
+    }
+
+    /* Message */
+    .msg {
+      display: none;
+      font-family: 'DM Mono', monospace;
+      font-size: 20px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      line-height: 1.5;
+      border-radius: 2px;
+    }
+    .msg.error   { display:block; background:rgba(200,60,20,0.07); color:#c03010; border:1px solid rgba(200,60,20,0.2); }
+    .msg.success { display:block; background:rgba(212,168,67,0.08); color:#8a6a10; border:1px solid rgba(212,168,67,0.3); }
+
+    /* Google button */
+    .btn-google {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      padding: 20px 28px;
+      background: #D4A843;
+      color: #111111;
+      border: none;
+      font-family: 'Poppins', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.2s;
+      box-shadow: 0 4px 28px rgba(212,168,67,0.3);
+      margin-bottom: 16px;
+    }
+    .btn-google::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,0.08);
+      transform: translateX(-100%);
+      transition: transform 0.28s;
+    }
+    .btn-google:hover::after { transform: translateX(0); }
+    .btn-google:hover {
+      background: #BA8F2E;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 40px rgba(212,168,67,0.38);
+    }
+
+    .hint {
+      font-family: 'DM Mono', monospace;
+      font-size: 20px;
+      color: #070707;
+      text-align: center;
+      letter-spacing: 0.3px;
+    }
+
+    /* Divider */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 32px 0;
+    }
+    .divider-line { flex: 1; height: 1px; background: #ececec; }
+    .divider-text {
+      font-family: 'DM Mono', monospace;
+      font-size: 15px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #817f7f;
+    }
+
+    /* Footer */
+    .footer-note {
+      font-size: 18px;
+      color: #aaaaaa;
+      line-height: 2;
+      font-weight: 300;
+    }
+    .footer-note a {
+      color: #D4A843;
+      text-decoration: none;
       font-weight: 500;
     }
-    .btn-google:hover {
-      border-color: var(--ink);
-      background: var(--cream);
+    .footer-note a:hover { opacity: 0.75; }
+
+    /* Animations */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
     }
 
-    .btn-text {
-      width: 100%;
-      padding: 11px;
-      background: transparent;
-      color: var(--muted);
-      border: none;
-      font-size: 13px;
-      cursor: pointer;
-      transition: color 0.15s;
-      font-family: var(--sans);
-    }
-    .btn-text:hover { color: var(--bronze); }
-
-    .msg {
-      font-size: 13px;
-      padding: 11px 14px;
-      border-radius: 10px;
-      margin-bottom: 14px;
-      display: none;
-      line-height: 1.5;
-    }
-    .msg.error { background: #FBE9E0; color: #8B3A1A; border: 1px solid #F0C5AC; display: block; }
-    .msg.success { background: #E5DDC8; color: var(--bronze); border: 1px solid var(--bronze); display: block; }
-
-    .footer-text {
-      font-size: 12px;
-      color: var(--muted);
-      margin-top: auto;
-      padding-top: 20px;
-      line-height: 1.7;
-    }
-    .footer-text a { color: var(--bronze); font-weight: 500; }
-
-    .panel { display: none; }
-    .panel.active { display: block; }
-
-    .signin-hint {
-      font-size: 12px;
-      color: var(--muted);
-      text-align: center;
-      font-family: var(--serif);
-      font-style: italic;
-    }
-
-    @media (max-width: 740px) {
-      .card { flex-direction: column; }
-      .left { width: 100%; padding: 36px 32px; gap: 32px; }
-      .right { padding: 36px 32px; }
-      .hero-text { font-size: 28px; }
-      h1 { font-size: 26px; }
+    /* Responsive */
+    @media (max-width: 900px) {
+      html, body { overflow: auto; height: auto; }
+      .layout { grid-template-columns: 1fr; height: auto; min-height: 100vh; }
+      .left { height: 55vh; }
+      .logo { top: 36px; left: 36px; }
+      .publishers { bottom: 36px; left: 36px; }
+      .hero-center { padding: 0 36px; }
+      .right { padding: 64px 36px; }
+      .hero-title { font-size: 48px; }
+      .form-head h1 { font-size: 48px; }
     }
   </style>
 </head>
 <body>
 
+<div class="top-line"></div>
 
+<div class="layout">
 
-<div class="card">
+  <!-- ══ LEFT ══ -->
   <div class="left">
-    <div>
-      <div class="logo">Anvoxa</div>
-      <div class="tagline">The voice behind the work.</div>
+
+    <div class="logo">
+      <div class="logo-name">Anvox<span>a</span></div>
+      <div class="logo-tag">The voice behind the work.</div>
     </div>
 
-    <div class="hero-text">
-      Every great idea<br>needs a <em>voice</em>.
-    </div>
-
-    <div>
-      <div class="write-for">We write for</div>
-      <div class="publishers">
-        <span class="pill">IEEE</span>
-        <span class="pill">Springer</span>
-        <span class="pill">Elsevier</span>
-        <span class="pill">ACM</span>
+    <div class="hero-center">
+      <div class="hero-inner">
+        <div class="eyebrow">Academic &amp; Research Writing</div>
+        <div class="hero-title">
+          Every great<br>idea needs a<br><em>voice.</em>
+        </div>
+        <p class="hero-desc">Research guides and writers — alongside you on the work you want to see published.</p>
       </div>
     </div>
+
+    <div class="publishers">
+      <div class="pub-label">We write for</div>
+      <div class="pub-pills">
+        <span class="pub-pill">IEEE</span>
+        <span class="pub-pill">Springer</span>
+        <span class="pub-pill">Elsevier</span>
+        <span class="pub-pill">ACM</span>
+      </div>
+    </div>
+
   </div>
 
+  <!-- ══ RIGHT ══ -->
   <div class="right">
-    <h1>Sign <em>in</em></h1>
-    <div class="sub">Research guides and writers — alongside you.</div>
+    <div class="form-box">
 
-    <div class="tabs">
-      <button class="tab active" onclick="switchTab('google')">Google</button>
-      <button class="tab" onclick="switchTab('email')">Email</button>
-    </div>
+      <div class="form-head">
+        <h1>Sign <em>in</em></h1>
+        <p class="form-sub">Research guides and writers — alongside you.</p>
+      </div>
 
-    <div class="role-label">I am a</div>
-    <div class="role-toggle">
-      <button class="role-btn active" id="role-client" onclick="setRole('client')">Client</button>
-      <button class="role-btn" id="role-researcher" onclick="setRole('researcher')">Researcher</button>
-    </div>
+      <div class="role-wrap">
+        <div class="role-lbl">I am a</div>
+        <div class="role-toggle">
+          <button class="role-btn active" id="role-client" onclick="setRole('client')">Client</button>
+          <button class="role-btn" id="role-researcher" onclick="setRole('researcher')">Researcher</button>
+        </div>
+      </div>
 
-    <div class="msg" id="msg"></div>
+      <div class="msg" id="msg"></div>
 
-    <div class="panel active" id="panel-google">
       <button class="btn-google" onclick="signInWithGoogle()">
-        <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.35-8.16 2.35-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+        <svg width="18" height="18" viewBox="0 0 48 48" style="flex-shrink:0">
+          <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+          <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+          <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+          <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.35-8.16 2.35-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+        </svg>
         Continue with Google
       </button>
-      <p class="signin-hint">You'll be redirected to Google to sign in</p>
-    </div>
+      <p class="hint">You'll be redirected to Google to sign in</p>
 
-    <div class="panel" id="panel-email">
-      <div class="input-label">Email address</div>
-      <input class="text-input" id="email-input" type="email" placeholder="you@example.com" />
-      <div class="input-label">Password</div>
-      <input class="text-input" id="password-input" type="password" placeholder="••••••••" />
-      <button class="btn-primary" onclick="signInWithEmail()">Sign in</button>
-      <button class="btn-text" onclick="registerWithEmail()">Don't have an account? Create one →</button>
-    </div>
+      <div class="divider">
+        <div class="divider-line"></div>
+        <span class="divider-text">Secure sign-in</span>
+        <div class="divider-line"></div>
+      </div>
 
-    <div class="footer-text">
-      By signing in you agree to Anvoxa's terms of service.<br>
-      Questions? <a href="mailto:hello@anvoxa.com">hello@anvoxa.com</a>
+      <p class="footer-note">
+        By signing in you agree to Anvoxa's terms of service.<br>
+        
+      </p>
+
     </div>
   </div>
+
 </div>
 
 <script>
@@ -419,30 +474,19 @@
     document.getElementById('role-researcher').classList.toggle('active', role === 'researcher');
   }
 
-  function switchTab(tab) {
-    document.querySelectorAll('.tab').forEach((t, i) => {
-      t.classList.toggle('active', ['google','email'][i] === tab);
-    });
-    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-    document.getElementById('panel-' + tab).classList.add('active');
-    clearMsg();
-  }
-
   function showMsg(text, type = 'error') {
     const el = document.getElementById('msg');
     el.textContent = text;
     el.className = 'msg ' + type;
   }
-  function clearMsg() {
-    document.getElementById('msg').className = 'msg';
-  }
+  function clearMsg() { document.getElementById('msg').className = 'msg'; }
 
   function handleAuthSuccess(data) {
     localStorage.setItem('accessToken', data.accessToken);
     localStorage.setItem('refreshToken', data.refreshToken);
     localStorage.setItem('user', JSON.stringify(data.user));
     showMsg('Signed in. Redirecting…', 'success');
-    const redirect = sessionStorage.getItem('postLoginRedirect') || '/home'; // signed-in users land on /home
+    const redirect = sessionStorage.getItem('postLoginRedirect') || '/home';
     sessionStorage.removeItem('postLoginRedirect');
     setTimeout(() => { window.location.href = redirect; }, 800);
   }
@@ -468,48 +512,7 @@
       handleAuthSuccess(data);
     } catch (err) {
       console.error(err);
-      if (err.code !== 'auth/popup-closed-by-user') {
-        showMsg('Google sign-in failed. Try again.');
-      }
-    }
-  }
-
-  async function signInWithEmail() {
-    const email = document.getElementById('email-input').value.trim();
-    const password = document.getElementById('password-input').value;
-    if (!email || !password) return showMsg('Enter email and password');
-    clearMsg();
-    try {
-      const result = await auth.signInWithEmailAndPassword(email, password);
-      const firebaseToken = await result.user.getIdToken();
-      const data = await sendToBackend('/auth/firebase/email', firebaseToken);
-      handleAuthSuccess(data);
-    } catch (err) {
-      console.error(err);
-      const msg = err.code === 'auth/user-not-found' ? 'No account found. Create one below.' :
-                  err.code === 'auth/invalid-credential' ? 'Wrong email or password' :
-                  'Sign in failed. Try again.';
-      showMsg(msg);
-    }
-  }
-
-  async function registerWithEmail() {
-    const email = document.getElementById('email-input').value.trim();
-    const password = document.getElementById('password-input').value;
-    if (!email || !password) return showMsg('Enter email and password');
-    if (password.length < 6) return showMsg('Password must be at least 6 characters');
-    clearMsg();
-    try {
-      const result = await auth.createUserWithEmailAndPassword(email, password);
-      const firebaseToken = await result.user.getIdToken();
-      const data = await sendToBackend('/auth/firebase/email', firebaseToken);
-      handleAuthSuccess(data);
-    } catch (err) {
-      console.error(err);
-      const msg = err.code === 'auth/email-already-in-use' ? 'Account already exists. Sign in instead.' :
-                  err.code === 'auth/weak-password' ? 'Password too weak' :
-                  'Registration failed. Try again.';
-      showMsg(msg);
+      if (err.code !== 'auth/popup-closed-by-user') showMsg('Google sign-in failed. Try again.');
     }
   }
 </script>
