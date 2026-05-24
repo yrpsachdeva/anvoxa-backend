@@ -59,6 +59,13 @@ app.get('/write', (req, res) => {
 app.get('/deploy', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'deploy.html'));
 });
+app.get('/__/auth/handler', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+app.get('/__/auth/iframe', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
 // Global error handler
 app.use((err, req, res, _next) => {
