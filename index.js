@@ -87,3 +87,4 @@ app.listen(PORT, () => {
   console.log(`  /home      → app home (auth-gated)`);
   console.log(`  /dashboard → app (auth-gated)\n`);
 });// force redeploy
+ 
