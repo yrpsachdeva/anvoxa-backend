@@ -131,6 +131,40 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.05);paddin
 .ft-links{display:flex;gap:24px;font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.3);}
 .ft-links a:hover{color:var(--gold);}
 </style>
+
+<style>
+/* Desktop zoom fix */
+@media screen and (min-width: 769px) {
+  body { zoom: 0.6; }
+}
+
+/* Mobile fixes */
+@media screen and (max-width: 768px) {
+  body { zoom: 1; overflow-x: hidden; }
+  
+  .wrap, .inner, .container, [class*="-inner"], [class*="-grid"] {
+    max-width: 100% !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+  
+  [class*="-grid"], [class*="grid-"] {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+  
+  [class*="card"], [class*="-card"] {
+    width: 100% !important;
+    min-width: unset !important;
+    max-width: 100% !important;
+  }
+  
+  h1, h2 { font-size: clamp(24px, 8vw, 48px) !important; }
+  h3 { font-size: clamp(18px, 5vw, 28px) !important; }
+  
+  .nav-links { display: none !important; }
+}
+</style>
 </head>
 <body>
 <div class="cd" id="cd"></div><div class="cr" id="cr"></div><div class="prog" id="prog"></div>
