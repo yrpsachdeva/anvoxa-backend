@@ -103,14 +103,14 @@ button { font-family: inherit; cursor: pointer; }
   border-bottom-color: rgba(232,161,74,0.22);
 }
 .nav-inner {
-  max-width: 1000px;
+  max-width: 1440px;
   margin: 0 auto;
-  padding: 0 50px;
+  padding: 0 24px;
   height: 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: 8px;
 }
 .nav-brand {
   font-family: 'Cormorant Garamond', serif !important;
@@ -181,17 +181,20 @@ button { font-family: inherit; cursor: pointer; }
 
 .nav-links {
   display: flex;
-  gap: 18px;
+  gap: 6px;
   align-items: center;
+  flex-wrap: nowrap;
 }
 .nav-link {
-  font-size: 10px;
+  font-size: 9px;
   color: rgba(245,230,200,0.6);
   font-weight: 400;
-  letter-spacing: 3.0px;
+  letter-spacing: 1.2px;
   text-transform: uppercase;
   transition: color 0.2s;
   position: relative;
+  white-space: nowrap;
+  padding: 4px 6px;
 }
 .nav-link::after {
   content: '';
@@ -207,16 +210,18 @@ button { font-family: inherit; cursor: pointer; }
 .nav-cta {
   background: var(--amber);
   color: var(--espresso);
-  padding: 11px 14px;
+  padding: 9px 12px;
   border-radius: 3px;
-  font-size: 12px;
+  font-size: 10px;
   border: none;
   font-weight: 700;
   font-family: var(--body);
-  letter-spacing: 1.5px;
+  letter-spacing: 1.2px;
   text-transform: uppercase;
   transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
   box-shadow: 0 0 0 0 rgba(232,161,74,0);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 .nav-cta:hover {
   background: var(--amber-deep);
@@ -461,6 +466,7 @@ button { font-family: inherit; cursor: pointer; }
   font-family: var(--mono);
   transition: all 0.2s;
 }
+
 .publisher-pill:hover {
   border-color: var(--amber);
   color: var(--amber);
@@ -1081,14 +1087,14 @@ section { position: relative; overflow: hidden; }
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 4px;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(252, 252, 252, 0.3);
   border: 1px solid rgba(232,161,74,0.15);
   border-radius: 15px;
   overflow: hidden;
   margin-top: 40px;
 }
 .step {
-  background: var(--mid-roast);
+  background: var(--dark-roast);
   padding: 28px 20px;
   transition: background 0.3s, transform 0.3s;
   min-height: 150px;
@@ -1116,7 +1122,7 @@ section { position: relative; overflow: hidden; }
   font-family: var(--display);
   font-size: 50px;
   font-weight: 900;
-  color: rgba(0, 195, 254, 0.1);
+  color: rgba(240, 179, 9, 0.1);
   line-height: 1;
   margin-bottom: 14px;
   letter-spacing: -5px;
@@ -1900,7 +1906,7 @@ body{
   background:
     radial-gradient(circle at top right, rgba(212,175,55,.16), transparent 30%),
     radial-gradient(circle at bottom left, rgba(230,199,106,.08), transparent 30%),
-    linear-gradient(180deg,#070707 0%, #111111 100%) !important;
+    linear-gradient(180deg,#0d0b09 0%, #15100f 100%) !important;
 }
 
 /* FLOATING GLOW */
@@ -1924,7 +1930,7 @@ body::before{
 
 /* NAV */
 .nav{
-  background:rgba(10,10,10,.78)!important;
+  background:rgba(13,11,9,.92)!important;
   border-bottom:1px solid rgba(212,175,55,.08)!important;
 }
 
@@ -2142,8 +2148,8 @@ img:hover{
   --cream:#f6f1e8 !important;
   --cream-lt:#fffdfa !important;
 
-  --espresso:#0d0d0d !important;
-  --dark-roast:#151515 !important;
+  --espresso:#0d0b09 !important;
+  --dark-roast:#15100f !important;
   --mid-roast:#1d1d1d !important;
 
   --latte:#d7c8b1 !important;
@@ -2155,7 +2161,7 @@ img:hover{
 }
 
 body{
-  background:linear-gradient(180deg,#0d0d0d 0%, #151515 100%) !important;
+  background:linear-gradient(180deg,#120d06 0%, #1a1108 100%) !important;
   color:var(--cream)!important;
 }
 
@@ -2165,7 +2171,9 @@ body::before,
 }
 
 section:nth-of-type(odd){
-  background:#0d0d0d !important;
+  background:
+    radial-gradient(ellipse at 88% 8%, rgba(110,82,30,.70) 0%, rgba(72,55,20,.40) 22%, rgba(40,30,12,.15) 42%, transparent 58%),
+    #0d0b09 !important;
 }
 
 section:nth-of-type(even){
@@ -2247,7 +2255,9 @@ section{
 }
 
 .hero{
-  background:#111 !important;
+  background:
+    radial-gradient(ellipse at 88% 8%, rgba(110,82,30,.70) 0%, rgba(72,55,20,.40) 22%, rgba(40,30,12,.15) 42%, transparent 58%),
+    #0d0b09 !important;
 }
 
 .hero-title,
@@ -2267,14 +2277,14 @@ section{
 
 .btn-primary,
 .nav-cta{
-  background:var(--cream)!important;
-  color:#111!important;
+  background:#b8902a!important;
+  color:#120d06!important;
   border:none!important;
 }
 
 .btn-primary:hover,
 .nav-cta:hover{
-  background:#e7d8bf!important;
+  background:#d4a835!important;
 }
 
 .btn-ghost{
@@ -2334,6 +2344,7 @@ section{
 
 </style>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 </head>
 <body>
 
@@ -2350,13 +2361,16 @@ section{
   <div class="nav-inner">
     <a href="#top" class="nav-brand">Anvoxa<span>.</span></a>
     <div class="nav-links" id="nav-links">
-      <a href="#what" class="nav-link">What we do</a>
+      <a href="#who" class="nav-link">Who we are</a>
+      <a href="#chatbots" class="nav-link">Our specialization</a>
+      <a href="#enquire" class="nav-link">Enquire</a>
+      <a href="#what" class="nav-link">What we build</a>
       <a href="#steps" class="nav-link">Process</a>
       <a href="#domains" class="nav-link">Domains</a>
       <a href="#principles" class="nav-link">Principles</a>
       <a href="#help" class="nav-link">Who we help</a>
       <a href="#contact" class="nav-link">Contact</a>
-      <button class="nav-cta" onclick="goAuth()" id="nav-cta">Get started</button>
+      <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})" id="nav-cta">Get started</button>
     </div>
     <button class="nav-toggle" onclick="toggleNav()" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -2366,53 +2380,259 @@ section{
 
 <!-- HERO -->
 
+<style>
+/* ── HERO REDESIGN — left-aligned, no arc ───────────── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 120px 0 80px;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 78% 50%, rgba(184,144,42,.28) 0%, rgba(184,144,42,.10) 28%, transparent 60%),
+    radial-gradient(ellipse at 92% 18%, rgba(201,123,32,.18) 0%, transparent 38%),
+    #120d06 !important;
+}
+
+/* subtle noise overlay */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  z-index: 0;
+}
+
+.hero-new-inner {
+  max-width: 950px;
+  margin: 0 auto;
+  padding: 0 48px;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-new-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: var(--amber);
+  text-transform: uppercase;
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: fade-up 0.7s 0.2s forwards;
+}
+.hero-new-eyebrow::before {
+  content: '';
+  width: 28px;
+  height: 1.5px;
+  background: var(--amber);
+  flex-shrink: 0;
+}
+
+.hero-new-title {
+  font-family: var(--display);
+  font-size: clamp(52px, 8vw, 105px);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -4px;
+  color: var(--cream-lt);
+  margin-bottom: 36px;
+  max-width: 680px;
+  opacity: 0;
+  animation: fade-up 0.8s 0.35s forwards;
+}
+.hero-new-title em {
+  font-style: italic;
+  color: var(--amber);
+  display: block;
+}
+
+.hero-new-sub {
+  font-size: 16px;
+  line-height: 1.8;
+  color: rgba(245,230,200,.68);
+  font-weight: 300;
+  max-width: 480px;
+  margin-bottom: 44px;
+  opacity: 0;
+  animation: fade-up 0.8s 0.5s forwards;
+}
+.hero-new-sub strong {
+  color: rgba(245,230,200,.92);
+  font-weight: 600;
+}
+
+.hero-new-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fade-up 0.8s 0.65s forwards;
+}
+
+.hero-new-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: #b8902a;
+  color: #120d06;
+  border: none;
+  border-radius: 4px;
+  font-family: var(--body);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer !important;
+  pointer-events: auto !important;
+  transition: background .22s, transform .22s, box-shadow .22s;
+}
+.hero-new-btn-primary:hover {
+  background: #d4a835;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(184,144,42,.30);
+}
+
+.hero-new-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  padding: 14px 28px;
+  background: transparent;
+  color: rgba(245,230,200,.80);
+  border: 1px solid rgba(245,230,200,.22);
+  border-radius: 4px;
+  font-family: var(--body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: border-color .22s, color .22s;
+  text-decoration: none;
+}
+.hero-new-btn-ghost:hover {
+  border-color: var(--amber);
+  color: var(--amber);
+}
+
+@media (max-width: 600px) {
+  .hero-new-inner { padding: 0 20px; }
+  .hero-new-title { font-size: clamp(38px, 12vw, 64px); letter-spacing: -2px; }
+  .hero-new-actions { flex-direction: column; }
+}
+</style>
+
 <section class="hero" id="top">
+  <div class="hero-new-inner">
 
-  
+    <div class="hero-new-eyebrow">
+      AI · RESEARCH · ENGINEERING
+    </div>
 
-  <div class="hero-inner">
+    <h1 class="hero-new-title">
+      Every great idea<br>needs a
+      <em>voice.</em>
+    </h1>
 
-    <div class="hero-arc">
+    <p class="hero-new-sub">
+      An AI-native studio for <strong>research &amp; R&amp;D, AI solutions,
+      chatbots, and intelligent ecosystems</strong> — with the cloud and
+      lab support to run them. Built alongside you, from the first idea
+      to what you ship.
+    </p>
 
-      <div class="hero-content">
-
-        <div class="hero-eyebrow">
-          An introduction · 2026
-        </div>
-
-        <h1 class="hero-title">
-          Every great idea needs a <em>voice.</em>
-        </h1>
-
-        <p class="hero-sub">
-          Research guides, supporting writers, and technical researchers — alongside you on the work you want to see published.
-        </p>
-
-        <div class="hero-actions">
-          <button class="btn btn-primary" onclick="startEngagement()">
-            Begin a conversation
-          </button>
-
-          <a href="#what" class="btn btn-ghost">
-            What we do
-          </a>
-        </div>
-
-        <div class="hero-publishers">
-          <span class="hero-publishers-label">We write for</span>
-          <span class="publisher-pill">IEEE</span>
-          <span class="publisher-pill">Springer</span>
-          <span class="publisher-pill">Elsevier</span>
-          <span class="publisher-pill">ACM</span>
-          <span class="publisher-pill">Scopus</span>
-        </div>
-
-      </div>
-
+    <div class="hero-new-actions">
+      <button class="hero-new-btn-primary" onclick="startEngagement()">
+        Begin a conversation →
+      </button>
+      <a href="#what" class="hero-new-btn-ghost">
+        Explore what we build
+      </a>
     </div>
 
   </div>
 </section>
+
+<!-- SCROLLING TICKER -->
+<style>
+.ticker-strip {
+  width: 100%;
+  background: #0d0b09;
+  border-top: 1px solid rgba(184,144,42,.12);
+  border-bottom: 1px solid rgba(184,144,42,.12);
+  overflow: hidden;
+  padding: 14px 0;
+  position: relative;
+  z-index: 5;
+}
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker-scroll 28s linear infinite;
+  gap: 0;
+}
+.ticker-strip:hover .ticker-track { animation-play-state: paused; }
+.ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 28px;
+  padding: 0 28px;
+  white-space: nowrap;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(245,230,200,.45);
+  font-weight: 400;
+}
+.ticker-item .ticker-dot {
+  width: 5px;
+  height: 5px;
+  background: var(--amber);
+  border-radius: 50%;
+  flex-shrink: 0;
+  opacity: .6;
+}
+.ticker-item:hover { color: var(--amber); }
+@keyframes ticker-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+</style>
+<div class="ticker-strip">
+  <div class="ticker-track" id="tickerTrack">
+    <!-- set 1 -->
+    <span class="ticker-item">AI Chatbots <span class="ticker-dot"></span></span>
+    <span class="ticker-item">LLM Integration <span class="ticker-dot"></span></span>
+    <span class="ticker-item">CRM Automation <span class="ticker-dot"></span></span>
+    <span class="ticker-item">Research &amp; R&amp;D <span class="ticker-dot"></span></span>
+    <span class="ticker-item">Cloud Support <span class="ticker-dot"></span></span>
+    <span class="ticker-item">Lab Support <span class="ticker-dot"></span></span>
+    <span class="ticker-item">AI Ecosystems <span class="ticker-dot"></span></span>
+    <span class="ticker-item">Advanced AI Chatbots <span class="ticker-dot"></span></span>
+    <span class="ticker-item">LLM Integration <span class="ticker-dot"></span></span>
+    <span class="ticker-item">Research &amp; R&amp;D <span class="ticker-dot"></span></span>
+    <!-- set 2 (duplicate for seamless loop) -->
+    <span class="ticker-item">AI Chatbots <span class="ticker-dot"></span></span>
+    <span class="ticker-item">LLM Integration <span class="ticker-dot"></span></span>
+    <span class="ticker-item">CRM Automation <span class="ticker-dot"></span></span>
+    <span class="ticker-item">Research &amp; R&amp;D <span class="ticker-dot"></span></span>
+    <span class="ticker-item">Cloud Support <span class="ticker-dot"></span></span>
+    <span class="ticker-item">Lab Support <span class="ticker-dot"></span></span>
+    <span class="ticker-item">AI Ecosystems <span class="ticker-dot"></span></span>
+    <span class="ticker-item">Advanced AI Chatbots <span class="ticker-dot"></span></span>
+    <span class="ticker-item">LLM Integration <span class="ticker-dot"></span></span>
+    <span class="ticker-item">Research &amp; R&amp;D <span class="ticker-dot"></span></span>
+  </div>
+</div>
+<!-- END TICKER -->
 
 
 <!-- WHO WE ARE -->
@@ -2466,59 +2686,589 @@ section{
     </div>
   </div>
 </section>
+<!-- ADVANCED CHATBOTS & CRM -->
+<style>
+.chatbot-section {
+  padding: 100px 24px;
+  position: relative;
+  overflow: hidden;
+}
+.chatbot-inner {
+  max-width: 950px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.chatbot-left { position: relative; z-index: 1; }
+.chatbot-left .eyebrow { color: var(--amber); }
+.chatbot-left .eyebrow::before { background: var(--amber); }
+.chatbot-heading {
+  font-family: var(--display);
+  font-size: clamp(28px, 4vw, 46px);
+  font-weight: 900;
+  color: var(--cream-lt);
+  line-height: 1.08;
+  letter-spacing: -1.5px;
+  margin-bottom: 24px;
+}
+.chatbot-heading em {
+  color: var(--amber);
+  font-style: italic;
+}
+.chatbot-desc {
+  font-size: 14px;
+  line-height: 1.85;
+  color: rgba(245,230,200,.55);
+  font-weight: 300;
+  margin-bottom: 36px;
+}
+.chatbot-features { list-style: none; display: flex; flex-direction: column; gap: 18px; margin-bottom: 36px; }
+.chatbot-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  font-size: 14px;
+  color: rgba(245,230,200,.70);
+  line-height: 1.7;
+}
+.chatbot-features li .cf-check {
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  border: 1.5px solid var(--amber);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.chatbot-features li .cf-check::after {
+  content: '';
+  width: 6px; height: 4px;
+  border-left: 1.5px solid var(--amber);
+  border-bottom: 1.5px solid var(--amber);
+  transform: rotate(-45deg) translate(1px, -1px);
+}
+.chatbot-features li strong { color: var(--cream-lt); font-weight: 600; }
+.chatbot-integrates {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.chatbot-integrates-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: rgba(245,230,200,.35);
+  flex-shrink: 0;
+}
+.chatbot-pill {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: rgba(245,230,200,.55);
+  border: 1px solid rgba(245,230,200,.14);
+  border-radius: 99px;
+  padding: 5px 14px;
+  transition: border-color .2s, color .2s;
+}
+.chatbot-pill:hover { border-color: var(--amber); color: var(--amber); }
 
-<!-- WHAT WE DO -->
-<section class="what" id="what">
-  <div class="wrap">
+/* Right: chat UI mockup */
+.chatbot-right { position: relative; z-index: 1; }
+.chat-ui {
+  background: rgba(21,16,15,.80);
+  border: 1px solid rgba(184,144,42,.15);
+  border-radius: 12px;
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+}
+.chat-header {
+  background: rgba(184,144,42,.08);
+  border-bottom: 1px solid rgba(184,144,42,.12);
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.chat-header-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--amber);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+@keyframes pulse-dot {
+  0%,100% { opacity: .6; transform: scale(1); }
+  50%      { opacity: 1;  transform: scale(1.2); }
+}
+.chat-header-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(245,230,200,.50);
+}
+.chat-body { padding: 24px 20px; display: flex; flex-direction: column; gap: 16px; }
+.chat-msg {
+  max-width: 82%;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: rgba(245,230,200,.80);
+}
+.chat-msg.bot {
+  background: rgba(184,144,42,.08);
+  border: 1px solid rgba(184,144,42,.12);
+  align-self: flex-start;
+  border-radius: 2px 10px 10px 10px;
+}
+.chat-msg.user {
+  background: rgba(245,230,200,.06);
+  border: 1px solid rgba(245,230,200,.08);
+  align-self: flex-end;
+  border-radius: 10px 2px 10px 10px;
+}
+.chat-msg .chat-tag {
+  display: inline-block;
+  background: rgba(184,144,42,.18);
+  color: var(--amber);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 1px;
+  padding: 2px 8px;
+  border-radius: 3px;
+  margin-top: 6px;
+}
+.chat-input-row {
+  border-top: 1px solid rgba(184,144,42,.10);
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.chat-input-fake {
+  flex: 1;
+  font-family: var(--body);
+  font-size: 13px;
+  color: rgba(245,230,200,.25);
+}
+.chat-send {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--amber);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.chat-send::after {
+  content: '→';
+  font-size: 13px;
+  color: #0d0b09;
+  font-weight: 700;
+}
 
-    <!-- Giant "WHAT WE DO" typography like reference image 5 -->
-    <div class="what-giant-text reveal">
-      <span class="line-1">WHAT</span>
-      <span class="line-2">WE</span>
-      <span class="line-3">DO</span>
-      <div class="what-circle"></div>
+@media(max-width:700px) {
+  .chatbot-inner { grid-template-columns: 1fr; gap: 40px; }
+  .chatbot-right { display: none; }
+}
+</style>
+
+<div class="chatbot-section" id="chatbots">
+  <div class="chatbot-inner">
+    <div class="chatbot-left reveal">
+      <div class="eyebrow reveal">Advanced Chatbots &amp; CRM</div>
+      <h2 class="chatbot-heading reveal reveal-delay-1">
+        Support that knows your customer<br>before they finish <em>typing.</em>
+      </h2>
+      <p class="chatbot-desc reveal reveal-delay-2">
+        We design advanced AI assistants powered by modern LLMs and wire them directly
+        into the tools you already run. Your chatbot reads live customer context, answers
+        with your own knowledge, and writes the outcome back to your CRM — automatically.
+      </p>
+      <ul class="chatbot-features reveal reveal-delay-3">
+        <li><span class="cf-check"></span><div><strong>Advanced LLM chatbots</strong> grounded in your docs, data, and brand voice — not generic answers.</div></li>
+        <li><span class="cf-check"></span><div><strong>Native CRM integration</strong> — read and update records, tickets, and deals in real time.</div></li>
+        <li><span class="cf-check"></span><div><strong>24/7 automated support</strong> that resolves the routine and escalates to humans cleanly.</div></li>
+        <li><span class="cf-check"></span><div><strong>Insight write-back</strong> — every conversation enriches your customer record automatically.</div></li>
+      </ul>
+      <div class="chatbot-integrates reveal reveal-delay-4">
+        <span class="chatbot-integrates-label">Integrates with</span>
+        <span class="chatbot-pill">Salesforce</span>
+        <span class="chatbot-pill">HubSpot</span>
+        <span class="chatbot-pill">Zoho</span>
+        <span class="chatbot-pill">Zendesk</span>
+        <span class="chatbot-pill">+ custom</span>
+      </div>
     </div>
 
-    <p class="what-desc-strip reveal">
-      Everything we offer today sits in one of two places: supporting you on the
-      writing, or supporting you on the work the paper is about. Often both.
-    </p>
+    <div class="chatbot-right reveal-right">
+      <div class="chat-ui">
+        
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END CHATBOTS SECTION -->
 
-    <div class="what-grid">
-      <div class="what-card amber-card reveal reveal-delay-1">
-        <div class="what-num">01 · Writing</div>
-        <h3 class="what-title">Supporting Writers<br>& <em>Research Guides</em></h3>
-        <p class="what-desc">
-          We sit alongside you through the structure, the argument, the literature,
-          the drafting, and the revisions — supporting the parts you don't have
-          time for, aren't sure how to handle, or want a second mind on.
-        </p>
-        <ul class="what-list">
-          <li>Research papers & conference manuscripts</li>
-          <li>Journal submissions & revisions</li>
-          <li>Whitepapers & technical articles</li>
-          <li>Thesis & dissertation support</li>
-          <li>Literature reviews & reference work</li>
-          <li>Technical blogs & documentation</li>
-        </ul>
+
+<!-- RESEARCH ENQUIRY -->
+<style>
+/* ── ENQUIRY — full-width gradient ─────────────────── */
+.enquiry-wrap{
+  position:relative;
+  overflow:hidden;
+  width:100%;
+  background: #f7f3ec;
+  padding:90px 0;
+  display:flex;
+  align-items:center;
+}
+
+/* decorative ghost circles (left side, over dark area) */
+.enquiry-half-left{
+  flex:1;
+  padding:0 52px 0 64px;
+  display:flex;
+  align-items:center;
+  position:relative;
+}
+.enquiry-half-left::before{
+  content:'';
+  position:absolute;
+  top:-100px; right:0px;
+  width:320px; height:320px;
+  border-radius:50%;
+  border:1.5px solid rgba(184,144,42,.12);
+  pointer-events:none;
+}
+.enquiry-half-left::after{
+  content:'';
+  position:absolute;
+  top:-40px; right:50px;
+  width:180px; height:180px;
+  border-radius:50%;
+  border:1px solid rgba(184,144,42,.08);
+  pointer-events:none;
+}
+
+/* RIGHT — transparent, sits on the warm-white part of gradient */
+.enquiry-half-right{
+  flex:1.5;
+  padding:0 48px 0 36px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+}
+
+/* LEFT text — dark side so cream/amber */
+.enquiry-left{ width:100%; position:relative; z-index:1; }
+.enquiry-left .eyebrow{ color:#8a5a1a; }
+.enquiry-left .eyebrow::before{ background:#8a5a1a; }
+.enquiry-left .section-title{ color:#1a1108; line-height:1.05; }
+.enquiry-left .section-title em{ color:#b8902a; font-style:italic; }
+.enquiry-tag{ font-family:var(--display);font-size:15px;color:rgba(100,60,10,.55);margin-top:-4px;margin-bottom:18px;font-style:italic; }
+.enquiry-desc{ font-size:13px;line-height:1.9;color:rgba(26,17,8,.62);font-weight:300;margin-bottom:26px; }
+.enquiry-badges{ display:flex;flex-wrap:wrap;gap:8px; }
+.enquiry-badge{ font-family:var(--mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#8a5a1a;border:1px solid rgba(184,144,42,.30);border-radius:2px;padding:5px 12px;background:rgba(184,144,42,.07); }
+
+/* FORM CARD — translucent white card sitting on warm-white gradient */
+.enquiry-card{
+  background:#ffffff;
+  border:1px solid rgba(184,144,42,.20);
+  border-radius:10px;
+  padding:24px 24px;
+  width:100%;
+  max-width:580px;
+  position:relative;
+  z-index:2;
+  box-shadow:0 2px 24px rgba(26,17,8,.10);
+}
+.eq-form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.eq-field{display:flex;flex-direction:column;gap:5px;margin-bottom:10px;}
+.eq-field.full{grid-column:span 2;}
+.eq-label{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#b8902a;}
+.eq-input,.eq-select,.eq-textarea{background:#fafafa;border:1px solid #ddd0b0;border-radius:4px;color:#1a1108;font-family:var(--body);font-size:13px;font-weight:400;padding:8px 12px;transition:border-color .2s,box-shadow .2s;outline:none;width:100%;box-sizing:border-box;-webkit-appearance:none;}
+.eq-input::placeholder,.eq-textarea::placeholder{color:rgba(26,17,8,.28);}
+.eq-input:focus,.eq-select:focus,.eq-textarea:focus{border-color:#b8902a;box-shadow:0 0 0 3px rgba(184,144,42,.12);background:#fff;}
+.eq-select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23b8902a' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:34px;background-color:#fafafa;}
+.eq-select option{background:#fff;color:#1a1108;}
+.eq-textarea{resize:vertical;min-height:68px;}
+.eq-toggle-wrap{display:flex;background:#f0ece6;border:1px solid #e0d0b8;border-radius:4px;overflow:hidden;}
+.eq-toggle-btn{flex:1;padding:10px 0;font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(26,17,8,.38);background:transparent;border:none;cursor:pointer !important;pointer-events:auto !important;position:relative;z-index:10;transition:background .2s,color .2s;}
+.eq-toggle-btn.active{background:#b8902a;color:#fff;}
+.eq-chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px;}
+.eq-chip{padding:7px 18px;border-radius:3px;border:1px solid #e0d0b8;background:#fafafa;color:rgba(26,17,8,.42);font-family:var(--mono);font-size:12px;letter-spacing:1.5px;cursor:pointer !important;pointer-events:auto !important;position:relative;z-index:10;transition:all .2s;}
+.eq-chip.selected,.eq-chip:hover{border-color:#b8902a;color:#b8902a;background:rgba(184,144,42,.07);}
+.eq-submit{width:100%;padding:15px;background:#1a1108;color:#fdf6e8;border:none;border-radius:4px;font-family:var(--body);font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer !important;pointer-events:auto !important;position:relative;z-index:10;transition:all .25s;margin-top:6px;}
+.eq-submit:hover:not(:disabled){background:#2c2c2c;transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.35);}
+.eq-submit:disabled{opacity:.5;cursor:not-allowed;transform:none;}
+.eq-success{display:none;text-align:center;padding:40px 20px;}
+.eq-success-icon{width:52px;height:52px;border-radius:50%;background:rgba(184,144,42,.10);border:1.5px solid #b8902a;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:22px;color:#b8902a;}
+.eq-success h3{font-family:var(--display);font-size:22px;font-weight:700;color:#1a1108;margin-bottom:10px;letter-spacing:-.5px;}
+.eq-success p{font-size:13px;color:rgba(26,17,8,.55);line-height:1.85;}
+.eq-error-msg{display:none;font-size:12px;color:#c0392b;margin-top:10px;text-align:center;}
+@media(max-width:700px){
+  .enquiry-wrap{flex-direction:column;}
+  .enquiry-half-left{padding:52px 24px;}
+  .enquiry-half-right{padding:48px 24px;}
+  .enquiry-card{border-left:none;border-top:3px solid #b8902a;border-radius:0 0 8px 8px;padding:24px 0 0 0;}
+  .eq-form-row{grid-template-columns:1fr;}
+  .eq-field.full{grid-column:span 1;}
+}
+</style>
+
+<div class="enquiry-wrap" id="enquire">
+
+  <!-- LEFT HALF — light/cream -->
+  <div class="enquiry-half-left">
+    <div class="enquiry-left">
+      <div class="eyebrow reveal">Start a conversation</div>
+      <h2 class="section-title reveal reveal-delay-1">Tell us about<br>your <em>research</em>.</h2>
+      <p class="enquiry-tag">We respond within 24 hours.</p>
+      <p class="enquiry-desc reveal reveal-delay-2">
+        Share the details below — your area of research, what you are targeting,
+        and the purpose. We read every enquiry personally and reply with a clear
+        sense of whether and how we can support you.
+      </p>
+      <div class="enquiry-badges reveal reveal-delay-3">
+        <span class="enquiry-badge">EB-1A</span>
+        <span class="enquiry-badge">Academic</span>
+        <span class="enquiry-badge">Project</span>
+        <span class="enquiry-badge">IEEE · Springer · Elsevier</span>
+        <span class="enquiry-badge">Q1 – Q4</span>
+        <span class="enquiry-badge">Conference A – D</span>
       </div>
-      <div class="what-card dark-card reveal reveal-delay-2">
-        <div class="what-num">02 · Code</div>
-        <h3 class="what-title">Supporting Coders<br>& <em>Technical Researchers</em></h3>
-        <p class="what-desc">
-          Coders and technical researchers who work alongside you on the actual
-          problem — so the paper is backed by work you can stand behind. Bring
-          the idea and the direction; we support you in getting it to results.
-        </p>
-        <ul class="what-list">
-          <li>Helping implement research ideas in code</li>
-          <li>Support with model training, fine-tuning, evaluation</li>
-          <li>Experiments, benchmarks & ablations</li>
-          <li>Data analysis & visualization</li>
-          <li>Reproducibility: clean scripts, notebooks</li>
-          <li>Reviewer-response & revision cycles</li>
-        </ul>
+    </div>
+  </div><!-- /enquiry-half-left -->
+
+  <!-- RIGHT HALF — dark -->
+  <div class="enquiry-half-right">
+    <div class="enquiry-card reveal-right">
+      <div class="eq-success" id="eq-success">
+        <div class="eq-success-icon">✦</div>
+        <h3>Enquiry received.</h3>
+        <p>We'll respond via email in <strong style="color:var(--amber);">less than 24 hours</strong>.<br>Thank you for reaching out to Anvoxa.</p>
       </div>
+
+      <form id="eq-form" novalidate>
+        <div class="eq-form-row">
+          <div class="eq-field">
+            <label class="eq-label" for="eq-name">Full name *</label>
+            <input class="eq-input" id="eq-name" type="text" placeholder="Dr. Jane Smith" required />
+          </div>
+          <div class="eq-field">
+            <label class="eq-label" for="eq-email">Email address *</label>
+            <input class="eq-input" id="eq-email" type="email" placeholder="jane@university.edu" required />
+          </div>
+        </div>
+        <div class="eq-form-row">
+          <div class="eq-field">
+            <label class="eq-label" for="eq-phone">Phone number</label>
+            <input class="eq-input" id="eq-phone" type="tel" placeholder="+1 555 000 0000" />
+          </div>
+          <div class="eq-field">
+            <label class="eq-label" for="eq-country">Country</label>
+            <input class="eq-input" id="eq-country" type="text" placeholder="United States" />
+          </div>
+        </div>
+        <div class="eq-field full" style="grid-column:span 2;">
+          <label class="eq-label" for="eq-area">Area of research *</label>
+          <input class="eq-input" id="eq-area" type="text" placeholder="e.g. Federated Learning · NLP · Wireless Networks" required />
+        </div>
+        <div class="eq-field full" style="grid-column:span 2;">
+          <label class="eq-label" for="eq-purpose">Purpose *</label>
+          <select class="eq-select" id="eq-purpose" required>
+            <option value="" disabled selected>Select the purpose of your research</option>
+            <option value="EB1A">EB-1A (Immigration / Extraordinary Ability)</option>
+            <option value="Academic">Academic publication</option>
+            <option value="Project">Industry / Project report</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="eq-field full" style="grid-column:span 2;">
+          <label class="eq-label">Target level *</label>
+          <div class="eq-toggle-wrap">
+            <button type="button" class="eq-toggle-btn active" id="btn-conference" data-level="conference">Conference</button>
+            <button type="button" class="eq-toggle-btn" id="btn-journal" data-level="journal">Journal</button>
+          </div>
+        </div>
+        <div class="eq-field full" id="conf-chips-wrap" style="grid-column:span 2;">
+          <label class="eq-label">Conference rank</label>
+          <div class="eq-chips">
+            <button type="button" class="eq-chip" onclick="selectChip(this,'A')">A</button>
+            <button type="button" class="eq-chip" onclick="selectChip(this,'B')">B</button>
+            <button type="button" class="eq-chip" onclick="selectChip(this,'C')">C</button>
+            <button type="button" class="eq-chip" onclick="selectChip(this,'D')">D</button>
+          </div>
+        </div>
+        <div class="eq-field full" id="jour-chips-wrap" style="grid-column:span 2; display:none;">
+          <label class="eq-label">Journal quartile</label>
+          <div class="eq-chips">
+            <button type="button" class="eq-chip" onclick="selectChip(this,'Q1')">Q1</button>
+            <button type="button" class="eq-chip" onclick="selectChip(this,'Q2')">Q2</button>
+            <button type="button" class="eq-chip" onclick="selectChip(this,'Q3')">Q3</button>
+            <button type="button" class="eq-chip" onclick="selectChip(this,'Q4')">Q4</button>
+          </div>
+        </div>
+        <div class="eq-field full" style="grid-column:span 2;">
+          <label class="eq-label" for="eq-message">Brief description <span style="opacity:.5">(optional)</span></label>
+          <textarea class="eq-textarea" id="eq-message" placeholder="Describe your paper idea, current state of work, or what support you need…"></textarea>
+        </div>
+        <div class="eq-error-msg" id="eq-error"></div>
+        <button type="submit" class="eq-submit" id="eq-submit-btn">Send enquiry →</button>
+      </form>
+    </div><!-- /enquiry-card -->
+  </div><!-- /enquiry-half-right -->
+
+</div><!-- /enquiry-wrap -->
+
+<script>
+const SUPABASE_URL = 'https://esexmwhdqkgjztskjsii.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVzZXhtd2hkcWtnanp0c2tqc2lpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgwNTUyODQsImV4cCI6MjA5MzYzMTI4NH0.HhFP8m4QYK7nmQ2GNpbNwkifnguSVo5TEHIlxjMo-r4';
+const _sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+let _levelType = 'conference';
+let _selLevel  = null;
+
+function switchLevel(type) {
+  _levelType = type; _selLevel = null;
+  document.getElementById('btn-conference').classList.toggle('active', type==='conference');
+  document.getElementById('btn-journal').classList.toggle('active',    type==='journal');
+  document.getElementById('conf-chips-wrap').style.display = type==='conference' ? '' : 'none';
+  document.getElementById('jour-chips-wrap').style.display = type==='journal'    ? '' : 'none';
+  document.querySelectorAll('.eq-chip').forEach(c=>c.classList.remove('selected'));
+}
+
+/* Robust toggle binding — survives cursor:none and stacking contexts */
+document.addEventListener('DOMContentLoaded', function() {
+  ['btn-conference','btn-journal'].forEach(function(id) {
+    var btn = document.getElementById(id);
+    if (!btn) return;
+    ['click','touchend','pointerup'].forEach(function(evt) {
+      btn.addEventListener(evt, function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        switchLevel(btn.getAttribute('data-level'));
+      }, {passive:false});
+    });
+  });
+});
+
+function selectChip(el, val) {
+  el.closest('.eq-chips').querySelectorAll('.eq-chip').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');
+  _selLevel = val;
+}
+
+document.getElementById('eq-form').addEventListener('submit', async function(e){
+  e.preventDefault();
+  const name    = document.getElementById('eq-name').value.trim();
+  const email   = document.getElementById('eq-email').value.trim();
+  const area    = document.getElementById('eq-area').value.trim();
+  const purpose = document.getElementById('eq-purpose').value;
+  const errEl   = document.getElementById('eq-error');
+  errEl.style.display = 'none';
+  if (!name || !email || !area || !purpose) {
+    errEl.textContent = 'Please fill in all required fields (*).';
+    errEl.style.display = 'block'; return;
+  }
+  const btn = document.getElementById('eq-submit-btn');
+  btn.disabled = true; btn.textContent = 'Sending…';
+  try {
+    const { error } = await _sb.from('research_enquiries').insert([{
+      name, email,
+      phone:            document.getElementById('eq-phone').value.trim()   || null,
+      country:          document.getElementById('eq-country').value.trim() || null,
+      area_of_research: area, purpose,
+      level_type:       _levelType,
+      conference_level: _levelType==='conference' ? _selLevel : null,
+      journal_level:    _levelType==='journal'    ? _selLevel : null,
+      message:          document.getElementById('eq-message').value.trim() || null,
+      status:           'new'
+    }]);
+    if (error) throw error;
+    document.getElementById('eq-form').style.display    = 'none';
+    document.getElementById('eq-success').style.display = 'block';
+  } catch(err) {
+    console.error(err);
+    errEl.textContent = 'Something went wrong. Please try again or email us directly.';
+    errEl.style.display = 'block';
+    btn.disabled = false; btn.textContent = 'Send enquiry →';
+  }
+});
+</script>
+<!-- END RESEARCH ENQUIRY -->
+
+<!-- WHAT WE BUILD -->
+<style>
+.wb-header{text-align:center;margin-bottom:52px;}
+.wb-header .eyebrow{justify-content:center;}
+.wb-title{font-family:var(--display);font-size:clamp(28px,4vw,50px);font-weight:900;color:var(--cream-lt);letter-spacing:-1.5px;line-height:1.1;margin-bottom:0;}
+.wb-title em{color:var(--amber);font-style:italic;}
+.wb-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(232,161,74,.10);border:1px solid rgba(232,161,74,.10);border-radius:8px;overflow:hidden;}
+.wb-card{background:rgba(21,16,15,.80);padding:36px 28px;display:flex;flex-direction:column;gap:16px;transition:background .3s;}
+.wb-card:hover{background:rgba(44,31,14,.75);}
+.wb-num{font-family:var(--mono);font-size:11px;letter-spacing:2px;color:var(--amber);opacity:.7;}
+.wb-icon{width:32px;height:32px;color:var(--amber);flex-shrink:0;}
+.wb-icon svg{width:100%;height:100%;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+.wb-card-title{font-family:var(--display);font-size:18px;font-weight:700;color:var(--cream-lt);letter-spacing:-.3px;line-height:1.2;}
+.wb-card-desc{font-size:13px;line-height:1.8;color:rgba(245,230,200,.55);font-weight:300;}
+@media(max-width:700px){.wb-grid{grid-template-columns:1fr;}}
+@media(min-width:701px) and (max-width:950px){.wb-grid{grid-template-columns:repeat(2,1fr);}}
+</style>
+<section class="what" id="what">
+  <div class="wrap">
+    <div class="wb-header reveal">
+      <div class="eyebrow">What we build</div>
+      <h2 class="wb-title">Intelligence, <em>engineered</em> around your work.</h2>
+    </div>
+    <div class="wb-grid">
+
+      <div class="wb-card reveal reveal-delay-1">
+        <div class="wb-num">01</div>
+        <div class="wb-icon"><svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2v-4M9 21H5a2 2 0 0 1-2-2v-4m0 0h18"/></svg></div>
+        <div class="wb-card-title">Research &amp; R&amp;D</div>
+        <p class="wb-card-desc">Literature, experiments, and original research — a second mind on the hard problems, from hypothesis through to results you can defend.</p>
+      </div>
+
+      <div class="wb-card reveal reveal-delay-2">
+        <div class="wb-num">02</div>
+        <div class="wb-icon"><svg viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="2"/><path d="M9 9h.01M15 9h.01M9 15h.01M15 15h.01M12 9v6M9 12h6"/></svg></div>
+        <div class="wb-card-title">AI Solutions &amp; Support</div>
+        <p class="wb-card-desc">Custom models, fine-tuning, evaluation, and integration — AI built to fit the work you actually do, not the other way around.</p>
+      </div>
+
+      <div class="wb-card reveal reveal-delay-3">
+        <div class="wb-num">03</div>
+        <div class="wb-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <div class="wb-card-title">AI Chatbots</div>
+        <p class="wb-card-desc">Conversational agents and assistants that understand your domain, your data, and your users — deployed where they're needed.</p>
+      </div>
+
+      <div class="wb-card reveal reveal-delay-1">
+        <div class="wb-num">04</div>
+        <div class="wb-icon"><svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div>
+        <div class="wb-card-title">AI Ecosystem</div>
+        <p class="wb-card-desc">Pipelines, tooling, and infrastructure that connect your models, data, and teams into one coherent system that scales.</p>
+      </div>
+
+      <div class="wb-card reveal reveal-delay-2">
+        <div class="wb-num">05</div>
+        <div class="wb-icon"><svg viewBox="0 0 24 24"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></div>
+        <div class="wb-card-title">Cloud Support</div>
+        <p class="wb-card-desc">Multi-cloud and hybrid deployment, scaling, and reliability — so your AI runs where it needs to, exactly when it needs to.</p>
+      </div>
+
+      <div class="wb-card reveal reveal-delay-3">
+        <div class="wb-num">06</div>
+        <div class="wb-icon"><svg viewBox="0 0 24 24"><path d="M9 3l-1 7h8L15 3M8 10v4a4 4 0 0 0 8 0v-4"/><line x1="5" y1="21" x2="19" y2="21"/></svg></div>
+        <div class="wb-card-title">Lab Support</div>
+        <p class="wb-card-desc">Hands-on help with environments, reproducibility, and the experiments behind work you can stand behind under review.</p>
+      </div>
+
     </div>
   </div>
 </section>

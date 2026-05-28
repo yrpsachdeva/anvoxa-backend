@@ -1,14 +1,24 @@
 require('dotenv').config();
 const express = require('express');
-const cors = require('cors');
-const path = require('path');
+const cors    = require('cors');
+const path    = require('path');
 
-const authRoutes = require('./auth');
-const apiRoutes = require('./api');
+const authRoutes  = require('./auth');
+const apiRoutes   = require('./api');
+const adminRoutes = require('./admin-routes');
 
 const app = express();
 
-// ── Middleware ────────────────────────────────────────────────
+// ── CORS (raw header first, then the cors() middleware) ───────
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', req.headers.origin || '*');
+  res.header('Access-Control-Allow-Credentials', 'true');
+  res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  if (req.method === 'OPTIONS') return res.sendStatus(200);
+  next();
+});
+
 app.use(cors({
   origin: [
     'https://www.anvoxa.com',
@@ -18,65 +28,57 @@ app.use(cors({
   ],
   credentials: true,
 }));
-app.use(express.json());
 
-// Trust proxy
+// ── Middleware ────────────────────────────────────────────────
+app.use(express.json());
 app.set('trust proxy', 1);
 
-// ── API routes (must come before static, so /auth/login doesn't get
-//    confused with /login the page) ────────────────────────────
-app.use('/auth', authRoutes);
-app.use('/', apiRoutes); // /engagements, /profile, /me
+// ── API routes ────────────────────────────────────────────────
+app.use('/auth/admin', adminRoutes.auth);
+app.use('/admin',      adminRoutes.protected);
+app.use('/auth',       authRoutes);
+app.use('/',           apiRoutes);
 
 // ── Page routes ───────────────────────────────────────────────
-// Sign-in page — root / landing URL
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
+app.get('/', (req, res) =>
+  res.sendFile(path.join(__dirname, 'public', 'index.html')));
 
-// Home (auth-gated; client-side guard redirects to / if not signed in)
-app.get('/home', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'home.html'));
-});
+app.get('/home', (req, res) =>
+  res.sendFile(path.join(__dirname, 'public', 'home.html')));
 
-// Dashboard (auth-gated client-side; the HTML itself does the redirect)
-app.get('/dashboard', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'dashboard.html'));
-});
+app.get('/dashboard', (req, res) =>
+  res.sendFile(path.join(__dirname, 'public', 'dashboard.html')));
+
+app.get('/run', (req, res) =>
+  res.sendFile(path.join(__dirname, 'public', 'run.html')));
+
+app.get('/write', (req, res) =>
+  res.sendFile(path.join(__dirname, 'public', 'write.html')));
+
+app.get('/deploy', (req, res) =>
+  res.sendFile(path.join(__dirname, 'public', 'deploy.html')));
+
+app.get('/__/auth/handler', (req, res) =>
+  res.sendFile(path.join(__dirname, 'public', 'index.html')));
+
+app.get('/__/auth/iframe', (req, res) =>
+  res.sendFile(path.join(__dirname, 'public', 'index.html')));
 
 // Health check
-app.get('/health', (req, res) => res.json({ status: 'ok', service: 'anvoxa-backend' }));
+app.get('/health', (req, res) =>
+  res.json({ status: 'ok', service: 'anvoxa-backend' }));
 
-// Static assets (CSS, images, JS files in /public — but NOT the HTMLs above,
-// which are explicitly routed) ────────────────────────────────
+// Static assets
 app.use(express.static(path.join(__dirname, 'public'), { index: false }));
-
-// 404 catch-all
-app.use((req, res) => res.status(404).json({ error: 'Route not found' }));
-app.get('/run', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'run.html'));
-});
-
-app.get('/write', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'write.html'));
-});
-
-app.get('/deploy', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'deploy.html'));
-});
-app.get('/__/auth/handler', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
-
-app.get('/__/auth/iframe', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
 
 // Global error handler
 app.use((err, req, res, _next) => {
   console.error(err);
   res.status(500).json({ error: 'Internal server error' });
 });
+
+// 404 catch-all (must be last)
+app.use((req, res) => res.status(404).json({ error: 'Route not found' }));
 
 // ── Start ─────────────────────────────────────────────────────
 const PORT = process.env.PORT || 4000;
@@ -86,5 +88,4 @@ app.listen(PORT, () => {
   console.log(`  /          → sign in (landing)`);
   console.log(`  /home      → app home (auth-gated)`);
   console.log(`  /dashboard → app (auth-gated)\n`);
-});// force redeploy
- 
+});
