@@ -12,7 +12,7 @@ const getSupabase = require('./supabase');
 // ─────────────────────────────────────────────────────────────
 if (!admin.apps.length) {
   admin.initializeApp({
-     credential: admin.credential.cert(JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT)),
+     credential: admin.credential.cert(JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_JSON)),
   });
 }
 
