@@ -417,7 +417,7 @@ const BACKEND = window.location.hostname === 'localhost'
   /* ── AUTH GUARD ── */
   const adminToken = localStorage.getItem('adminToken');
   const adminUser  = JSON.parse(localStorage.getItem('adminUser') || 'null');
-  if (!adminToken) { window.location.href = '/'; }
+  if (!adminToken) { window.location.href = '/admin-login'; }
 
   document.getElementById('sb-admin-email').textContent = adminUser?.email || 'Admin';
 

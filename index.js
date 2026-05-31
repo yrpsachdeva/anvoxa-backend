@@ -41,9 +41,15 @@ app.use('/',           apiRoutes);
 
 // ── Page routes ───────────────────────────────────────────────
 app.get('/', (req, res) =>
-  res.sendFile(path.join(__dirname, 'public', 'index.html')));
+  res.sendFile(path.join(__dirname, 'public', 'home.html')));
 
 app.get('/home', (req, res) =>
+  res.sendFile(path.join(__dirname, 'public', 'home.html')));
+
+app.get('/login', (req, res) =>
+  res.sendFile(path.join(__dirname, 'public', 'home.html')));
+
+app.get('/admin-login', (req, res) =>
   res.sendFile(path.join(__dirname, 'public', 'home.html')));
 
 app.get('/dashboard', (req, res) =>
@@ -59,10 +65,10 @@ app.get('/deploy', (req, res) =>
   res.sendFile(path.join(__dirname, 'public', 'deploy.html')));
 
 app.get('/__/auth/handler', (req, res) =>
-  res.sendFile(path.join(__dirname, 'public', 'index.html')));
+  res.sendFile(path.join(__dirname, 'public', 'home.html')));
 
 app.get('/__/auth/iframe', (req, res) =>
-  res.sendFile(path.join(__dirname, 'public', 'index.html')));
+  res.sendFile(path.join(__dirname, 'public', 'home.html')));
 
 // Health check
 app.get('/health', (req, res) =>
@@ -85,7 +91,7 @@ const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`\n  Anvoxa running on http://localhost:${PORT}`);
   console.log(`  Environment: ${process.env.NODE_ENV || 'development'}\n`);
-  console.log(`  /          → sign in (landing)`);
-  console.log(`  /home      → app home (auth-gated)`);
+  console.log(`  /          → home (public landing)`);
+  console.log(`  /home      → home (same page, kept for back-compat)`);
   console.log(`  /dashboard → app (auth-gated)\n`);
 });
