@@ -10,12 +10,15 @@ const getSupabase = require('./supabase');
 // ─────────────────────────────────────────────────────────────
 // Firebase Admin init
 // ─────────────────────────────────────────────────────────────
+const serviceAccount = process.env.FIREBASE_SERVICE_ACCOUNT_JSON
+  ? JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_JSON)
+  : require('./firebase-service-account.json');
+
 if (!admin.apps.length) {
   admin.initializeApp({
-     credential: admin.credential.cert(JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_JSON)),
+    credential: admin.credential.cert(serviceAccount),
   });
 }
-
 // ─────────────────────────────────────────────────────────────
 // Map frontend role -> DB enum
 //   Frontend sends 'client' or 'researcher'
