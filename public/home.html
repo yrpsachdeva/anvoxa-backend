@@ -4090,7 +4090,7 @@ function handleEnquirySubmit(){
   }
 
   async function sendToBackend(endpoint, firebaseToken) {
-    const res = await fetch(BACKEND + endpoint, {
+    const res = await fetch('https://anvoxa-backend-production.up.railway.app/enquiry', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ firebaseToken, role: selectedRole }),
