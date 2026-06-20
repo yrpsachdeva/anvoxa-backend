@@ -1,5 +1,5 @@
 // api.js — Authenticated routes for the dashboard
-// Engagements (list, create) + Profile (update) + Public enquiry form
+// Engagements (list, create) + Profile (update)
 require('dotenv').config();
 const express = require('express');
 const jwt = require('jsonwebtoken');
@@ -25,10 +25,13 @@ function requireAuth(req, res, next) {
 }
 
 // ─────────────────────────────────────────────────────────────
-// POST /api/enquiry — public route, no auth needed
-// Saves enquiry from the home page contact form to Supabase
+// POST /enquiries — public route, called from the contact form
+// on the marketing site (home.html). No auth required — this is
+// the public "Send us an enquiry" form submission.
+// body: { name, email, phone, country, area_of_research, purpose,
+//         level_type, conference_level, journal_level, message }
 // ─────────────────────────────────────────────────────────────
-router.post('/enquiry', async (req, res) => {
+router.post('/enquiries', async (req, res) => {
   try {
     const {
       name,
@@ -38,38 +41,38 @@ router.post('/enquiry', async (req, res) => {
       area_of_research,
       purpose,
       level_type,
-      rank,
-      description,
+      conference_level,
+      journal_level,
+      message,
     } = req.body || {};
 
-    // Validate required fields
     if (!name || !email || !area_of_research || !purpose) {
-      return res.status(400).json({ error: 'Name, email, area of research and purpose are required' });
+      return res.status(400).json({ error: 'Name, email, area of research, and purpose are required' });
     }
 
     const { data, error } = await getSupabase()
       .from('research_enquiries')
       .insert({
         name,
-        email: email.toLowerCase().trim(),
+        email,
         phone: phone || null,
         country: country || null,
         area_of_research,
         purpose,
-        level_type: level_type || 'conference',
-        rank: rank || null,
-        description: description || null,
+        level_type: level_type || null,
+        conference_level: conference_level || null,
+        journal_level: journal_level || null,
+        message: message || null,
         status: 'new',
       })
       .select()
       .single();
 
     if (error) throw error;
-
-    return res.status(201).json({ success: true, enquiry: data });
+    return res.status(201).json({ enquiry: data });
   } catch (err) {
-    console.error('[POST /enquiry]', err);
-    return res.status(500).json({ error: 'Failed to save enquiry. Please try again.' });
+    console.error('[POST /enquiries]', err);
+    return res.status(500).json({ error: 'Failed to submit enquiry' });
   }
 });
 
@@ -104,7 +107,7 @@ router.post('/engagements', requireAuth, async (req, res) => {
     const validArms = ['studio', 'research', 'intelligence', 'academy', 'labs', 'core'];
     if (!validArms.includes(arm)) return res.status(400).json({ error: 'Invalid arm' });
 
-    const { data, error } = await getSupabase()
+    const { data, error } = await supabase
       .from('engagements')
       .insert({
         client_id: req.userId,
@@ -126,18 +129,24 @@ router.post('/engagements', requireAuth, async (req, res) => {
 
 // ─────────────────────────────────────────────────────────────
 // PATCH /profile — update the current user's profile
+// body: { full_name?, phone?, organisation?, designation? }
+//
+// Note: full_name and phone live on `users`.
+// organisation and designation live on `client_profiles`.
+// We update both and return the merged user object.
 // ─────────────────────────────────────────────────────────────
 router.patch('/profile', requireAuth, async (req, res) => {
   try {
     const { full_name, phone, organisation, designation } = req.body;
 
+    // 1. Update users table
     const userPatch = {};
     if (full_name !== undefined) userPatch.full_name = full_name;
     if (phone !== undefined) userPatch.phone = phone;
 
     let userRow;
     if (Object.keys(userPatch).length) {
-      const { data, error } = await getSupabase()
+      const { data, error } = await supabase
         .from('users')
         .update(userPatch)
         .eq('id', req.userId)
@@ -150,13 +159,14 @@ router.patch('/profile', requireAuth, async (req, res) => {
       userRow = data;
     }
 
+    // 2. Upsert client_profiles row (only if user is a client and we have profile fields)
     let profileRow = {};
     if ((organisation !== undefined || designation !== undefined) && req.userRole === 'client') {
       const profilePatch = { user_id: req.userId };
       if (organisation !== undefined) profilePatch.organisation = organisation;
       if (designation !== undefined) profilePatch.designation = designation;
 
-      const { data, error } = await getSupabase()
+      const { data, error } = await supabase
         .from('client_profiles')
         .upsert(profilePatch, { onConflict: 'user_id' })
         .select()
@@ -164,7 +174,8 @@ router.patch('/profile', requireAuth, async (req, res) => {
       if (error) throw error;
       profileRow = data;
     } else {
-      const { data } = await getSupabase()
+      // Try fetching existing profile so frontend gets it back
+      const { data } = await supabase
         .from('client_profiles')
         .select('organisation, designation')
         .eq('user_id', req.userId)
@@ -172,6 +183,7 @@ router.patch('/profile', requireAuth, async (req, res) => {
       profileRow = data || {};
     }
 
+    // 3. Merge for the frontend
     const merged = {
       ...userRow,
       organisation: profileRow.organisation || null,
@@ -186,18 +198,18 @@ router.patch('/profile', requireAuth, async (req, res) => {
 });
 
 // ─────────────────────────────────────────────────────────────
-// GET /me — return the latest user info
+// GET /me — return the latest user info (handy on dashboard load)
 // ─────────────────────────────────────────────────────────────
 router.get('/me', requireAuth, async (req, res) => {
   try {
-    const { data: userRow, error } = await getSupabase()
+    const { data: userRow, error } = await supabase
       .from('users')
       .select('*')
       .eq('id', req.userId)
       .single();
     if (error) throw error;
 
-    const { data: profileRow } = await getSupabase()
+    const { data: profileRow } = await supabase
       .from('client_profiles')
       .select('organisation, designation')
       .eq('user_id', req.userId)
