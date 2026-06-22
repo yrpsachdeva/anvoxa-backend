@@ -159,7 +159,41 @@
     .badge.closed    { background: rgba(76,175,125,0.12); color: var(--green); border: 1px solid rgba(76,175,125,0.25); }
     .badge.closed::before { background: var(--green); }
 
-    .purpose-chip { display: inline-block; padding: 2px 8px; border: 1px solid var(--border2); font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 1px; color: rgba(245,235,217,0.5); border-radius: 4px; }
+    .sb-purpose-badge { background: var(--surface3); color: rgba(245,235,217,0.4); font-family: 'JetBrains Mono', monospace; font-size: 9px; padding: 1px 7px; border-radius: 10px; }
+    .sb-link.active .sb-purpose-badge { background: rgba(255,185,103,0.2); color: var(--amber); }
+
+    /* ── MINI STATS (purpose views) ── */
+    .mini-stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 24px; }
+    .mini-stat-card { background: var(--surface); border: 1px solid var(--border); padding: 14px 18px; border-radius: 8px; }
+    .mini-stat-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: rgba(245,235,217,0.35); margin-bottom: 8px; }
+    .mini-stat-value { font-family: 'Bebas Neue', cursive; font-size: 30px; letter-spacing: 1px; color: var(--cream); line-height: 1; }
+
+    /* ── PURPOSE ICON HEADER ── */
+    .purpose-icon-badge { width: 34px; height: 34px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .purpose-icon-badge svg { width: 17px; height: 17px; stroke-width: 1.8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    .purpose-icon-badge.amber  { background: rgba(255,185,103,0.12); }
+    .purpose-icon-badge.amber svg  { stroke: var(--amber); }
+    .purpose-icon-badge.blue   { background: rgba(95,240,224,0.12); }
+    .purpose-icon-badge.blue svg   { stroke: var(--blue); }
+    .purpose-icon-badge.purple { background: rgba(123,95,255,0.12); }
+    .purpose-icon-badge.purple svg { stroke: var(--plasma-2); }
+    .purpose-icon-badge.gray   { background: var(--surface3); }
+    .purpose-icon-badge.gray svg   { stroke: rgba(245,235,217,0.5); }
+
+    /* ── PIPELINE STAGE CHIP ── */
+    .stage-chip { display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 1px; text-transform: uppercase; font-weight: 500; white-space: nowrap; background: var(--surface3); color: rgba(245,235,217,0.5); border: 1px solid var(--border); cursor: pointer; }
+    .stage-chip:hover { border-color: var(--amber); color: var(--amber); }
+
+    /* ── ACTIVITY (users) ── */
+    .activity-row-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+    .activity-row-dot.online  { background: var(--green); box-shadow: 0 0 6px rgba(76,175,125,0.6); }
+    .activity-row-dot.recent  { background: var(--amber); }
+    .activity-row-dot.idle    { background: rgba(245,235,217,0.2); }
+    .role-chip { display: inline-block; padding: 2px 8px; border: 1px solid var(--border2); font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 1px; color: rgba(245,235,217,0.5); border-radius: 4px; text-transform: capitalize; }
+    .verify-tick { display: inline-flex; align-items: center; gap: 3px; font-size: 10px; }
+    .verify-tick.yes { color: var(--green); }
+    .verify-tick.no  { color: rgba(245,235,217,0.25); }
+
 
     .rank-chip { display: inline-block; width: 22px; height: 22px; line-height: 22px; text-align: center; border-radius: 50%; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; background: rgba(255,185,103,0.1); color: var(--amber); border: 1px solid rgba(255,185,103,0.2); }
 
@@ -249,12 +283,41 @@
       </a>
     </nav>
 
-    <div class="sb-section-label">Data</div>
+    <div class="sb-section-label">Enquiries</div>
     <nav class="sb-nav">
       <a class="sb-link" onclick="showView('enquiries')" id="nav-enquiries">
         <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-        Enquiries
+        All enquiries
         <span id="new-badge" style="margin-left:auto;background:rgba(255,185,103,0.2);color:var(--amber);font-family:'JetBrains Mono',monospace;font-size:9px;padding:1px 7px;border-radius:10px;display:none;"></span>
+      </a>
+      <a class="sb-link" onclick="showPurposeView('eb1a')" id="nav-purpose-eb1a">
+        <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+        <span style="flex:1;">EB-1A</span>
+        <span class="sb-purpose-badge" id="badge-purpose-eb1a"></span>
+      </a>
+      <a class="sb-link" onclick="showPurposeView('academic')" id="nav-purpose-academic">
+        <svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+        <span style="flex:1;">Academic</span>
+        <span class="sb-purpose-badge" id="badge-purpose-academic"></span>
+      </a>
+      <a class="sb-link" onclick="showPurposeView('industry')" id="nav-purpose-industry">
+        <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+        <span style="flex:1;">Industry</span>
+        <span class="sb-purpose-badge" id="badge-purpose-industry"></span>
+      </a>
+      <a class="sb-link" onclick="showPurposeView('other')" id="nav-purpose-other">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+        <span style="flex:1;">Other</span>
+        <span class="sb-purpose-badge" id="badge-purpose-other"></span>
+      </a>
+    </nav>
+
+    <div class="sb-section-label">Website</div>
+    <nav class="sb-nav">
+      <a class="sb-link" onclick="showView('activity')" id="nav-activity">
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        Website activity
+        <span id="users-badge" style="margin-left:auto;background:rgba(95,240,224,0.15);color:var(--blue);font-family:'JetBrains Mono',monospace;font-size:9px;padding:1px 7px;border-radius:10px;display:none;"></span>
       </a>
     </nav>
 
@@ -401,6 +464,80 @@
       </div>
     </div>
 
+    <!-- ── PURPOSE VIEWS (EB-1A / Academic / Industry / Other) ── -->
+    <div class="view" id="view-purpose-eb1a" data-purpose-key="eb1a"></div>
+    <div class="view" id="view-purpose-academic" data-purpose-key="academic"></div>
+    <div class="view" id="view-purpose-industry" data-purpose-key="industry"></div>
+    <div class="view" id="view-purpose-other" data-purpose-key="other"></div>
+
+    <!-- ── WEBSITE ACTIVITY VIEW ── -->
+    <div class="view" id="view-activity">
+      <div class="page-header fade-in">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--amber-dim);margin-bottom:6px;">Website</div>
+          <div class="page-title">Activity <em>.</em></div>
+        </div>
+        <button class="refresh-btn" onclick="loadUsers()">
+          <svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
+          Refresh
+        </button>
+      </div>
+
+      <div class="mini-stats-grid fade-in">
+        <div class="mini-stat-card">
+          <div class="mini-stat-label">Registered users</div>
+          <div class="mini-stat-value" id="act-total">—</div>
+        </div>
+        <div class="mini-stat-card">
+          <div class="mini-stat-label">Logged in today</div>
+          <div class="mini-stat-value" id="act-today">—</div>
+        </div>
+        <div class="mini-stat-card">
+          <div class="mini-stat-label">Logged in this week</div>
+          <div class="mini-stat-value" id="act-week">—</div>
+        </div>
+      </div>
+
+      <div class="panel fade-in">
+        <div class="panel-head">
+          <span class="panel-title">Who has logged in</span>
+          <span id="users-count" style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(245,235,217,0.35);"></span>
+        </div>
+        <div class="panel-body">
+          <div class="filters-bar">
+            <div class="search-box">
+              <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input class="search-input" type="text" id="users-search-input" placeholder="Search by name, email, phone…" oninput="filterUsersTable()"/>
+            </div>
+            <select class="filter-select" id="filter-role" onchange="filterUsersTable()">
+              <option value="">All roles</option>
+              <option value="client">Client</option>
+              <option value="team">Team</option>
+            </select>
+            <select class="filter-select" id="filter-user-status" onchange="filterUsersTable()">
+              <option value="">All statuses</option>
+              <option value="active">Active</option>
+              <option value="suspended">Suspended</option>
+              <option value="pending">Pending</option>
+            </select>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead><tr>
+                <th></th><th>Name</th><th>Email / Phone</th><th>Role</th>
+                <th>Verified</th><th>Status</th><th>Last login</th><th>Joined</th>
+              </tr></thead>
+              <tbody id="users-tbody">
+                <tr><td colspan="8"><div class="loading"><div class="spinner"></div> Loading…</div></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
   </main>
 </div>
 
@@ -455,10 +592,258 @@ const BACKEND = window.location.hostname === 'localhost'
       renderBreakdowns();
       renderRecentTable();
       renderEnquiriesTable();
+      renderPurposeBadges();
+      renderActivePurposeView();
     } catch (err) {
       console.error('Load error:', err);
     }
   }
+
+  /* ── PURPOSE SECTIONS ── */
+  const PURPOSE_CONFIG = {
+    eb1a: {
+      label: 'EB-1A',
+      sub: 'Immigration · Extraordinary Ability',
+      color: 'amber',
+      icon: '<path d="M20 6L9 17l-5-5"/>',
+      stages: ['new','evidence','drafted','sent','filed'],
+      stageLabels: { new:'New', evidence:'Evidence gathering', drafted:'Letter drafted', sent:'Sent to client', filed:'Filed' },
+    },
+    academic: {
+      label: 'Academic',
+      sub: 'Conference / Journal publication',
+      color: 'blue',
+      icon: '<path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/>',
+      stages: ['new','reviewing','matched','progress','submitted'],
+      stageLabels: { new:'New', reviewing:'Reviewing fit', matched:'Venue matched', progress:'In progress', submitted:'Submitted' },
+    },
+    industry: {
+      label: 'Industry',
+      sub: 'Industry / Project report',
+      color: 'purple',
+      icon: '<rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/>',
+      stages: ['new','contacted','proposal','won','lost'],
+      stageLabels: { new:'New', contacted:'Contacted', proposal:'Proposal sent', won:'Won', lost:'Lost' },
+    },
+    other: {
+      label: 'Other',
+      sub: 'Uncategorised enquiries',
+      color: 'gray',
+      icon: '<circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/>',
+      stages: ['new','contacted','in_progress','closed'],
+      stageLabels: { new:'New', contacted:'Contacted', in_progress:'In progress', closed:'Closed' },
+    },
+  };
+
+  // sub-status is stored client-side over the existing `status` column —
+  // we map the existing 4 db statuses onto each purpose's richer pipeline
+  // so we never touch the schema or break the original status filtering.
+  const STAGE_TO_DB_STATUS = { new:'new', evidence:'contacted', drafted:'contacted', sent:'in_progress', filed:'closed',
+    reviewing:'contacted', matched:'contacted', progress:'in_progress', submitted:'closed',
+    contacted:'contacted', proposal:'contacted', won:'closed', lost:'closed', in_progress:'in_progress', closed:'closed' };
+
+  // Normalizes whatever is stored in the `purpose` column (older test rows used
+  // mixed casing like "Academic"/"EB1A"/"Project" before the form was finalized)
+  // into one of the 4 canonical keys used by PURPOSE_CONFIG.
+  function normalizePurpose(raw) {
+    const p = (raw || '').toString().trim().toLowerCase();
+    if (!p) return 'other';
+    if (p.includes('eb1a') || p.includes('eb-1a') || p.includes('ebla') || p.includes('immigration')) return 'eb1a';
+    if (p.includes('academ')) return 'academic';
+    if (p.includes('industr') || p.includes('project')) return 'industry';
+    if (PURPOSE_CONFIG[p]) return p;
+    return 'other';
+  }
+
+  function purposeEnquiries(key) {
+    return allEnquiries.filter(e => normalizePurpose(e.purpose) === key);
+  }
+
+  function renderPurposeBadges() {
+    Object.keys(PURPOSE_CONFIG).forEach(key => {
+      const n = purposeEnquiries(key).filter(e => !e.status || e.status === 'new').length;
+      const badge = document.getElementById('badge-purpose-' + key);
+      if (badge) badge.textContent = n > 0 ? n : '';
+    });
+  }
+
+  function showPurposeView(key) {
+    document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+    document.querySelectorAll('.sb-link').forEach(l=>l.classList.remove('active'));
+    document.getElementById('view-purpose-' + key).classList.add('active');
+    document.getElementById('nav-purpose-' + key).classList.add('active');
+    renderPurposeView(key);
+  }
+
+  function renderActivePurposeView() {
+    const activeEl = document.querySelector('.view.active[data-purpose-key]');
+    if (activeEl) renderPurposeView(activeEl.dataset.purposeKey);
+  }
+
+  function renderPurposeView(key) {
+    const cfg = PURPOSE_CONFIG[key];
+    const list = purposeEnquiries(key).slice().sort((a,b) => (b.id||0)-(a.id||0));
+    const newN = list.filter(e => !e.status || e.status === 'new').length;
+    const closedN = list.filter(e => e.status === 'closed').length;
+    const avgAgeDays = list.length
+      ? Math.round(list.reduce((sum,e) => sum + (Date.now() - new Date(e.created_at||Date.now()))/86400000, 0) / list.length)
+      : 0;
+
+    const rows = list.map(e => {
+      const initials = (e.name||'? ?').trim().split(/\s+/).slice(0,2).map(w=>w[0]?.toUpperCase()||'').join('');
+      const rank = e.conference_level || e.journal_level || e.rank || null;
+      const stage = dbStatusToStage(e.status, cfg);
+      return `
+        <div style="display:flex;align-items:center;gap:12px;padding:12px 14px;border-bottom:1px solid var(--border);cursor:pointer;" onclick="openModal('${e.id}')">
+          <div style="width:30px;height:30px;border-radius:50%;background:rgba(255,185,103,0.1);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--amber);flex-shrink:0;">${esc(initials)}</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:13px;color:var(--cream);font-weight:500;">${esc(e.name||'—')}</div>
+            <div style="font-size:11px;color:rgba(245,235,217,0.4);">${esc(e.area_of_research||'—')}${rank?` · rank ${esc(rank)}`:''}</div>
+          </div>
+          <span class="stage-chip" onclick="event.stopPropagation();cyclePurposeStage('${e.id}','${key}')" title="Click to advance stage">${esc(cfg.stageLabels[stage]||stage)}</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(245,235,217,0.3);width:64px;text-align:right;flex-shrink:0;">${fmtDate(e.created_at)}</span>
+        </div>`;
+    }).join('') || '<div class="no-data">No enquiries yet</div>';
+
+    document.getElementById('view-purpose-' + key).innerHTML = `
+      <div class="page-header fade-in">
+        <div style="display:flex;align-items:center;gap:14px;">
+          <div class="purpose-icon-badge ${cfg.color}"><svg viewBox="0 0 24 24">${cfg.icon}</svg></div>
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--amber-dim);margin-bottom:6px;">${esc(cfg.sub)}</div>
+            <div class="page-title">${esc(cfg.label)} <em>.</em></div>
+          </div>
+        </div>
+        <button class="refresh-btn" onclick="loadData()">
+          <svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
+          Refresh
+        </button>
+      </div>
+
+      <div class="mini-stats-grid fade-in">
+        <div class="mini-stat-card"><div class="mini-stat-label">New</div><div class="mini-stat-value">${newN}</div></div>
+        <div class="mini-stat-card"><div class="mini-stat-label">Avg. age</div><div class="mini-stat-value">${avgAgeDays}d</div></div>
+        <div class="mini-stat-card"><div class="mini-stat-label">Closed</div><div class="mini-stat-value">${closedN}</div></div>
+      </div>
+
+      <div class="panel fade-in">
+        <div class="panel-head">
+          <span class="panel-title">${esc(cfg.label)} enquiries</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(245,235,217,0.35);">${list.length} total</span>
+        </div>
+        <div style="padding:4px 0;">${rows}</div>
+      </div>`;
+  }
+
+  function dbStatusToStage(status, cfg) {
+    status = status || 'new';
+    // pick the stage within this purpose's pipeline whose mapped db status matches
+    const match = cfg.stages.find(s => STAGE_TO_DB_STATUS[s] === status);
+    return match || cfg.stages[0];
+  }
+
+  async function cyclePurposeStage(id, key) {
+    const cfg = PURPOSE_CONFIG[key];
+    const e = allEnquiries.find(x => x.id === id);
+    if (!e) return;
+    const current = dbStatusToStage(e.status, cfg);
+    const idx = cfg.stages.indexOf(current);
+    const next = cfg.stages[(idx + 1) % cfg.stages.length];
+    const nextDbStatus = STAGE_TO_DB_STATUS[next];
+    try {
+      const { error } = await _sb.from('research_enquiries').update({ status: nextDbStatus }).eq('id', id);
+      if (error) throw error;
+      e.status = nextDbStatus;
+      renderPurposeView(key);
+      renderPurposeBadges();
+      renderStats();
+      showToast(`Moved to "${cfg.stageLabels[next]}"`);
+    } catch (err) {
+      showToast('Failed to update stage', true);
+    }
+  }
+
+  /* ── WEBSITE ACTIVITY (users who have logged in) ── */
+  let allUsers = [];
+
+  async function loadUsers() {
+    document.getElementById('users-tbody').innerHTML = '<tr><td colspan="8"><div class="loading"><div class="spinner"></div> Loading…</div></td></tr>';
+    try {
+      const res = await fetch(BACKEND + '/admin/users', {
+        headers: { Authorization: 'Bearer ' + adminToken },
+      });
+      if (!res.ok) throw new Error('Failed to fetch users');
+      const json = await res.json();
+      allUsers = json.users || [];
+      renderUsersStats();
+      renderUsersTable();
+    } catch (err) {
+      console.error('Load users error:', err);
+      document.getElementById('users-tbody').innerHTML = '<tr><td colspan="8"><div class="no-data">Failed to load users</div></td></tr>';
+    }
+  }
+
+  function renderUsersStats() {
+    const today = new Date().toISOString().slice(0,10);
+    const weekAgo = new Date(Date.now() - 7*24*60*60*1000).toISOString();
+    const loggedToday = allUsers.filter(u => u.last_login_at?.startsWith(today)).length;
+    const loggedWeek  = allUsers.filter(u => u.last_login_at && u.last_login_at > weekAgo).length;
+
+    document.getElementById('act-total').textContent = allUsers.length;
+    document.getElementById('act-today').textContent = loggedToday;
+    document.getElementById('act-week').textContent  = loggedWeek;
+
+    const badge = document.getElementById('users-badge');
+    if (loggedToday > 0) { badge.textContent = loggedToday; badge.style.display = 'inline'; }
+    else badge.style.display = 'none';
+  }
+
+  function renderUsersTable(rows) {
+    const data = rows || allUsers;
+    document.getElementById('users-count').textContent = `${data.length} of ${allUsers.length}`;
+    document.getElementById('users-tbody').innerHTML = data.length
+      ? data.map(u => {
+          const initials = (u.full_name||u.email||'? ?').trim().split(/\s+/).slice(0,2).map(w=>w[0]?.toUpperCase()||'').join('');
+          const lastLoginMs = u.last_login_at ? Date.now() - new Date(u.last_login_at) : Infinity;
+          const dot = lastLoginMs < 86400000 ? 'online' : lastLoginMs < 7*86400000 ? 'recent' : 'idle';
+          return `
+          <tr>
+            <td><div class="activity-row-dot ${dot}" title="${dot==='online'?'Active in last 24h':dot==='recent'?'Active this week':'Inactive'}"></div></td>
+            <td class="name">${esc(u.full_name||'—')}</td>
+            <td class="email">${esc(u.email||u.phone||'—')}</td>
+            <td><span class="role-chip">${esc(u.role||'client')}</span></td>
+            <td>
+              <span class="verify-tick ${u.email_verified?'yes':'no'}">${u.email_verified?'✓':'·'} email</span>
+              &nbsp;
+              <span class="verify-tick ${u.phone_verified?'yes':'no'}">${u.phone_verified?'✓':'·'} phone</span>
+            </td>
+            <td>${userStatusBadge(u.status)}</td>
+            <td style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(245,235,217,0.4);">${u.last_login_at ? fmtDateFull(u.last_login_at) : 'Never'}</td>
+            <td style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(245,235,217,0.3);">${fmtDate(u.created_at)}</td>
+          </tr>`;
+        }).join('')
+      : '<tr><td colspan="8"><div class="no-data">No users found</div></td></tr>';
+  }
+
+  function filterUsersTable() {
+    const q      = document.getElementById('users-search-input').value.toLowerCase();
+    const role   = document.getElementById('filter-role').value;
+    const status = document.getElementById('filter-user-status').value;
+    const filtered = allUsers.filter(u => {
+      const matchQ = !q || [u.full_name,u.email,u.phone].some(f=>(f||'').toLowerCase().includes(q));
+      const matchR = !role || (u.role||'client') === role;
+      const matchS = !status || (u.status||'active') === status;
+      return matchQ && matchR && matchS;
+    });
+    renderUsersTable(filtered);
+  }
+
+  function userStatusBadge(s) {
+    const map = { active:'closed', suspended:'new', pending:'contacted' };
+    const cls = map[s||'active'] || 'closed';
+    return `<span class="badge ${cls}">${esc(s||'active')}</span>`;
+  }
+
 
   /* ── STATS ── */
   function renderStats() {
@@ -632,6 +1017,7 @@ const BACKEND = window.location.hostname === 'localhost'
     document.querySelectorAll('.sb-link').forEach(l=>l.classList.remove('active'));
     document.getElementById('view-'+view).classList.add('active');
     document.getElementById('nav-'+view).classList.add('active');
+    if (view === 'activity' && !allUsers.length) loadUsers();
   }
 
   /* ── LOGOUT ── */
