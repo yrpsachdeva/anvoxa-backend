@@ -135,6 +135,22 @@ protectedRouter.get('/enquiries', async (req, res) => {
   }
 });
 
+// GET /admin/users — fetch all registered users (website activity / who has logged in)
+protectedRouter.get('/users', async (req, res) => {
+  try {
+    const { data, error } = await getSupabase()
+      .from('users')
+      .select('id, email, phone, full_name, role, status, avatar_url, phone_verified, email_verified, last_login_at, created_at')
+      .order('last_login_at', { ascending: false, nullsFirst: false });
+
+    if (error) throw error;
+    return res.json({ users: data });
+  } catch (err) {
+    console.error('Fetch users error:', err);
+    return res.status(500).json({ error: 'Failed to fetch users' });
+  }
+});
+
 // PATCH /admin/enquiries/:id/status — update enquiry status
 protectedRouter.patch('/enquiries/:id/status', async (req, res) => {
   const { id }     = req.params;
