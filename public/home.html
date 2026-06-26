@@ -1870,8 +1870,8 @@ footer{
 }
 #login-modal.open { display: flex; }
 #login-modal .login-card {
-  background: #ffffff; width: 100%; max-width: 440px;
-  padding: 40px 40px 34px; position: relative;
+  background: #ffffff; width: 100%; max-width: 520px;  min-height: 320px;
+  padding: 64px 48px 56px;
   box-shadow: 0 30px 80px rgba(0,0,0,0.5);
   max-height: 92vh; overflow-y: auto;
   animation: loginPop 0.32s ease both;
@@ -2015,12 +2015,7 @@ body.anv-paused *,body.anv-paused *::before,body.anv-paused *::after{animation-p
       <div class="msg" id="msg"></div>
       <!-- PUBLIC USER AUTH -->
       <div id="user-auth">
-        <div class="role-wrap">
-          <div class="role-lbl">I am a</div>
-          <div class="role-toggle">
-            <button class="role-btn active" id="role-client" onclick="setRole('client')">Client</button>
-            <button class="role-btn" id="role-researcher" onclick="setRole('researcher')">Researcher</button>
-          </div>
+        
         </div>
         <div class="google-section" id="google-section">
           <button class="btn-google" onclick="signInWithGoogle()">
