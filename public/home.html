@@ -2113,13 +2113,12 @@ body.anv-paused *,body.anv-paused *::before,body.anv-paused *::after{animation-p
       <div class="nav-dd-menu" id="research-dd-menu">
         <button class="nav-dd-item" onclick="showPage('research-support');closeAllDDs()"><span class="ddi-title">Research Support</span><span class="ddi-desc">Literature, papers, manuscripts</span></button>
         <button class="nav-dd-item" onclick="showPage('expert-guidance');closeAllDDs()"><span class="ddi-title">Expert Guidance</span><span class="ddi-desc">One-on-one mentorship & direction</span></button>
-        <button class="nav-dd-item" onclick="showPage('eb1a');closeAllDDs()"><span class="ddi-title">EB1A Support</span><span class="ddi-desc">Extraordinary ability visa documentation</span></button>
         <button class="nav-dd-item" onclick="showPage('guidance');closeAllDDs()"><span class="ddi-title">Guidance</span><span class="ddi-desc">Strategic roadmaps for your journey</span></button>
       </div>
     </div>
     <button class="nav-link" onclick="showPage('chatbot')">Chatbot & AI</button>
     <button class="nav-link" onclick="showPage('ebooks')">Ebooks</button>
-    <button class="nav-link" onclick="showPage('multicloud')">Multi Cloud</button>
+    <button class="nav-link" onclick="showPage('eb1a')">EB1A Support</button>
     <button class="nav-link" onclick="showPage('contact')">Contact</button>
   </div>
 
@@ -2224,8 +2223,8 @@ body.anv-paused *,body.anv-paused *::before,body.anv-paused *::after{animation-p
   <section class="what-sec" id="home-what">
     <div class="wrap">
       <div class="eyebrow rv">What we build</div>
-      <h2 class="sec-title rv d1">Six capabilities. <em>One studio.</em></h2>
-      <p class="sec-lead rv d2">Research, AI systems, ebooks, and sovereign multi-cloud — shaped around what your work actually needs. Pick any door.</p>
+      <h2 class="sec-title rv d1">Five capabilities. <em>One studio.</em></h2>
+      <p class="sec-lead rv d2">Research, AI systems, and ebooks — shaped around what your work actually needs. Pick any door.</p>
 
       <div class="bento-grid">
         <!-- Tall: Research -->
@@ -2281,13 +2280,6 @@ body.anv-paused *,body.anv-paused *::before,body.anv-paused *::after{animation-p
             <p class="t-desc">For founders, executives, and thinkers. Voice-true, publication-ready, under your name.</p>
           </div>
           <span class="t-link">Explore →</span>
-        </div>
-
-        <!-- Stat tile: Multi-Cloud -->
-        <div class="tile t-med t-stat rv d3" onclick="showPage('multicloud')" style="cursor:pointer!important;">
-          <div class="figure">06<sup>·</sup></div>
-          <div class="figure-label">Multi-Cloud Orchestrance — five hyperscalers, nine GPU clouds, zero lock-in.</div>
-          <span class="t-link" style="margin-top:14px;">Explore →</span>
         </div>
 
         <!-- Wide: Manifesto -->
@@ -3221,149 +3213,6 @@ body.anv-paused *,body.anv-paused *::before,body.anv-paused *::after{animation-p
 
 
 <!-- ══════════════════════════════════════════════════
-     PAGE: MULTICLOUD
-══════════════════════════════════════════════════ -->
-<div class="page" id="page-multicloud">
-  <section class="page-hero">
-  <div class="deco-orb deco-orb-lg" style="top:-10%;right:-8%;background:radial-gradient(circle,rgba(123,95,255,.18),transparent 70%);animation:drift 18s ease-in-out infinite;"></div>
-  <div class="deco-orb deco-orb-sm" style="bottom:5%;left:5%;background:radial-gradient(circle,rgba(255,185,103,.15),transparent 70%);animation:drift 14s ease-in-out infinite reverse;"></div>
-  <div class="page-hero-inner">
-      <div>
-        <div class="page-hero-kicker">04 · Multi-Cloud Orchestrance</div>
-        <h1 class="page-hero-title">One contract. Every cloud. <em>No lock-in.</em></h1>
-        <p class="page-hero-lead">Five major hyperscalers, nine specialist GPU clouds, sovereign infrastructure — exposed as one capability surface. Routing, cost arbitrage, and policy enforcement handled by the orchestration layer.</p>
-        <div class="page-hero-btns">
-          <button class="btn-gold" onclick="showPage('contact')">Begin a conversation →</button>
-          <button class="btn-outline" onclick="document.getElementById('cloud-providers').scrollIntoView({behavior:'smooth'})">See the stack</button>
-        </div>
-      </div>
-      <div class="page-hero-aside">
-        <div style="display:flex;flex-wrap:wrap;gap:8px;">
-          <span class="badge">GDPR</span><span class="badge">EU AI Act</span><span class="badge">DPDPA</span>
-          <span class="badge">SOC 2</span><span class="badge">Zero egress</span><span class="badge">Sovereign</span>
-          <span class="badge">HIPAA-ready</span><span class="badge">ISO 27001</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div style="height:1px;background:linear-gradient(90deg,transparent,rgba(255,185,103,.15),rgba(123,95,255,.15),transparent);margin:0;"></div>
-
-  <section class="content-sec">
-    <div class="wrap">
-      <div class="eyebrow rv">Capabilities</div>
-      <h2 class="sec-title rv d1">What the orchestration <em>layer does.</em></h2>
-      <div class="cloud-grid">
-        <div class="cloud-card rv d1"><div class="card-num-badge">01</div><div class="cloud-title">Multi-cloud routing</div><p class="cloud-desc">Intelligent workload routing across providers based on cost, latency, availability, and compliance requirements — in real time.</p></div>
-        <div class="cloud-card rv d2"><div class="card-num-badge">02</div><div class="cloud-title">Cost arbitrage</div><p class="cloud-desc">Continuous cost optimisation across spot, reserved, and on-demand capacity — with full visibility into where every dollar goes.</p></div>
-        <div class="cloud-card rv d3"><div class="card-num-badge">03</div><div class="cloud-title">Policy enforcement</div><p class="cloud-desc">Data residency, compliance boundaries, and egress controls enforced at the orchestration layer — not per-cloud, per-service.</p></div>
-        <div class="cloud-card rv d4"><div class="card-num-badge">04</div><div class="cloud-title">Unified control plane</div><p class="cloud-desc">One interface, one contract, one support relationship — regardless of how many underlying providers are in the stack.</p></div>
-        <div class="cloud-card rv d5"><div class="card-num-badge">05</div><div class="cloud-title">Sovereign deployment</div><p class="cloud-desc">Private cloud and on-premise options for organisations where data never leaves defined boundaries. Truly sovereign.</p></div>
-        <div class="cloud-card rv"><div class="card-num-badge">06</div><div class="cloud-title">GPU compute access</div><p class="cloud-desc">Nine specialist GPU cloud providers accessed through one interface — for AI training, inference, and compute-heavy workloads.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="hyperscalers" style="position:relative;" id="cloud-providers">
-    <div class="wrap">
-      <div class="eyebrow rv">Providers</div>
-      <h2 class="sec-title rv d1">The hyperscalers <em>we orchestrate.</em></h2>
-      <div class="hs-grid">
-        <div class="hs-card rv d1"><div class="hs-name">AWS</div><div class="hs-type">Amazon Web Services</div></div>
-        <div class="hs-card rv d2"><div class="hs-name">GCP</div><div class="hs-type">Google Cloud Platform</div></div>
-        <div class="hs-card rv d3"><div class="hs-name">Azure</div><div class="hs-type">Microsoft Azure</div></div>
-        <div class="hs-card rv d4"><div class="hs-name">OCI</div><div class="hs-type">Oracle Cloud</div></div>
-        <div class="hs-card rv d5"><div class="hs-name">IBM</div><div class="hs-type">IBM Cloud</div></div>
-      </div>
-      <div class="eyebrow rv" style="margin-top:40px;display:block;">GPU clouds we access</div>
-      <div class="hs-grid" style="grid-template-columns:repeat(4,1fr);margin-top:14px;">
-        <div class="hs-card rv d1"><div class="hs-name">CoreWeave</div><div class="hs-type">GPU cloud</div></div>
-        <div class="hs-card rv d2"><div class="hs-name">Lambda Labs</div><div class="hs-type">GPU cloud</div></div>
-        <div class="hs-card rv d3"><div class="hs-name">RunPod</div><div class="hs-type">GPU cloud</div></div>
-        <div class="hs-card rv d4"><div class="hs-name">Vast.ai</div><div class="hs-type">GPU marketplace</div></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="cloud-architecture">
-  <div class="ambient-tl"></div><div class="ambient-br"></div>
-    <div class="wrap">
-      <div class="content-2col">
-        <div>
-          <div class="eyebrow rv">Architecture</div>
-          <h2 class="sec-title rv d1" style="font-size:clamp(24px,3.5vw,40px);">How the orchestration <em>works.</em></h2>
-          <div class="arch-items">
-            <div class="arch-item rv d1"><div class="ai-num">01</div><div><div class="ai-title">Workload classification</div><div class="ai-desc">Each workload is classified by type, sensitivity, latency requirement, and compliance profile before routing begins.</div></div></div>
-            <div class="arch-item rv d2"><div class="ai-num">02</div><div><div class="ai-title">Policy-driven routing</div><div class="ai-desc">Routing decisions respect data residency rules, cost budgets, and provider SLAs — automatically, in real time.</div></div></div>
-            <div class="arch-item rv d3"><div class="ai-num">03</div><div><div class="ai-title">Cost arbitrage engine</div><div class="ai-desc">Continuous scanning of spot pricing and capacity availability across providers to optimise cost without sacrificing reliability.</div></div></div>
-            <div class="arch-item rv d4"><div class="ai-num">04</div><div><div class="ai-title">Unified observability</div><div class="ai-desc">All logs, metrics, and spend data aggregated into one dashboard — regardless of which provider ran the workload.</div></div></div>
-          </div>
-        </div>
-        <div>
-          <div class="eyebrow rv">Compliance</div>
-          <h2 class="sec-title rv d1" style="font-size:clamp(24px,3.5vw,40px);">Built for <em>regulated environments.</em></h2>
-          <div class="feature-list" style="margin-top:14px;">
-            <div class="fl-item rv d1"><div class="fl-dot"></div><div class="fl-body"><div class="fl-title">GDPR & EU AI Act</div><div class="fl-desc">Data residency enforcement, processing records, and AI system documentation for European regulatory requirements.</div></div></div>
-            <div class="fl-item rv d2"><div class="fl-dot"></div><div class="fl-body"><div class="fl-title">DPDPA (India)</div><div class="fl-desc">Data Principal rights management and consent enforcement for Indian regulatory compliance.</div></div></div>
-            <div class="fl-item rv d3"><div class="fl-dot"></div><div class="fl-body"><div class="fl-title">SOC 2 Type II</div><div class="fl-desc">Security controls and audit trail support for organisations requiring SOC 2 compliance in their supply chain.</div></div></div>
-            <div class="fl-item rv d4"><div class="fl-dot"></div><div class="fl-body"><div class="fl-title">Zero egress architecture</div><div class="fl-desc">Data that must not leave a boundary doesn't leave it — enforced at the network layer, not as a policy document.</div></div></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="cta-band">
-    <div class="wrap">
-      <div class="cta-band-inner">
-        <div class="cta-band-text"><h2>One contract. <em>Every cloud.</em></h2><p>Tell us your cloud environment, compliance requirements, and what you're trying to achieve. We'll map the architecture.</p></div>
-        <button class="btn-gold" onclick="showPage('contact')">Begin a conversation →</button>
-      </div>
-    </div>
-  </section>
-  <footer>
-    <div class="ft-brand" style="display:flex;flex-direction:column;align-items:center;gap:0;">
-      <svg style="width:56px;height:56px;display:block;margin:0 auto 6px;" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-label="Anvoxa">
-  <defs>
-    <linearGradient id="lgA" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%"   stop-color="#fffbe8"/>
-      <stop offset="25%"  stop-color="#f5d980"/>
-      <stop offset="50%"  stop-color="#c9922a"/>
-      <stop offset="75%"  stop-color="#f0c860"/>
-      <stop offset="100%" stop-color="#8a5f10"/>
-    </linearGradient>
-    <linearGradient id="lgR" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%"   stop-color="#fffbe8" stop-opacity=".9"/>
-      <stop offset="40%"  stop-color="#c9922a" stop-opacity=".6"/>
-      <stop offset="100%" stop-color="#c9922a" stop-opacity=".8"/>
-    </linearGradient>
-  </defs>
-  <circle cx="100" cy="100" r="90" fill="none" stroke="url(#lgR)" stroke-width=".8"/>
-  <circle cx="100" cy="100" r="84" fill="none" stroke="url(#lgR)" stroke-width=".4" opacity=".45"/>
-  <circle cx="10"  cy="100" r="2.2" fill="#c9922a"/>
-  <circle cx="190" cy="100" r="2.2" fill="#c9922a"/>
-  <text font-family="'Cinzel','Georgia',serif" font-size="64" font-weight="700" text-anchor="middle" x="100" y="134" fill="url(#lgA)" letter-spacing="-1">A</text>
-  <text font-family="'Cinzel','Georgia',serif" font-size="7" font-weight="400" text-anchor="middle" x="100" y="68"  fill="#c9922a" letter-spacing="4.5">ANVOXA</text>
-  <text font-family="'Cinzel','Georgia',serif" font-size="5.5" font-weight="400" text-anchor="middle" x="100" y="147" fill="#a07820" letter-spacing="3.5">MMXXVI</text>
-</svg>
-      <span style="font-family:'Bebas Neue',cursive;font-size:26px;letter-spacing:4px;color:var(--cream-lt);text-transform:uppercase;">Anvoxa</span>
-    </div>
-    <div class="ft-tag">The voice behind the work.</div>
-    <div class="ft-links">
-      <a href="mailto:helloanvox@gmail.com">helloanvox@gmail.com</a>
-      <span class="ft-sep">·</span>
-      <a href="https://www.linkedin.com/company/anvoxa/" target="_blank">LinkedIn</a>
-      <a href="https://x.com/ANVITON_ai" target="_blank">Twitter / X</a>
-      <a href="https://www.instagram.com/anviton.ai/" target="_blank">Instagram</a>
-      <span class="ft-sep">·</span>
-      <a href="javascript:void(0)" onclick="showPage('terms')">Terms of Service</a>
-    </div>
-    <div class="ft-copy">© 2026 Anvoxa. All rights reserved.</div>
-  </footer>
-</div>
-
-
-<!-- ══════════════════════════════════════════════════
      PAGE: CONTACT
 ══════════════════════════════════════════════════ -->
 <div class="page" id="page-contact">
@@ -3406,7 +3255,6 @@ body.anv-paused *,body.anv-paused *::before,body.anv-paused *::after{animation-p
                 <option value="research">Research &amp; Publishing</option>
                 <option value="chatbot">AI Chatbot / Automation</option>
                 <option value="ebook">Ebook</option>
-                <option value="multicloud">Multi-Cloud Infrastructure</option>
               </select>
             </div>
           </div>
@@ -3537,32 +3385,6 @@ body.anv-paused *,body.anv-paused *::before,body.anv-paused *::after{animation-p
                   <option value="Yes">Yes</option>
                   <option value="No">No</option>
                 </select>
-              </div>
-            </div>
-          </div>
-
-          <!-- ===== MULTI-CLOUD ===== -->
-          <div class="svc-section hidden" id="svc-multicloud">
-            <div class="eq-row full" style="margin-bottom:16px;">
-              <div class="eq-group">
-                <label class="eq-label">Which clouds are you using now?</label>
-                <input class="eq-input" type="text" placeholder="e.g. AWS, GCP, Azure, none yet" id="eq-mc-clouds"/>
-              </div>
-            </div>
-            <div class="eq-row">
-              <div class="eq-group">
-                <label class="eq-label">Workload type <span class="req">*</span></label>
-                <select class="eq-select" id="eq-mc-workload">
-                  <option value="">Select…</option>
-                  <option value="AI training">AI training</option>
-                  <option value="Inference">Inference</option>
-                  <option value="App hosting">App hosting</option>
-                  <option value="Other">Other</option>
-                </select>
-              </div>
-              <div class="eq-group">
-                <label class="eq-label">Rough monthly budget</label>
-                <input class="eq-input" type="text" placeholder="e.g. $2,000 / mo" id="eq-mc-budget"/>
               </div>
             </div>
           </div>
@@ -3776,7 +3598,7 @@ body.anv-paused *,body.anv-paused *::before,body.anv-paused *::after{animation-p
 
 /* ── JS-driven Chip Orbit (text always upright) ── */
 (function(){
-  const CHIPS=['Research','Mentorship','EB-1A','AI Systems','Ebooks','Multi-Cloud'];
+  const CHIPS=['Research','Mentorship','EB-1A','AI Systems','Ebooks'];
   const orbit=document.getElementById('chipOrbit');
   if(!orbit)return;
   const N=CHIPS.length;
@@ -4432,7 +4254,7 @@ function setRank(el, group, rank){
 }
 
 function switchService(val){
-  ['research','chatbot','ebook','multicloud'].forEach(svc=>{
+  ['research','chatbot','ebook'].forEach(svc=>{
     const sec=document.getElementById('svc-'+svc);
     if(sec) sec.classList.toggle('hidden', svc!==val);
   });
@@ -4487,13 +4309,6 @@ async function handleEnquirySubmit(){
     if(!t){ markEmpty('eq-eb-topic'); return; }
     payload.area_of_research='Ebook';
     payload.message='[Ebook enquiry]\n\u2022 Topic: '+(t||'-')+'\n\u2022 Approx length: '+(l||'-')+'\n\u2022 Outline/draft already: '+(o||'-')+(brief?('\n\n'+brief):'');
-  } else if(service==='multicloud'){
-    const c=document.getElementById('eq-mc-clouds')?.value.trim();
-    const w=document.getElementById('eq-mc-workload')?.value;
-    const b=document.getElementById('eq-mc-budget')?.value.trim();
-    if(!w){ const el=document.getElementById('eq-mc-workload'); if(el) el.style.borderColor='rgba(255,100,100,.5)'; return; }
-    payload.area_of_research='Multi-Cloud Infrastructure';
-    payload.message='[Multi-Cloud enquiry]\n\u2022 Current clouds: '+(c||'-')+'\n\u2022 Workload type: '+(w||'-')+'\n\u2022 Rough monthly budget: '+(b||'-')+(brief?('\n\n'+brief):'');
   }
 
   const submitBtn=document.querySelector('.eq-submit');
