@@ -213,6 +213,19 @@ ul{list-style:none;}
 .sec-title em,.sec-title i{font-style:normal;color:var(--gold);}
 .sec-lead{font-size:14px;line-height:1.8;color:var(--cream-soft);font-weight:300;max-width:480px;margin-bottom:36px;}
 
+/* An introduction — intro video section */
+.intro-sec{position:relative;padding:96px 0 100px;overflow:hidden;}
+.intro-sec::before{content:'';position:absolute;left:50%;top:6%;transform:translateX(-50%);width:1000px;max-width:130%;height:560px;background:radial-gradient(circle at 50% 32%,rgba(255,185,103,.12),transparent 62%);pointer-events:none;z-index:0;}
+.intro-sec .wrap{position:relative;z-index:1;}
+.intro-stage{width:100%;margin:30px 0 0;}
+.intro-frame{position:relative;border:1px solid rgba(255,185,103,.28);border-radius:16px;overflow:hidden;background:#0a0807;box-shadow:0 36px 100px rgba(0,0,0,.5),0 0 64px rgba(255,185,103,.10);}
+.intro-frame::after{content:'';position:absolute;inset:0;border-radius:16px;pointer-events:none;box-shadow:inset 0 0 0 1px rgba(255,185,103,.10);}
+.intro-video{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;background:#0a0807;}
+.intro-fallback{position:absolute;inset:0;display:none;align-items:center;justify-content:center;text-align:center;padding:24px;background:radial-gradient(circle at 50% 40%,rgba(255,185,103,.07),transparent 60%),#0e0b08;color:var(--cream-soft);font-family:var(--mono);font-size:11px;letter-spacing:.6px;line-height:1.9;}
+.intro-fallback.show{display:flex;}
+.intro-fallback b{color:var(--gold);font-weight:600;}
+@media(max-width:600px){.intro-sec{padding:70px 0 76px;}.intro-stage{margin-top:24px;}.intro-frame{border-radius:12px;}}
+
 /* Buttons */
 .btn-gold{
   display:inline-flex;align-items:center;gap:8px;
@@ -394,6 +407,22 @@ footer{
 .t-desc{font-size:13px;color:var(--cream-soft);line-height:1.6;max-width:340px;}
 .t-link{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:1px;color:var(--gold);display:inline-flex;align-items:center;gap:6px;transition:gap .2s;}
 .tile:hover .t-link{gap:12px;}
+
+.t-illus{
+  flex:1;width:100%;min-height:0;
+  object-fit:contain;object-position:left center;
+  opacity:.92;pointer-events:none;
+  -webkit-mask-image:linear-gradient(to bottom,transparent,#000 6%,#000 92%,transparent);
+  mask-image:linear-gradient(to bottom,transparent,#000 6%,#000 92%,transparent);
+}
+.t-med-ext{grid-row:span 2;}
+.t-eb1a{grid-column:span 3;grid-row:span 1;padding:0;}
+.t-split{padding:0;}
+.t-split-row{display:flex;align-items:center;gap:28px;height:100%;padding:28px 32px;}
+.t-split-text{flex:1.3;min-width:0;display:flex;flex-direction:column;justify-content:center;}
+.t-split-text .t-link{margin-top:14px;}
+.t-split-illus{flex:0 0 auto;height:84%;max-height:200px;width:auto;object-fit:contain;opacity:.94;pointer-events:none;}
+.t-illus-narrow{width:78%;max-width:340px;margin:0 auto;object-position:center center;}
 
 .t-wide{grid-column:span 4;}
 .t-tall{grid-column:span 2;grid-row:span 2;}
@@ -660,7 +689,11 @@ footer{
   .nav-toggle{display:block;}
   .page-hero-inner,.contact-grid,.content-2col{grid-template-columns:1fr;gap:36px;}
   .bento-grid{grid-template-columns:1fr 1fr;grid-auto-rows:auto;}
-  .t-wide,.t-tall,.t-half,.t-med{grid-column:span 2;grid-row:span 1;}
+  .t-wide,.t-tall,.t-half,.t-med,.t-eb1a{grid-column:span 2;grid-row:span 1;}
+  .t-med-ext{grid-row:auto;}
+  .t-split-row{flex-direction:column;align-items:stretch;padding:28px 24px;}
+  .t-split-text{flex:none;}
+  .t-split-illus{height:auto;max-height:160px;width:100%;}
   .features-grid,.domains-grid,.cloud-grid{grid-template-columns:1fr 1fr;}
   .steps-row,.metrics-grid{grid-template-columns:1fr 1fr;}
   .hs-grid{grid-template-columns:repeat(3,1fr);}
@@ -670,7 +703,7 @@ footer{
 }
 @media(max-width:580px){
   .bento-grid{grid-template-columns:1fr;grid-auto-rows:auto;}
-  .t-wide,.t-tall,.t-half,.t-med{grid-column:span 1;}
+  .t-wide,.t-tall,.t-half,.t-med,.t-eb1a{grid-column:span 1;}
   .features-grid,.domains-grid,.cloud-grid,.steps-row,.metrics-grid,.evidence-grid,.stack-grid{grid-template-columns:1fr;}
   .hs-grid{grid-template-columns:1fr 1fr;}
   .cta-band-inner{flex-direction:column;align-items:flex-start;}
@@ -2219,6 +2252,27 @@ body.anv-paused *,body.anv-paused *::before,body.anv-paused *::after{animation-p
     </div>
   </section>
 
+  <!-- An introduction — intro video section -->
+  <section class="intro-sec" id="home-intro" aria-label="An introduction">
+    <div class="wrap">
+      <div class="eyebrow rv">An introduction · 2026</div>
+      <h2 class="sec-title rv d1">How we work, <em>in two minutes.</em></h2>
+      <p class="sec-lead rv d2">A short look at the studio — who you'd be working alongside, and how an idea becomes something you can ship.</p>
+
+      <div class="intro-stage rv d2">
+        <div class="intro-frame">
+          <video class="intro-video" id="introVideo" autoplay muted loop playsinline preload="metadata"
+                 onerror="document.getElementById('introFallback').classList.add('show')">
+            <source src="anvoxa_intro_v3.mp4" type="video/mp4">
+          </video>
+          <div class="intro-fallback" id="introFallback">
+            <span>Intro video — place <b>anvoxa_intro_v3.mp4</b> next to this page.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- What we build — Bento Grid -->
   <section class="what-sec" id="home-what">
     <div class="wrap">
@@ -2235,62 +2289,78 @@ body.anv-paused *,body.anv-paused *::before,body.anv-paused *::after{animation-p
             <h3 class="t-title">Research <i>Support.</i></h3>
             <p class="t-desc">Literature, papers, manuscripts. Alongside you through structure, argument, drafting, and revisions — publication-ready, in your voice.</p>
           </div>
+          <img class="t-illus" src="assets/research-support-illustration.png" alt="" aria-hidden="true">
           <span class="t-link">Explore →</span>
         </div>
 
         <!-- Wide: Expert Guidance -->
-        <div class="tile t-wide rv d2" onclick="showPage('expert-guidance')" style="cursor:pointer!important;">
+        <div class="tile t-wide t-split rv d2" onclick="showPage('expert-guidance')" style="cursor:pointer!important;">
           <div class="tile-glow" style="background:var(--gold);"></div>
-          <div>
-            <div class="t-num">02 · Expert Guidance</div>
-            <h3 class="t-title">One-on-one <i>mentorship.</i></h3>
-            <p class="t-desc">Strategic direction from specialists who have navigated the exact path you're entering. Honest, specific, no-fluff.</p>
+          <div class="t-split-row">
+            <div class="t-split-text">
+              <div class="t-num">02 · Expert Guidance</div>
+              <h3 class="t-title">One-on-one <i>mentorship.</i></h3>
+              <p class="t-desc">Strategic direction from specialists who have navigated the exact path you're entering. Honest, specific, no-fluff.</p>
+              <span class="t-link">Explore →</span>
+            </div>
+            <img class="t-split-illus" src="assets/manifesto-illustration.png" alt="" aria-hidden="true">
           </div>
-          <span class="t-link">Explore →</span>
         </div>
 
-        <!-- Med: EB1A -->
-        <div class="tile t-med rv d3" onclick="showPage('eb1a')" style="cursor:pointer!important;">
+        <!-- Wide: EB1A -->
+        <div class="tile t-eb1a rv d3" onclick="showPage('eb1a')" style="cursor:pointer!important;">
           <div class="tile-glow" style="background:var(--gold);"></div>
-          <div>
-            <div class="t-num">03 · EB-1A</div>
-            <h3 class="t-title">Extraordinary <i>ability.</i></h3>
-            <p class="t-desc">Evidence strategy, narrative framing, and full material preparation for your EB-1A petition.</p>
+          <div class="t-split-row">
+            <div class="t-split-text">
+              <div class="t-num">03 · EB-1A</div>
+              <h3 class="t-title">Extraordinary <i>ability.</i></h3>
+              <p class="t-desc">Evidence strategy, narrative framing, and full material preparation for your EB-1A petition.</p>
+              <span class="t-link">Explore →</span>
+            </div>
+            <img class="t-split-illus" src="assets/eb1a-illustration.png" alt="" aria-hidden="true">
           </div>
-          <span class="t-link">Explore →</span>
         </div>
 
         <!-- Half: AI Systems -->
-        <div class="tile t-half rv d4" onclick="showPage('chatbot')" style="cursor:pointer!important;">
+        <div class="tile t-half t-split rv d4" onclick="showPage('chatbot')" style="cursor:pointer!important;">
           <div class="tile-glow" style="background:var(--plasma-2);"></div>
-          <div>
-            <div class="t-num">04 · AI Systems</div>
-            <h3 class="t-title">Chatbots & assistants <i>that ship.</i></h3>
-            <p class="t-desc">One team. One system. You own the code, the prompts, and the models — at handoff.</p>
+          <div class="t-split-row">
+            <div class="t-split-text">
+              <div class="t-num">04 · AI Systems</div>
+              <h3 class="t-title">Chatbots & assistants <i>that ship.</i></h3>
+              <p class="t-desc">One team. One system. You own the code, the prompts, and the models — at handoff.</p>
+              <span class="t-link">Explore →</span>
+            </div>
+            <img class="t-split-illus" src="assets/ai-systems-illustration.jpg" alt="" aria-hidden="true">
           </div>
-          <span class="t-link">Explore →</span>
         </div>
 
         <!-- Half: Ebooks -->
-        <div class="tile t-half rv d5" onclick="showPage('ebooks')" style="cursor:pointer!important;">
+        <div class="tile t-half t-split rv d5" onclick="showPage('ebooks')" style="cursor:pointer!important;">
           <div class="tile-glow" style="background:var(--gold);"></div>
-          <div>
-            <div class="t-num">05 · Ebooks</div>
-            <h3 class="t-title">The book inside, <i>brought out.</i></h3>
-            <p class="t-desc">For founders, executives, and thinkers. Voice-true, publication-ready, under your name.</p>
+          <div class="t-split-row">
+            <div class="t-split-text">
+              <div class="t-num">05 · Ebooks</div>
+              <h3 class="t-title">The book inside, <i>brought out.</i></h3>
+              <p class="t-desc">For founders, executives, and thinkers. Voice-true, publication-ready, under your name.</p>
+              <span class="t-link">Explore →</span>
+            </div>
+            <img class="t-split-illus" src="assets/ebooks-illustration.png" alt="" aria-hidden="true">
           </div>
-          <span class="t-link">Explore →</span>
         </div>
 
         <!-- Wide: Manifesto -->
-        <div class="tile t-wide rv d4">
+        <div class="tile t-wide t-split rv d4">
           <div class="tile-glow" style="background:var(--gold);right:-40px;top:-40px;width:300px;height:300px;"></div>
-          <div>
-            <div class="t-num">·</div>
-            <h3 class="t-title">Built alongside you, <i>from the first idea to what you ship.</i></h3>
-            <p class="t-desc">Real over fast. Voice stays yours. Honest scope. Research-backed. Four things we won't compromise on, ever.</p>
+          <div class="t-split-row">
+            <div class="t-split-text">
+              <div class="t-num">·</div>
+              <h3 class="t-title">Built alongside you, <i>from the first idea to what you ship.</i></h3>
+              <p class="t-desc">Real over fast. Voice stays yours. Honest scope. Research-backed. Four things we won't compromise on, ever.</p>
+              <span class="t-link" onclick="showPage('contact')">Begin a conversation →</span>
+            </div>
+            <img class="t-split-illus" src="assets/expert-guidance-illustration.png" alt="" aria-hidden="true">
           </div>
-          <span class="t-link" onclick="showPage('contact')">Begin a conversation →</span>
         </div>
       </div>
     </div>
@@ -4731,6 +4801,17 @@ async function handleEnquirySubmit(){
   document.addEventListener('visibilitychange',function(){
     document.body.classList.toggle('anv-paused', document.hidden);
   });
+})();
+</script>
+
+<!-- Intro video: ensure autoplay -->
+<script>
+(function(){
+  var v=document.getElementById('introVideo');
+  if(!v)return;
+  function nudge(){ var p=v.play(); if(p&&p.catch){p.catch(function(){}); } }
+  if(document.readyState!=='loading'){ nudge(); }
+  else { document.addEventListener('DOMContentLoaded', nudge); }
 })();
 </script>
 </body>
