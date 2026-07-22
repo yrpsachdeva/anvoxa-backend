@@ -10,7 +10,14 @@ const adminRoutes = require('./admin-routes');
 const app = express();
 app.get('/sitemap.xml', (req, res) => {
   res.setHeader('Content-Type', 'application/xml');
-  res.sendFile(path.join(__dirname, 'public', 'sitemap.xml'));
+  res.send(`<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://anvoxa.com/</loc>
+    <priority>1.0</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+</urlset>`);
 });
 // ── CORS (raw header first, then the cors() middleware) ───────
 app.use((req, res, next) => {
