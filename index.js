@@ -32,6 +32,8 @@ app.use(cors({
 // ── Middleware ────────────────────────────────────────────────
 app.use(express.json());
 app.set('trust proxy', 1);
+app.get('/sitemap.xml', (req, res) =>
+  res.sendFile(path.join(__dirname, 'public', 'sitemap.xml')));
 
 // ── API routes ────────────────────────────────────────────────
 app.use('/auth/admin', adminRoutes.auth);
@@ -74,8 +76,7 @@ app.get('/__/auth/iframe', (req, res) =>
 app.get('/health', (req, res) =>
   res.json({ status: 'ok', service: 'anvoxa-backend' }));
 // Sitemap
-app.get('/sitemap.xml', (req, res) =>
-  res.sendFile(path.join(__dirname, 'public', 'sitemap.xml')));
+
 // Static assets
 app.use(express.static(path.join(__dirname, 'public'), { index: false }));
 
