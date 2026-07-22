@@ -540,7 +540,7 @@ footer{
 
 /* Feature list */
 .feature-list{display:flex;flex-direction:column;gap:10px;margin-top:20px;}
-.fl-item{display:flex;gap:14px;align-items:flex-start;}
+.fl-item{display:flex;gap:16px;align-items:flex-start;}
 .fl-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:6px;box-shadow:0 0 8px rgba(255,185,103,.4);}
 .fl-title{font-size:13px;font-weight:500;color:var(--cream-lt);margin-bottom:3px;}
 .fl-desc{font-size:12px;color:var(--cream-soft);font-weight:300;line-height:1.7;}
@@ -918,7 +918,7 @@ footer{
 .uniform-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:14px;
+  gap:16px;
   margin-top:48px;
 }
 .u-tile{
@@ -972,7 +972,7 @@ svg.u-illus{
   max-width:1600px;margin:0 auto;padding:0 48px;
   display:grid;
   grid-template-columns:repeat(6,1fr);
-  gap:14px;
+  gap:16px;
 }
 
 /* individual paper card */
@@ -1043,7 +1043,7 @@ svg.u-illus{
   background:rgba(10,8,26,.55);border:1px solid rgba(255,185,103,.09);
   border-radius:20px;padding:32px;display:flex;flex-direction:column;gap:16px;
 }
-.proof-rev-top{display:flex;align-items:center;gap:14px;}
+.proof-rev-top{display:flex;align-items:center;gap:16px;}
 .proof-rev-avatar{flex-shrink:0;}
 .proof-rev-name{font-size:16px;font-weight:600;color:var(--cream-lt);}
 .proof-rev-org{font-size:13px;color:rgba(196,168,130,.55);margin-top:2px;font-family:var(--mono);letter-spacing:.5px;}
@@ -1089,7 +1089,7 @@ svg.u-illus{
 .static-cards-grid{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:14px;
+  gap:16px;
 }
 .sc-card{
   background:rgba(10,8,26,.55);
@@ -2367,6 +2367,174 @@ body.anv-paused *,body.anv-paused *::before,body.anv-paused *::after{animation-p
 }
 .faq-a a{color:var(--gold);}
 @media(max-width:600px){.faq-sec{padding:70px 0;}.faq-q{padding:17px 18px;font-size:13px;}.faq-a{padding:0 18px 18px;}}
+
+
+
+/* ── HERO LAYOUT 2 — horizontal rows pinned to edges ── */
+.hero-constellation{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;}
+.hl2-col{
+  position:absolute;top:0;bottom:0;width:22vw;min-width:240px;max-width:360px;
+  display:flex;flex-direction:column;justify-content:center;gap:0;
+  z-index:6;pointer-events:none;
+}
+.hl2-col.hl2-left  { left:0; padding-left:20px; }
+.hl2-col.hl2-right { right:0; padding-right:20px; align-items:flex-end; }
+.hl2-row{
+  display:flex;align-items:center;gap:16px;
+  padding:24px 0;
+}
+.hl2-col.hl2-right .hl2-row{ flex-direction:row-reverse; }
+.hl2-bar{
+  width:44px;height:3px;border-radius:99px;flex-shrink:0;
+}
+.hl2-col.hl2-left  .hl2-bar{ background:linear-gradient(90deg,rgba(0,0,0,0),var(--hbar-col)); }
+.hl2-col.hl2-right .hl2-bar{ background:linear-gradient(270deg,rgba(0,0,0,0),var(--hbar-col)); }
+.hl2-dot{
+  width:17px;height:17px;border-radius:50%;flex-shrink:0;
+  box-shadow:0 0 16px var(--hbar-col);
+  animation:hl2-pulse 2.6s ease-in-out infinite;
+  position:relative;
+}
+.hl2-dot::after{
+  content:'';position:absolute;inset:-6px;border-radius:50%;
+  border:1px solid var(--hbar-col);opacity:0;
+  animation:hl2-ring 2.6s ease-out infinite;
+}
+@keyframes hl2-pulse{0%,100%{transform:scale(1);opacity:.65;}50%{transform:scale(1.45);opacity:1;}}
+@keyframes hl2-ring{0%{transform:scale(.6);opacity:.6;}100%{transform:scale(2);opacity:0;}}
+.hl2-text-wrap{ line-height:1.4; }
+.hl2-main{
+  font-family:var(--mono);font-size:clamp(16px,1.4vw,20px);font-weight:700;
+  letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--hbar-col);white-space:nowrap;
+}
+.hl2-sub{
+  font-family:var(--mono);font-size:clamp(12px,1vw,14.5px);letter-spacing:1px;
+  text-transform:uppercase;color:rgba(245,235,217,.42);
+  margin-top:4px;white-space:nowrap;
+}
+.hl2-col.hl2-right .hl2-text-wrap{ text-align:right; }
+@media(max-width:1280px){.hl2-col{display:none;}.hero-constellation{display:none;}}
+
+/* ═══════════════════════════════════════════════════
+   CROSS-PAGE ANIMATIONS
+═══════════════════════════════════════════════════ */
+
+/* --- Shared keyframes --- */
+@keyframes pa-float   { 0%,100%{transform:translateY(0);}   50%{transform:translateY(-10px);} }
+@keyframes pa-float2  { 0%,100%{transform:translateY(-5px);}50%{transform:translateY(8px);} }
+@keyframes pa-pulse   { 0%,100%{opacity:.4;transform:scale(1);}  50%{opacity:.9;transform:scale(1.5);} }
+@keyframes pa-ring    { 0%{transform:scale(.6);opacity:.6;} 100%{transform:scale(2.2);opacity:0;} }
+@keyframes pa-rot-cw  { from{transform:rotate(0deg);}  to{transform:rotate(360deg);} }
+@keyframes pa-rot-ccw { from{transform:rotate(0deg);}  to{transform:rotate(-360deg);} }
+@keyframes pa-scanline{ 0%{top:0%;opacity:.7;} 100%{top:100%;opacity:0;} }
+@keyframes pa-blink   { 0%,100%{opacity:1;} 49%{opacity:1;} 50%{opacity:0;} 99%{opacity:0;} }
+@keyframes pa-shimmer { 0%,100%{opacity:.15;} 50%{opacity:.45;} }
+@keyframes pa-draw    { from{stroke-dashoffset:600;} to{stroke-dashoffset:0;} }
+@keyframes pa-rise    { from{opacity:0;transform:translateY(18px);} to{opacity:1;transform:translateY(0);} }
+@keyframes pa-glow-pulse { 0%,100%{opacity:.06;} 50%{opacity:.14;} }
+
+/* --- Page-hero ambient overlay (all .page-hero and .subpage-hero) --- */
+.page-hero, .subpage-hero { position:relative; overflow:hidden; }
+
+.pa-constellation {
+  position:absolute; inset:0; width:100%; height:100%;
+  pointer-events:none; z-index:0; opacity:.85;
+}
+.pa-constellation path, .pa-constellation line {
+  stroke-dasharray:600;
+  stroke-dashoffset:600;
+  animation: pa-draw 3s ease forwards;
+}
+
+/* Nebula blobs */
+.pa-nebula {
+  position:absolute; border-radius:50%; pointer-events:none; z-index:0;
+  animation: pa-glow-pulse 6s ease-in-out infinite;
+}
+
+/* Floating ambient dots */
+.pa-dot {
+  position:absolute; border-radius:50%; pointer-events:none; z-index:1;
+  animation: pa-pulse 3s ease-in-out infinite;
+}
+.pa-dot::after {
+  content:''; position:absolute; inset:-6px; border-radius:50%;
+  border:1px solid currentColor; opacity:0;
+  animation: pa-ring 3s ease-out infinite;
+}
+
+/* Orbit rings on page heroes */
+.pa-orbit {
+  position:absolute; border-radius:50%; pointer-events:none; z-index:0;
+  border:1px solid rgba(255,185,103,0.1);
+}
+.pa-orbit.cw  { animation: pa-rot-cw  20s linear infinite; }
+.pa-orbit.ccw { animation: pa-rot-ccw 28s linear infinite; }
+.pa-orbit-dot {
+  position:absolute; width:7px; height:7px; border-radius:50%;
+  top:-3.5px; left:50%; margin-left:-3.5px;
+  background:#FFB967; box-shadow:0 0 10px rgba(255,185,103,.7);
+}
+
+/* Floating stat cards on hero pages */
+.pa-card {
+  position:absolute; z-index:3; pointer-events:none;
+  background:rgba(8,6,20,0.82); border:1px solid;
+  border-radius:10px; padding:10px 16px;
+  animation: pa-float 5s ease-in-out infinite;
+}
+.pa-card.f2 { animation-name:pa-float2; }
+.pa-card-num { font-size:20px; font-weight:700; line-height:1; }
+.pa-card-lbl { font-size:8.5px; letter-spacing:1.5px; text-transform:uppercase; opacity:.55; margin-top:3px; }
+
+/* Scanline effect (subtle) */
+.pa-scanline {
+  position:absolute; left:0; right:0; height:2px; pointer-events:none; z-index:2;
+  background:linear-gradient(90deg,transparent,rgba(255,185,103,.06),transparent);
+  animation: pa-scanline 7s linear infinite;
+}
+
+/* Grid lines - technical feel */
+.pa-grid {
+  position:absolute; inset:0; pointer-events:none; z-index:0;
+  background-image:
+    linear-gradient(rgba(255,185,103,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,185,103,.025) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* Corner bracket accents */
+.pa-corner {
+  position:absolute; width:28px; height:28px; pointer-events:none; z-index:2;
+}
+.pa-corner::before, .pa-corner::after {
+  content:''; position:absolute; background:#FFB967; opacity:.4;
+}
+.pa-corner.tl::before { top:0; left:0; width:100%; height:2px; }
+.pa-corner.tl::after  { top:0; left:0; width:2px; height:100%; }
+.pa-corner.tr::before { top:0; right:0; width:100%; height:2px; }
+.pa-corner.tr::after  { top:0; right:0; width:2px; height:100%; }
+.pa-corner.bl::before { bottom:0; left:0; width:100%; height:2px; }
+.pa-corner.bl::after  { bottom:0; left:0; width:2px; height:100%; }
+.pa-corner.br::before { bottom:0; right:0; width:100%; height:2px; }
+.pa-corner.br::after  { bottom:0; right:0; width:2px; height:100%; }
+
+/* Horizontal data bars (chatbot / ebooks) */
+.pa-databar {
+  position:absolute; height:2px; border-radius:99px; pointer-events:none; z-index:1;
+  animation: pa-shimmer 3s ease-in-out infinite;
+}
+
+/* Stagger rise-in for content sections */
+.pa-rise { animation: pa-rise .7s ease both; }
+.pa-rise.d1 { animation-delay:.1s; }
+.pa-rise.d2 { animation-delay:.25s; }
+.pa-rise.d3 { animation-delay:.4s; }
+.pa-rise.d4 { animation-delay:.55s; }
+
+/* contact page specific */
+.contact-page { position:relative; overflow:hidden; }
 </style>
 </head>
 <body>
@@ -2506,6 +2674,118 @@ body.anv-paused *,body.anv-paused *::before,body.anv-paused *::after{animation-p
 
   <!-- Hero -->
   <section class="hero">
+
+    <!-- Constellation -->
+    <svg class="hero-constellation" viewBox="0 0 1440 800" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <line x1="200" y1="140" x2="320" y2="260" stroke="rgba(255,185,103,0.13)" stroke-width="1"/>
+      <line x1="120" y1="320" x2="320" y2="260" stroke="rgba(255,185,103,0.1)" stroke-width="1"/>
+      <line x1="200" y1="140" x2="120" y2="320" stroke="rgba(255,185,103,0.08)" stroke-width="1"/>
+      <line x1="60"  y1="230" x2="200" y2="140" stroke="rgba(255,185,103,0.07)" stroke-width="1"/>
+      <line x1="260" y1="480" x2="120" y2="320" stroke="rgba(95,240,224,0.08)" stroke-width="1"/>
+      <line x1="70"  y1="560" x2="260" y2="480" stroke="rgba(95,240,224,0.07)" stroke-width="1"/>
+      <line x1="320" y1="260" x2="260" y2="480" stroke="rgba(169,136,255,0.07)" stroke-width="1"/>
+      <circle cx="200" cy="140" r="3"   fill="rgba(255,185,103,0.6)"/>
+      <circle cx="320" cy="260" r="2.5" fill="rgba(255,185,103,0.38)"/>
+      <circle cx="120" cy="320" r="3"   fill="rgba(95,240,224,0.5)"/>
+      <circle cx="60"  cy="230" r="2"   fill="rgba(255,185,103,0.28)"/>
+      <circle cx="260" cy="480" r="3"   fill="rgba(169,136,255,0.48)"/>
+      <circle cx="70"  cy="560" r="2.5" fill="rgba(95,240,224,0.28)"/>
+      <circle cx="20"  cy="80"  r="1.8" fill="rgba(255,185,103,0.22)"/>
+      <circle cx="360" cy="100" r="1.8" fill="rgba(255,185,103,0.18)"/>
+      <circle cx="15"  cy="660" r="1.8" fill="rgba(169,136,255,0.18)"/>
+      <line x1="1240" y1="140" x2="1120" y2="260" stroke="rgba(95,240,224,0.13)" stroke-width="1"/>
+      <line x1="1320" y1="320" x2="1120" y2="260" stroke="rgba(95,240,224,0.1)" stroke-width="1"/>
+      <line x1="1240" y1="140" x2="1320" y2="320" stroke="rgba(95,240,224,0.08)" stroke-width="1"/>
+      <line x1="1380" y1="230" x2="1240" y2="140" stroke="rgba(95,240,224,0.07)" stroke-width="1"/>
+      <line x1="1180" y1="480" x2="1320" y2="320" stroke="rgba(255,185,103,0.08)" stroke-width="1"/>
+      <line x1="1370" y1="560" x2="1180" y2="480" stroke="rgba(169,136,255,0.07)" stroke-width="1"/>
+      <line x1="1120" y1="260" x2="1180" y2="480" stroke="rgba(169,136,255,0.07)" stroke-width="1"/>
+      <circle cx="1240" cy="140" r="3"   fill="rgba(95,240,224,0.6)"/>
+      <circle cx="1120" cy="260" r="2.5" fill="rgba(95,240,224,0.38)"/>
+      <circle cx="1320" cy="320" r="3"   fill="rgba(255,185,103,0.5)"/>
+      <circle cx="1380" cy="230" r="2"   fill="rgba(95,240,224,0.28)"/>
+      <circle cx="1180" cy="480" r="3"   fill="rgba(169,136,255,0.48)"/>
+      <circle cx="1370" cy="560" r="2.5" fill="rgba(169,136,255,0.28)"/>
+      <circle cx="1420" cy="80"  r="1.8" fill="rgba(95,240,224,0.22)"/>
+      <circle cx="1080" cy="100" r="1.8" fill="rgba(95,240,224,0.18)"/>
+      <circle cx="1425" cy="660" r="1.8" fill="rgba(169,136,255,0.18)"/>
+    </svg>
+
+    <!-- Left column — research stats -->
+    <div class="hl2-col hl2-left" aria-hidden="true">
+      <div class="hl2-row" style="--hbar-col:#FFB967;">
+        <div class="hl2-bar"></div>
+        <div class="hl2-dot" style="background:#FFB967;animation-delay:0s;"></div>
+        <div class="hl2-text-wrap">
+          <div class="hl2-main">50+ Papers</div>
+          <div class="hl2-sub">Published &amp; indexed</div>
+        </div>
+      </div>
+      <div class="hl2-row" style="--hbar-col:#5FF0E0;">
+        <div class="hl2-bar"></div>
+        <div class="hl2-dot" style="background:#5FF0E0;animation-delay:.5s;"></div>
+        <div class="hl2-text-wrap">
+          <div class="hl2-main">505 Citations</div>
+          <div class="hl2-sub">Top paper · MLPerf</div>
+        </div>
+      </div>
+      <div class="hl2-row" style="--hbar-col:#A988FF;">
+        <div class="hl2-bar"></div>
+        <div class="hl2-dot" style="background:#A988FF;animation-delay:1s;"></div>
+        <div class="hl2-text-wrap">
+          <div class="hl2-main">Q1–Q2 Journals</div>
+          <div class="hl2-sub">Peer-reviewed</div>
+        </div>
+      </div>
+      <div class="hl2-row" style="--hbar-col:rgba(255,185,103,0.45);">
+        <div class="hl2-bar"></div>
+        <div class="hl2-dot" style="background:rgba(255,185,103,0.35);box-shadow:none;animation:none;"></div>
+        <div class="hl2-text-wrap">
+          <div class="hl2-main" style="color:rgba(255,185,103,0.4);">6 Venues</div>
+          <div class="hl2-sub">MLSys · Lancet · more</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right column — services -->
+    <div class="hl2-col hl2-right" aria-hidden="true">
+      <div class="hl2-row" style="--hbar-col:#5FF0E0;">
+        <div class="hl2-bar"></div>
+        <div class="hl2-dot" style="background:#5FF0E0;animation-delay:.25s;"></div>
+        <div class="hl2-text-wrap">
+          <div class="hl2-main">EB‑1A Docs</div>
+          <div class="hl2-sub">Full evidence package</div>
+        </div>
+      </div>
+      <div class="hl2-row" style="--hbar-col:#FFB967;">
+        <div class="hl2-bar"></div>
+        <div class="hl2-dot" style="background:#FFB967;animation-delay:.75s;"></div>
+        <div class="hl2-text-wrap">
+          <div class="hl2-main">AI Chatbots</div>
+          <div class="hl2-sub">Custom agents shipped</div>
+        </div>
+      </div>
+      <div class="hl2-row" style="--hbar-col:#A988FF;">
+        <div class="hl2-bar"></div>
+        <div class="hl2-dot" style="background:#A988FF;animation-delay:1.25s;"></div>
+        <div class="hl2-text-wrap">
+          <div class="hl2-main">Ebooks</div>
+          <div class="hl2-sub">Voice-true &amp; published</div>
+        </div>
+      </div>
+      <div class="hl2-row" style="--hbar-col:rgba(255,185,103,0.45);">
+        <div class="hl2-bar"></div>
+        <div class="hl2-dot" style="background:rgba(255,185,103,0.35);box-shadow:none;animation:none;"></div>
+        <div class="hl2-text-wrap">
+          <div class="hl2-main" style="color:rgba(255,185,103,0.4);">Idea → Shipped</div>
+          <div class="hl2-sub">From scratch</div>
+        </div>
+      </div>
+    </div>
+
+
+
+
     <svg class="hero-logo-emblem" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-label="Anvoxa emblem">
   <defs>
     <linearGradient id="hlgA" x1="0" y1="0" x2="1" y2="1">
@@ -3040,6 +3320,39 @@ body.anv-paused *,body.anv-paused *::before,body.anv-paused *::after{animation-p
 ══════════════════════════════════════════════════ -->
 <div class="page" id="page-research">
   <section class="page-hero">
+
+    <div class="pa-nebula" style="top:-10%;left:-5%;width:420px;height:420px;background:radial-gradient(circle,rgba(255,185,103,0.09),transparent 70%);"></div>
+    <div class="pa-nebula" style="top:20%;right:-8%;width:340px;height:340px;background:radial-gradient(circle,rgba(95,240,224,0.07),transparent 70%);animation-delay:2s;"></div>
+    <div class="pa-grid"></div>
+    <div class="pa-scanline"></div>
+    <svg class="pa-constellation" viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg">
+      <line x1="80" y1="80" x2="220" y2="180" stroke="rgba(255,185,103,0.18)" stroke-width="1" style="animation-delay:.2s"/>
+      <line x1="220" y1="180" x2="160" y2="340" stroke="rgba(255,185,103,0.13)" stroke-width="1" style="animation-delay:.5s"/>
+      <line x1="80" y1="80" x2="40" y2="260" stroke="rgba(255,185,103,0.1)" stroke-width="1" style="animation-delay:.8s"/>
+      <line x1="1100" y1="80" x2="980" y2="200" stroke="rgba(95,240,224,0.18)" stroke-width="1" style="animation-delay:.3s"/>
+      <line x1="980" y1="200" x2="1050" y2="360" stroke="rgba(95,240,224,0.13)" stroke-width="1" style="animation-delay:.6s"/>
+      <line x1="1100" y1="80" x2="1160" y2="280" stroke="rgba(95,240,224,0.1)" stroke-width="1" style="animation-delay:.9s"/>
+      <circle cx="80"  cy="80"  r="3.5" fill="rgba(255,185,103,0.7)"/><circle cx="220" cy="180" r="2.5" fill="rgba(255,185,103,0.45)"/>
+      <circle cx="160" cy="340" r="3"   fill="rgba(95,240,224,0.5)"/> <circle cx="40"  cy="260" r="2"   fill="rgba(255,185,103,0.3)"/>
+      <circle cx="1100" cy="80" r="3.5" fill="rgba(95,240,224,0.7)"/><circle cx="980" cy="200" r="2.5" fill="rgba(95,240,224,0.45)"/>
+      <circle cx="1050" cy="360" r="3"  fill="rgba(169,136,255,0.5)"/><circle cx="1160" cy="280" r="2" fill="rgba(95,240,224,0.3)"/>
+    </svg>
+    <div class="pa-dot" style="left:6%;top:20%;width:10px;height:10px;background:#FFB967;color:#FFB967;animation-delay:0s;box-shadow:0 0 14px rgba(255,185,103,.6);"></div>
+    <div class="pa-dot" style="left:6%;top:55%;width:8px;height:8px;background:#5FF0E0;color:#5FF0E0;animation-delay:.9s;box-shadow:0 0 12px rgba(95,240,224,.5);"></div>
+    <div class="pa-dot" style="right:5%;top:25%;width:10px;height:10px;background:#5FF0E0;color:#5FF0E0;animation-delay:.4s;box-shadow:0 0 14px rgba(95,240,224,.6);"></div>
+    <div class="pa-dot" style="right:5%;top:65%;width:8px;height:8px;background:#A988FF;color:#A988FF;animation-delay:1.3s;box-shadow:0 0 12px rgba(169,136,255,.5);"></div>
+    <div class="pa-card" style="left:3%;top:50%;transform:translateY(-50%);border-color:rgba(255,185,103,0.25);animation-delay:0s;">
+      <div class="pa-card-num" style="color:#FFB967;">50+</div>
+      <div class="pa-card-lbl" style="color:#FFB967;">Papers</div>
+    </div>
+    <div class="pa-card f2" style="right:3%;top:50%;transform:translateY(-50%);border-color:rgba(95,240,224,0.25);animation-delay:.6s;">
+      <div class="pa-card-num" style="color:#5FF0E0;">505</div>
+      <div class="pa-card-lbl" style="color:#5FF0E0;">Citations</div>
+    </div>
+    <div class="pa-corner tl" style="top:20px;left:20px;"></div>
+    <div class="pa-corner tr" style="top:20px;right:20px;"></div>
+    <div class="pa-corner bl" style="bottom:20px;left:20px;"></div>
+    <div class="pa-corner br" style="bottom:20px;right:20px;"></div>
   <div class="deco-orb deco-orb-lg" style="top:-10%;right:-8%;background:radial-gradient(circle,rgba(123,95,255,.18),transparent 70%);animation:drift 18s ease-in-out infinite;"></div>
   <div class="deco-orb deco-orb-sm" style="bottom:5%;left:5%;background:radial-gradient(circle,rgba(255,185,103,.15),transparent 70%);animation:drift 14s ease-in-out infinite reverse;"></div>
   <div class="page-hero-inner">
@@ -3289,6 +3602,27 @@ body.anv-paused *,body.anv-paused *::before,body.anv-paused *::after{animation-p
 ══════════════════════════════════════════════════ -->
 <div class="page" id="page-research-support">
   <section class="subpage-hero">
+    <div class="pa-nebula" style="top:0;left:-10%;width:380px;height:380px;background:radial-gradient(circle,rgba(255,185,103,0.08),transparent 70%);"></div>
+    <div class="pa-nebula" style="bottom:-10%;right:-5%;width:300px;height:300px;background:radial-gradient(circle,rgba(169,136,255,0.07),transparent 70%);animation-delay:3s;"></div>
+    <div class="pa-grid"></div>
+    <div class="pa-scanline" style="animation-delay:2s;"></div>
+    <svg class="pa-constellation" viewBox="0 0 1200 400" xmlns="http://www.w3.org/2000/svg">
+      <line x1="60" y1="60" x2="180" y2="150" stroke="rgba(255,185,103,0.15)" stroke-width="1" style="animation-delay:.3s"/>
+      <line x1="180" y1="150" x2="100" y2="300" stroke="rgba(255,185,103,0.1)" stroke-width="1" style="animation-delay:.6s"/>
+      <line x1="1140" y1="60" x2="1020" y2="160" stroke="rgba(169,136,255,0.15)" stroke-width="1" style="animation-delay:.4s"/>
+      <line x1="1020" y1="160" x2="1100" y2="310" stroke="rgba(169,136,255,0.1)" stroke-width="1" style="animation-delay:.7s"/>
+      <circle cx="60" cy="60" r="3" fill="rgba(255,185,103,0.6)"/><circle cx="180" cy="150" r="2.5" fill="rgba(255,185,103,0.4)"/>
+      <circle cx="100" cy="300" r="2.5" fill="rgba(255,185,103,0.35)"/>
+      <circle cx="1140" cy="60" r="3" fill="rgba(169,136,255,0.6)"/><circle cx="1020" cy="160" r="2.5" fill="rgba(169,136,255,0.4)"/>
+      <circle cx="1100" cy="310" r="2.5" fill="rgba(169,136,255,0.35)"/>
+    </svg>
+    <div class="pa-dot" style="left:5%;top:30%;width:9px;height:9px;background:#FFB967;color:#FFB967;box-shadow:0 0 12px rgba(255,185,103,.6);"></div>
+    <div class="pa-dot" style="left:5%;top:65%;width:7px;height:7px;background:#A988FF;color:#A988FF;animation-delay:.7s;box-shadow:0 0 10px rgba(169,136,255,.5);"></div>
+    <div class="pa-dot" style="right:5%;top:30%;width:9px;height:9px;background:#A988FF;color:#A988FF;animation-delay:.4s;box-shadow:0 0 12px rgba(169,136,255,.6);"></div>
+    <div class="pa-dot" style="right:5%;top:65%;width:7px;height:7px;background:#FFB967;color:#FFB967;animation-delay:1.1s;box-shadow:0 0 10px rgba(255,185,103,.5);"></div>
+    <div class="pa-corner tl" style="top:20px;left:20px;"></div>
+    <div class="pa-corner br" style="bottom:20px;right:20px;"></div>
+
   <div class="deco-orb" style="width:300px;height:300px;top:-5%;right:-5%;background:radial-gradient(circle,rgba(123,95,255,.12),transparent 70%);animation:drift 16s ease-in-out infinite;"></div>
   <div class="deco-orb" style="width:200px;height:200px;bottom:0;left:10%;background:radial-gradient(circle,rgba(255,185,103,.1),transparent 70%);animation:drift 20s ease-in-out infinite reverse;"></div>
   <div class="subpage-hero-inner">
@@ -3498,6 +3832,71 @@ body.anv-paused *,body.anv-paused *::before,body.anv-paused *::after{animation-p
 ══════════════════════════════════════════════════ -->
 <div class="page" id="page-eb1a">
   <section class="subpage-hero">
+    <div class="pa-nebula" style="top:-5%;right:5%;width:380px;height:380px;background:radial-gradient(circle,rgba(169,136,255,0.08),transparent 70%);"></div>
+    <div class="pa-nebula" style="bottom:0;left:8%;width:300px;height:300px;background:radial-gradient(circle,rgba(255,185,103,0.07),transparent 70%);animation-delay:3s;"></div>
+    <div class="pa-grid"></div>
+    <div class="pa-scanline" style="animation-delay:3s;"></div>
+    <svg class="pa-constellation" viewBox="0 0 1200 400" xmlns="http://www.w3.org/2000/svg">
+      <line x1="55" y1="70" x2="175" y2="165" stroke="rgba(169,136,255,0.16)" stroke-width="1" style="animation-delay:.3s"/>
+      <line x1="175" y1="165" x2="90"  y2="320" stroke="rgba(169,136,255,0.11)" stroke-width="1" style="animation-delay:.6s"/>
+      <line x1="1145" y1="70" x2="1025" y2="175" stroke="rgba(255,185,103,0.16)" stroke-width="1" style="animation-delay:.4s"/>
+      <line x1="1025" y1="175" x2="1110" y2="330" stroke="rgba(255,185,103,0.11)" stroke-width="1" style="animation-delay:.7s"/>
+      <circle cx="55"  cy="70"  r="3"   fill="rgba(169,136,255,0.6)"/>
+      <circle cx="175" cy="165" r="2.5" fill="rgba(169,136,255,0.4)"/>
+      <circle cx="90"  cy="320" r="2.5" fill="rgba(169,136,255,0.35)"/>
+      <circle cx="1145" cy="70"  r="3"  fill="rgba(255,185,103,0.6)"/>
+      <circle cx="1025" cy="175" r="2.5" fill="rgba(255,185,103,0.4)"/>
+      <circle cx="1110" cy="330" r="2.5" fill="rgba(255,185,103,0.35)"/>
+    </svg>
+    <div class="pa-dot" style="left:4%;top:35%;width:9px;height:9px;background:#A988FF;color:#A988FF;box-shadow:0 0 12px rgba(169,136,255,.6);"></div>
+    <div class="pa-dot" style="left:4%;top:65%;width:7px;height:7px;background:#FFB967;color:#FFB967;animation-delay:.8s;box-shadow:0 0 10px rgba(255,185,103,.5);"></div>
+    <div class="pa-dot" style="right:4%;top:35%;width:9px;height:9px;background:#FFB967;color:#FFB967;animation-delay:.4s;box-shadow:0 0 12px rgba(255,185,103,.6);"></div>
+    <div class="pa-dot" style="right:4%;top:65%;width:7px;height:7px;background:#A988FF;color:#A988FF;animation-delay:1.2s;box-shadow:0 0 10px rgba(169,136,255,.5);"></div>
+    <div class="pa-corner tl" style="top:20px;left:20px;border-color:rgba(169,136,255,0.5)!important;"></div>
+    <div class="pa-corner br" style="bottom:20px;right:20px;border-color:rgba(255,185,103,0.4)!important;"></div>
+
+    <div class="pa-nebula" style="top:-5%;left:5%;width:500px;height:500px;background:radial-gradient(circle,rgba(255,185,103,0.08),transparent 70%);"></div>
+    <div class="pa-nebula" style="bottom:-10%;right:10%;width:350px;height:350px;background:radial-gradient(circle,rgba(95,240,224,0.06),transparent 70%);animation-delay:2.5s;"></div>
+    <div class="pa-grid"></div>
+    <div class="pa-scanline" style="animation-delay:4s;"></div>
+    <svg class="pa-constellation" viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg">
+      <line x1="50" y1="100" x2="170" y2="200" stroke="rgba(255,185,103,0.16)" stroke-width="1" style="animation-delay:.2s"/>
+      <line x1="170" y1="200" x2="80"  y2="370" stroke="rgba(255,185,103,0.11)" stroke-width="1" style="animation-delay:.5s"/>
+      <line x1="50"  y1="100" x2="20"  y2="280" stroke="rgba(255,185,103,0.08)" stroke-width="1" style="animation-delay:.8s"/>
+      <line x1="1150" y1="100" x2="1040" y2="220" stroke="rgba(95,240,224,0.16)" stroke-width="1" style="animation-delay:.3s"/>
+      <line x1="1040" y1="220" x2="1120" y2="380" stroke="rgba(95,240,224,0.11)" stroke-width="1" style="animation-delay:.6s"/>
+      <circle cx="50"  cy="100" r="3"   fill="rgba(255,185,103,0.65)"/>
+      <circle cx="170" cy="200" r="2.5" fill="rgba(255,185,103,0.45)"/>
+      <circle cx="80"  cy="370" r="2.5" fill="rgba(255,185,103,0.35)"/>
+      <circle cx="20"  cy="280" r="2"   fill="rgba(255,185,103,0.25)"/>
+      <circle cx="1150" cy="100" r="3"  fill="rgba(95,240,224,0.65)"/>
+      <circle cx="1040" cy="220" r="2.5" fill="rgba(95,240,224,0.45)"/>
+      <circle cx="1120" cy="380" r="2.5" fill="rgba(95,240,224,0.35)"/>
+    </svg>
+    <!-- Orbit rings — fitting for a "status" page -->
+    <div class="pa-orbit cw"  style="width:160px;height:160px;left:3%;top:50%;margin-top:-80px;">
+      <div class="pa-orbit-dot"></div>
+    </div>
+    <div class="pa-orbit ccw" style="width:240px;height:240px;left:3%;top:50%;margin-top:-120px;border-color:rgba(95,240,224,0.08);">
+    </div>
+    <div class="pa-orbit cw"  style="width:160px;height:160px;right:3%;top:50%;margin-top:-80px;border-color:rgba(95,240,224,0.12);">
+      <div class="pa-orbit-dot" style="background:#5FF0E0;box-shadow:0 0 10px rgba(95,240,224,.7);"></div>
+    </div>
+    <div class="pa-orbit ccw" style="width:240px;height:240px;right:3%;top:50%;margin-top:-120px;">
+    </div>
+    <div class="pa-card" style="left:3.5%;top:30%;border-color:rgba(255,185,103,0.28);animation-delay:0s;">
+      <div class="pa-card-num" style="color:#FFB967;font-size:15px;">EB‑1A</div>
+      <div class="pa-card-lbl" style="color:#FFB967;">Extraordinary ability</div>
+    </div>
+    <div class="pa-card f2" style="right:3.5%;top:30%;border-color:rgba(95,240,224,0.28);animation-delay:.8s;">
+      <div class="pa-card-num" style="color:#5FF0E0;font-size:15px;">10</div>
+      <div class="pa-card-lbl" style="color:#5FF0E0;">USCIS criteria</div>
+    </div>
+    <div class="pa-corner tl" style="top:20px;left:20px;"></div>
+    <div class="pa-corner tr" style="top:20px;right:20px;"></div>
+    <div class="pa-corner bl" style="bottom:20px;left:20px;"></div>
+    <div class="pa-corner br" style="bottom:20px;right:20px;"></div>
+
   <div class="deco-orb" style="width:300px;height:300px;top:-5%;right:-5%;background:radial-gradient(circle,rgba(123,95,255,.12),transparent 70%);animation:drift 16s ease-in-out infinite;"></div>
   <div class="deco-orb" style="width:200px;height:200px;bottom:0;left:10%;background:radial-gradient(circle,rgba(255,185,103,.1),transparent 70%);animation:drift 20s ease-in-out infinite reverse;"></div>
   <div class="page-hero-inner" style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;">
@@ -3857,6 +4256,29 @@ body.anv-paused *,body.anv-paused *::before,body.anv-paused *::after{animation-p
 ══════════════════════════════════════════════════ -->
 <div class="page" id="page-guidance">
   <section class="subpage-hero">
+    <div class="pa-nebula" style="top:-5%;right:5%;width:380px;height:380px;background:radial-gradient(circle,rgba(169,136,255,0.08),transparent 70%);"></div>
+    <div class="pa-nebula" style="bottom:0;left:8%;width:300px;height:300px;background:radial-gradient(circle,rgba(255,185,103,0.07),transparent 70%);animation-delay:3s;"></div>
+    <div class="pa-grid"></div>
+    <div class="pa-scanline" style="animation-delay:3s;"></div>
+    <svg class="pa-constellation" viewBox="0 0 1200 400" xmlns="http://www.w3.org/2000/svg">
+      <line x1="55" y1="70" x2="175" y2="165" stroke="rgba(169,136,255,0.16)" stroke-width="1" style="animation-delay:.3s"/>
+      <line x1="175" y1="165" x2="90"  y2="320" stroke="rgba(169,136,255,0.11)" stroke-width="1" style="animation-delay:.6s"/>
+      <line x1="1145" y1="70" x2="1025" y2="175" stroke="rgba(255,185,103,0.16)" stroke-width="1" style="animation-delay:.4s"/>
+      <line x1="1025" y1="175" x2="1110" y2="330" stroke="rgba(255,185,103,0.11)" stroke-width="1" style="animation-delay:.7s"/>
+      <circle cx="55"  cy="70"  r="3"   fill="rgba(169,136,255,0.6)"/>
+      <circle cx="175" cy="165" r="2.5" fill="rgba(169,136,255,0.4)"/>
+      <circle cx="90"  cy="320" r="2.5" fill="rgba(169,136,255,0.35)"/>
+      <circle cx="1145" cy="70"  r="3"  fill="rgba(255,185,103,0.6)"/>
+      <circle cx="1025" cy="175" r="2.5" fill="rgba(255,185,103,0.4)"/>
+      <circle cx="1110" cy="330" r="2.5" fill="rgba(255,185,103,0.35)"/>
+    </svg>
+    <div class="pa-dot" style="left:4%;top:35%;width:9px;height:9px;background:#A988FF;color:#A988FF;box-shadow:0 0 12px rgba(169,136,255,.6);"></div>
+    <div class="pa-dot" style="left:4%;top:65%;width:7px;height:7px;background:#FFB967;color:#FFB967;animation-delay:.8s;box-shadow:0 0 10px rgba(255,185,103,.5);"></div>
+    <div class="pa-dot" style="right:4%;top:35%;width:9px;height:9px;background:#FFB967;color:#FFB967;animation-delay:.4s;box-shadow:0 0 12px rgba(255,185,103,.6);"></div>
+    <div class="pa-dot" style="right:4%;top:65%;width:7px;height:7px;background:#A988FF;color:#A988FF;animation-delay:1.2s;box-shadow:0 0 10px rgba(169,136,255,.5);"></div>
+    <div class="pa-corner tl" style="top:20px;left:20px;border-color:rgba(169,136,255,0.5)!important;"></div>
+    <div class="pa-corner br" style="bottom:20px;right:20px;border-color:rgba(255,185,103,0.4)!important;"></div>
+
   <div class="deco-orb" style="width:300px;height:300px;top:-5%;right:-5%;background:radial-gradient(circle,rgba(123,95,255,.12),transparent 70%);animation:drift 16s ease-in-out infinite;"></div>
   <div class="deco-orb" style="width:200px;height:200px;bottom:0;left:10%;background:radial-gradient(circle,rgba(255,185,103,.1),transparent 70%);animation:drift 20s ease-in-out infinite reverse;"></div>
   <div class="subpage-hero-inner">
@@ -3953,6 +4375,55 @@ body.anv-paused *,body.anv-paused *::before,body.anv-paused *::after{animation-p
 ══════════════════════════════════════════════════ -->
 <div class="page" id="page-chatbot">
   <section class="page-hero">
+    <div class="pa-nebula" style="top:-5%;right:10%;width:420px;height:420px;background:radial-gradient(circle,rgba(95,240,224,0.09),transparent 70%);"></div>
+    <div class="pa-nebula" style="bottom:0;left:5%;width:340px;height:340px;background:radial-gradient(circle,rgba(169,136,255,0.08),transparent 70%);animation-delay:2s;"></div>
+    <div class="pa-grid"></div>
+    <div class="pa-scanline" style="animation-delay:1s;"></div>
+    <div class="pa-scanline" style="animation-delay:4.5s;opacity:.4;"></div>
+    <svg class="pa-constellation" viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg">
+      <line x1="60" y1="80"  x2="200" y2="160" stroke="rgba(95,240,224,0.18)" stroke-width="1" style="animation-delay:.2s"/>
+      <line x1="200" y1="160" x2="120" y2="310" stroke="rgba(95,240,224,0.13)" stroke-width="1" style="animation-delay:.5s"/>
+      <line x1="60" y1="80"  x2="30"  y2="240" stroke="rgba(95,240,224,0.09)" stroke-width="1" style="animation-delay:.8s"/>
+      <line x1="200" y1="160" x2="300" y2="280" stroke="rgba(169,136,255,0.1)" stroke-width="1" style="animation-delay:1s"/>
+      <line x1="1140" y1="80"  x2="1010" y2="170" stroke="rgba(169,136,255,0.18)" stroke-width="1" style="animation-delay:.3s"/>
+      <line x1="1010" y1="170" x2="1090" y2="320" stroke="rgba(169,136,255,0.13)" stroke-width="1" style="animation-delay:.6s"/>
+      <line x1="1140" y1="80"  x2="1170" y2="250" stroke="rgba(169,136,255,0.09)" stroke-width="1" style="animation-delay:.9s"/>
+      <circle cx="60"  cy="80"  r="3"   fill="rgba(95,240,224,0.7)"/>
+      <circle cx="200" cy="160" r="2.5" fill="rgba(95,240,224,0.5)"/>
+      <circle cx="120" cy="310" r="2.5" fill="rgba(95,240,224,0.4)"/>
+      <circle cx="30"  cy="240" r="2"   fill="rgba(95,240,224,0.3)"/>
+      <circle cx="300" cy="280" r="2"   fill="rgba(169,136,255,0.35)"/>
+      <circle cx="1140" cy="80"  r="3"  fill="rgba(169,136,255,0.7)"/>
+      <circle cx="1010" cy="170" r="2.5" fill="rgba(169,136,255,0.5)"/>
+      <circle cx="1090" cy="320" r="2.5" fill="rgba(169,136,255,0.4)"/>
+      <circle cx="1170" cy="250" r="2"   fill="rgba(169,136,255,0.3)"/>
+    </svg>
+    <!-- Data bars — techy AI feel -->
+    <div class="pa-databar" style="left:2%;top:30%;width:120px;background:linear-gradient(90deg,transparent,rgba(95,240,224,0.4));animation-delay:0s;"></div>
+    <div class="pa-databar" style="left:2%;top:42%;width:80px;background:linear-gradient(90deg,transparent,rgba(95,240,224,0.25));animation-delay:.5s;"></div>
+    <div class="pa-databar" style="left:2%;top:54%;width:100px;background:linear-gradient(90deg,transparent,rgba(95,240,224,0.35));animation-delay:1s;"></div>
+    <div class="pa-databar" style="left:2%;top:66%;width:60px;background:linear-gradient(90deg,transparent,rgba(95,240,224,0.2));animation-delay:1.5s;"></div>
+    <div class="pa-databar" style="right:2%;top:30%;width:120px;background:linear-gradient(270deg,transparent,rgba(169,136,255,0.4));animation-delay:.3s;"></div>
+    <div class="pa-databar" style="right:2%;top:42%;width:90px;background:linear-gradient(270deg,transparent,rgba(169,136,255,0.25));animation-delay:.8s;"></div>
+    <div class="pa-databar" style="right:2%;top:54%;width:110px;background:linear-gradient(270deg,transparent,rgba(169,136,255,0.35));animation-delay:1.3s;"></div>
+    <div class="pa-databar" style="right:2%;top:66%;width:70px;background:linear-gradient(270deg,transparent,rgba(169,136,255,0.2));animation-delay:1.8s;"></div>
+    <div class="pa-dot" style="left:4%;top:28%;width:10px;height:10px;background:#5FF0E0;color:#5FF0E0;box-shadow:0 0 14px rgba(95,240,224,.6);"></div>
+    <div class="pa-dot" style="left:4%;top:60%;width:8px;height:8px;background:#A988FF;color:#A988FF;animation-delay:.8s;box-shadow:0 0 12px rgba(169,136,255,.5);"></div>
+    <div class="pa-dot" style="right:4%;top:28%;width:10px;height:10px;background:#A988FF;color:#A988FF;animation-delay:.4s;box-shadow:0 0 14px rgba(169,136,255,.6);"></div>
+    <div class="pa-dot" style="right:4%;top:60%;width:8px;height:8px;background:#5FF0E0;color:#5FF0E0;animation-delay:1.2s;box-shadow:0 0 12px rgba(95,240,224,.5);"></div>
+    <div class="pa-card" style="left:2.5%;top:50%;transform:translateY(-50%);border-color:rgba(95,240,224,0.25);animation-delay:0s;">
+      <div class="pa-card-num" style="color:#5FF0E0;">AI</div>
+      <div class="pa-card-lbl" style="color:#5FF0E0;">Chatbots & agents</div>
+    </div>
+    <div class="pa-card f2" style="right:2.5%;top:50%;transform:translateY(-50%);border-color:rgba(169,136,255,0.25);animation-delay:.7s;">
+      <div class="pa-card-num" style="color:#A988FF;">RAG</div>
+      <div class="pa-card-lbl" style="color:#A988FF;">Full-stack AI</div>
+    </div>
+    <div class="pa-corner tl" style="top:20px;left:20px;border-color:rgba(95,240,224,0.4);"></div>
+    <div class="pa-corner tr" style="top:20px;right:20px;border-color:rgba(169,136,255,0.4);"></div>
+    <div class="pa-corner bl" style="bottom:20px;left:20px;border-color:rgba(95,240,224,0.4);"></div>
+    <div class="pa-corner br" style="bottom:20px;right:20px;border-color:rgba(169,136,255,0.4);"></div>
+
   <div class="deco-orb deco-orb-lg" style="top:-10%;right:-8%;background:radial-gradient(circle,rgba(123,95,255,.18),transparent 70%);animation:drift 18s ease-in-out infinite;"></div>
   <div class="deco-orb deco-orb-sm" style="bottom:5%;left:5%;background:radial-gradient(circle,rgba(255,185,103,.15),transparent 70%);animation:drift 14s ease-in-out infinite reverse;"></div>
   <div class="page-hero-inner">
@@ -4130,6 +4601,43 @@ body.anv-paused *,body.anv-paused *::before,body.anv-paused *::after{animation-p
 ══════════════════════════════════════════════════ -->
 <div class="page" id="page-ebooks">
   <section class="page-hero">
+    <div class="pa-nebula" style="top:-5%;left:8%;width:400px;height:400px;background:radial-gradient(circle,rgba(255,185,103,0.09),transparent 70%);"></div>
+    <div class="pa-nebula" style="bottom:0%;right:5%;width:320px;height:320px;background:radial-gradient(circle,rgba(169,136,255,0.07),transparent 70%);animation-delay:3s;"></div>
+    <div class="pa-grid"></div>
+    <div class="pa-scanline" style="animation-delay:2.5s;"></div>
+    <svg class="pa-constellation" viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg">
+      <line x1="70" y1="90" x2="190" y2="190" stroke="rgba(255,185,103,0.16)" stroke-width="1" style="animation-delay:.25s"/>
+      <line x1="190" y1="190" x2="100" y2="360" stroke="rgba(255,185,103,0.11)" stroke-width="1" style="animation-delay:.55s"/>
+      <line x1="70" y1="90"  x2="25"  y2="250" stroke="rgba(255,185,103,0.08)" stroke-width="1" style="animation-delay:.85s"/>
+      <line x1="1130" y1="90" x2="1020" y2="190" stroke="rgba(169,136,255,0.16)" stroke-width="1" style="animation-delay:.35s"/>
+      <line x1="1020" y1="190" x2="1100" y2="370" stroke="rgba(169,136,255,0.11)" stroke-width="1" style="animation-delay:.65s"/>
+      <line x1="1130" y1="90" x2="1175" y2="260" stroke="rgba(169,136,255,0.08)" stroke-width="1" style="animation-delay:.95s"/>
+      <circle cx="70"  cy="90"  r="3"   fill="rgba(255,185,103,0.65)"/>
+      <circle cx="190" cy="190" r="2.5" fill="rgba(255,185,103,0.45)"/>
+      <circle cx="100" cy="360" r="2.5" fill="rgba(255,185,103,0.35)"/>
+      <circle cx="25"  cy="250" r="2"   fill="rgba(255,185,103,0.25)"/>
+      <circle cx="1130" cy="90"  r="3"  fill="rgba(169,136,255,0.65)"/>
+      <circle cx="1020" cy="190" r="2.5" fill="rgba(169,136,255,0.45)"/>
+      <circle cx="1100" cy="370" r="2.5" fill="rgba(169,136,255,0.35)"/>
+      <circle cx="1175" cy="260" r="2"   fill="rgba(169,136,255,0.25)"/>
+    </svg>
+    <div class="pa-dot" style="left:5%;top:25%;width:10px;height:10px;background:#FFB967;color:#FFB967;box-shadow:0 0 14px rgba(255,185,103,.6);"></div>
+    <div class="pa-dot" style="left:5%;top:60%;width:8px;height:8px;background:#A988FF;color:#A988FF;animation-delay:.9s;box-shadow:0 0 12px rgba(169,136,255,.5);"></div>
+    <div class="pa-dot" style="right:5%;top:25%;width:10px;height:10px;background:#A988FF;color:#A988FF;animation-delay:.5s;box-shadow:0 0 14px rgba(169,136,255,.6);"></div>
+    <div class="pa-dot" style="right:5%;top:60%;width:8px;height:8px;background:#FFB967;color:#FFB967;animation-delay:1.4s;box-shadow:0 0 12px rgba(255,185,103,.5);"></div>
+    <div class="pa-card" style="left:2.5%;top:50%;transform:translateY(-50%);border-color:rgba(255,185,103,0.25);animation-delay:0s;">
+      <div class="pa-card-num" style="color:#FFB967;">Ghost</div>
+      <div class="pa-card-lbl" style="color:#FFB967;">& PDF formats</div>
+    </div>
+    <div class="pa-card f2" style="right:2.5%;top:50%;transform:translateY(-50%);border-color:rgba(169,136,255,0.25);animation-delay:.7s;">
+      <div class="pa-card-num" style="color:#A988FF;">Your</div>
+      <div class="pa-card-lbl" style="color:#A988FF;">Voice · kept</div>
+    </div>
+    <div class="pa-corner tl" style="top:20px;left:20px;"></div>
+    <div class="pa-corner tr" style="top:20px;right:20px;border-color:rgba(169,136,255,0.4)!important;"></div>
+    <div class="pa-corner bl" style="bottom:20px;left:20px;"></div>
+    <div class="pa-corner br" style="bottom:20px;right:20px;border-color:rgba(169,136,255,0.4)!important;"></div>
+
   <div class="deco-orb deco-orb-lg" style="top:-10%;right:-8%;background:radial-gradient(circle,rgba(123,95,255,.18),transparent 70%);animation:drift 18s ease-in-out infinite;"></div>
   <div class="deco-orb deco-orb-sm" style="bottom:5%;left:5%;background:radial-gradient(circle,rgba(255,185,103,.15),transparent 70%);animation:drift 14s ease-in-out infinite reverse;"></div>
   <div class="page-hero-inner">
@@ -4291,6 +4799,25 @@ body.anv-paused *,body.anv-paused *::before,body.anv-paused *::after{animation-p
 ══════════════════════════════════════════════════ -->
 <div class="page" id="page-contact">
   <section class="contact-page">
+    <div class="pa-nebula" style="top:-10%;left:-5%;width:500px;height:500px;background:radial-gradient(circle,rgba(255,185,103,0.07),transparent 70%);pointer-events:none;z-index:0;position:absolute;"></div>
+    <div class="pa-nebula" style="bottom:-5%;right:-5%;width:380px;height:380px;background:radial-gradient(circle,rgba(95,240,224,0.06),transparent 70%);pointer-events:none;z-index:0;position:absolute;animation-delay:2s;"></div>
+    <div class="pa-grid" style="position:absolute;inset:0;z-index:0;pointer-events:none;"></div>
+    <div class="pa-scanline" style="position:absolute;left:0;right:0;height:2px;z-index:0;pointer-events:none;animation-delay:1s;"></div>
+    <svg style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:.7;" viewBox="0 0 1200 700" xmlns="http://www.w3.org/2000/svg">
+      <line x1="50" y1="80" x2="180" y2="200" stroke="rgba(255,185,103,0.14)" stroke-width="1"/>
+      <line x1="180" y1="200" x2="80" y2="380" stroke="rgba(255,185,103,0.09)" stroke-width="1"/>
+      <circle cx="50" cy="80" r="3" fill="rgba(255,185,103,0.55)"/><circle cx="180" cy="200" r="2" fill="rgba(255,185,103,0.35)"/>
+      <circle cx="80" cy="380" r="2.5" fill="rgba(255,185,103,0.3)"/>
+      <line x1="1150" y1="80" x2="1030" y2="210" stroke="rgba(95,240,224,0.14)" stroke-width="1"/>
+      <line x1="1030" y1="210" x2="1120" y2="400" stroke="rgba(95,240,224,0.09)" stroke-width="1"/>
+      <circle cx="1150" cy="80" r="3" fill="rgba(95,240,224,0.55)"/><circle cx="1030" cy="210" r="2" fill="rgba(95,240,224,0.35)"/>
+      <circle cx="1120" cy="400" r="2.5" fill="rgba(95,240,224,0.3)"/>
+    </svg>
+    <div style="position:absolute;left:20px;top:20px;pointer-events:none;z-index:2;" class="pa-corner tl"></div>
+    <div style="position:absolute;right:20px;top:20px;pointer-events:none;z-index:2;" class="pa-corner tr"></div>
+    <div style="position:absolute;left:20px;bottom:20px;pointer-events:none;z-index:2;" class="pa-corner bl"></div>
+    <div style="position:absolute;right:20px;bottom:20px;pointer-events:none;z-index:2;" class="pa-corner br"></div>
+
   <div class="ambient-tl"></div><div class="ambient-br"></div>
     <div class="wrap">
       <div class="contact-grid">
