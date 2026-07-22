@@ -8,7 +8,8 @@ const apiRoutes   = require('./api');
 const adminRoutes = require('./admin-routes');
 
 const app = express();
-
+app.get('/sitemap.xml', (req, res) =>
+  res.sendFile(path.join(__dirname, 'public', 'sitemap.xml')));
 // ── CORS (raw header first, then the cors() middleware) ───────
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', req.headers.origin || '*');
@@ -32,8 +33,7 @@ app.use(cors({
 // ── Middleware ────────────────────────────────────────────────
 app.use(express.json());
 app.set('trust proxy', 1);
-app.get('/sitemap.xml', (req, res) =>
-  res.sendFile(path.join(__dirname, 'public', 'sitemap.xml')));
+
 
 // ── API routes ────────────────────────────────────────────────
 app.use('/auth/admin', adminRoutes.auth);
