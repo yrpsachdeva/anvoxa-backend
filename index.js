@@ -8,41 +8,68 @@ const apiRoutes   = require('./api');
 const adminRoutes = require('./admin-routes');
 
 const app = express();
-app.get('/sitemap.xml', (req, res) => {
-  res.setHeader('Content-Type', 'application/xml');
-  res.send(`<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://anvoxa.com/</loc>
-    <priority>1.0</priority>
-    <changefreq>weekly</changefreq>
-  </url>
-</urlset>`);
-});
-// ── CORS (raw header first, then the cors() middleware) ───────
+
+// ── CORS — explicit allowlist only ────────────────────────────
+// Reflecting an arbitrary Origin with credentials enabled would let
+// any website make authenticated calls against this API.
+const ALLOWED_ORIGINS = [
+  'https://www.anvoxa.com',
+  'https://anvoxa.com',
+  'https://anvoxa-backend-production.up.railway.app',
+  process.env.FRONTEND_URL || 'http://localhost:4000',
+];
+
+app.use(cors({
+  origin(origin, cb) {
+    // No Origin header = same-origin request / curl — nothing to grant.
+    if (!origin) return cb(null, false);
+    cb(null, ALLOWED_ORIGINS.includes(origin));
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}));
+
+// ── Security headers ──────────────────────────────────────────
+// CSP allows 'unsafe-inline' for script/style because the frontend is
+// large single-file HTML pages with inline <script>/<style> throughout —
+// moving that to external files or per-tag nonces is a separate, bigger
+// refactor. Every external host below is one this app actually calls:
+// Google Fonts, the Firebase SDK + auth popup/redirect domains, the
+// Umami analytics beacon, and our own Railway backend.
+const CSP = [
+  "default-src 'self'",
+  "script-src 'self' 'unsafe-inline' https://www.gstatic.com https://umami-production-6624.up.railway.app https://accounts.google.com",
+  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+  "font-src 'self' https://fonts.gstatic.com",
+  "img-src 'self' data: https:",
+  "media-src 'self'",
+  "connect-src 'self' https://*.googleapis.com https://*.firebaseapp.com https://umami-production-6624.up.railway.app https://anvoxa-backend-production.up.railway.app",
+  "frame-src https://accounts.google.com https://anvoxa-1f95c.firebaseapp.com",
+  "object-src 'none'",
+  "base-uri 'self'",
+  "frame-ancestors 'self'",
+].join('; ');
+
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', req.headers.origin || '*');
-  res.header('Access-Control-Allow-Credentials', 'true');
-  res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE,OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  if (req.method === 'OPTIONS') return res.sendStatus(200);
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'SAMEORIGIN');
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
+  res.setHeader('Content-Security-Policy', CSP);
+  // allow-popups (not plain same-origin) — Firebase's signInWithPopup opens
+  // a popup that talks back to this window; strict same-origin COOP would
+  // sever that channel and silently break Google sign-in.
+  res.setHeader('Cross-Origin-Opener-Policy', 'same-origin-allow-popups');
+  if (req.secure || req.headers['x-forwarded-proto'] === 'https') {
+    res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
+  }
   next();
 });
 
-app.use(cors({
-  origin: [
-    'https://www.anvoxa.com',
-    'https://anvoxa.com',
-    'https://anvoxa-backend-production.up.railway.app',
-    process.env.FRONTEND_URL || 'http://localhost:4000',
-  ],
-  credentials: true,
-}));
-
 // ── Middleware ────────────────────────────────────────────────
-app.use(express.json());
+app.use(express.json({ limit: '200kb' }));
 app.set('trust proxy', 1);
-
 
 // ── API routes ────────────────────────────────────────────────
 app.use('/auth/admin', adminRoutes.auth);
@@ -51,43 +78,40 @@ app.use('/auth',       authRoutes);
 app.use('/',           apiRoutes);
 
 // ── Page routes ───────────────────────────────────────────────
-app.get('/', (req, res) =>
-  res.sendFile(path.join(__dirname, 'public', 'home.html')));
+const send = (file) => (req, res) =>
+  res.sendFile(path.join(__dirname, 'public', file));
 
-app.get('/home', (req, res) =>
-  res.sendFile(path.join(__dirname, 'public', 'home.html')));
+app.get('/',            send('home.html'));
+app.get('/home',        send('home.html'));
+app.get('/login',       send('home.html'));
+app.get('/admin-login', send('home.html'));
+app.get('/terms',       send('home.html'));
+app.get('/privacy',     send('home.html'));
+app.get('/contact',     send('home.html'));
 
-app.get('/login', (req, res) =>
-  res.sendFile(path.join(__dirname, 'public', 'home.html')));
+app.get('/dashboard', send('dashboard.html'));
+app.get('/run',       send('run.html'));
+app.get('/write',     send('write.html'));
+app.get('/deploy',    send('deploy.html'));
 
-app.get('/admin-login', (req, res) =>
-  res.sendFile(path.join(__dirname, 'public', 'home.html')));
-
-app.get('/dashboard', (req, res) =>
-  res.sendFile(path.join(__dirname, 'public', 'dashboard.html')));
-
-app.get('/run', (req, res) =>
-  res.sendFile(path.join(__dirname, 'public', 'run.html')));
-
-app.get('/write', (req, res) =>
-  res.sendFile(path.join(__dirname, 'public', 'write.html')));
-
-app.get('/deploy', (req, res) =>
-  res.sendFile(path.join(__dirname, 'public', 'deploy.html')));
-
-app.get('/__/auth/handler', (req, res) =>
-  res.sendFile(path.join(__dirname, 'public', 'home.html')));
-
-app.get('/__/auth/iframe', (req, res) =>
-  res.sendFile(path.join(__dirname, 'public', 'home.html')));
+app.get('/__/auth/handler', send('home.html'));
+app.get('/__/auth/iframe',  send('home.html'));
 
 // Health check
 app.get('/health', (req, res) =>
   res.json({ status: 'ok', service: 'anvoxa-backend' }));
-// Sitemap
 
-// Static assets
-app.use(express.static(path.join(__dirname, 'public'), { index: false }));
+// ── Static assets — cache immutable media, never cache HTML ───
+app.use(express.static(path.join(__dirname, 'public'), {
+  index: false,
+  setHeaders(res, filePath) {
+    if (/\.(png|jpe?g|webp|svg|mp4|woff2?)$/i.test(filePath)) {
+      res.setHeader('Cache-Control', 'public, max-age=604800');       // 7 days
+    } else if (/\.html$/i.test(filePath)) {
+      res.setHeader('Cache-Control', 'no-cache');
+    }
+  },
+}));
 
 // Global error handler
 app.use((err, req, res, _next) => {
@@ -95,8 +119,13 @@ app.use((err, req, res, _next) => {
   res.status(500).json({ error: 'Internal server error' });
 });
 
-// 404 catch-all (must be last)
-app.use((req, res) => res.status(404).json({ error: 'Route not found' }));
+// 404 catch-all (must be last) — starry page for browsers, JSON for APIs
+app.use((req, res) => {
+  if (req.accepts(['html', 'json']) === 'html') {
+    return res.status(404).sendFile(path.join(__dirname, 'public', '404.html'));
+  }
+  res.status(404).json({ error: 'Route not found' });
+});
 
 // ── Start ─────────────────────────────────────────────────────
 const PORT = process.env.PORT || 4000;
