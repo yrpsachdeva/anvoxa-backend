@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <meta name="google-site-verification" content="EsdUfIsBqeUO3Xy6_kAFmV39L_pmwqi9he1ZbSMnzs8" />
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Anvoxa — The voice behind the work.</title>
@@ -265,12 +264,12 @@ footer{
 }
 .ft-brand{font-family:var(--display);font-size:30px;font-style:normal;letter-spacing:3px;text-transform:uppercase;color:var(--cream-lt);margin-bottom:6px;}
 .ft-brand b,.ft-brand em{color:var(--gold);font-style:normal;}
-.ft-tag{font-family:var(--mono);font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--cream-faint);margin-bottom:20px;}
+.ft-tag{font-family:var(--mono);font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--cream-soft);margin-bottom:20px;}
 .ft-links{display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap;}
-.ft-links a{font-family:var(--mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(245,235,217,.35);transition:color .2s;}
+.ft-links a{font-family:var(--mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--cream-soft);transition:color .2s;}
 .ft-links a:hover{color:var(--gold);}
 .ft-sep{color:rgba(245,235,217,.12);}
-.ft-copy{font-size:10px;color:rgba(245,235,217,.18);margin-top:16px;}
+.ft-copy{font-size:10px;color:rgba(245,235,217,.55);margin-top:16px;}
 
 /* Social pills */
 .social-links-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px;}
@@ -2137,7 +2136,7 @@ svg.u-illus{
 .terms-back { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--cream-soft); margin-bottom: 32px; transition: color .2s; cursor: pointer!important; }
 .terms-back:hover { color: var(--gold); }
 .terms-doc { background: rgba(10,8,26,.65); border: 1px solid var(--line); border-radius: 20px; padding: 52px 56px 48px; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
-.terms-eyebrow { font-family: var(--mono); font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; opacity: 1; }
+.terms-eyebrow { font-family: var(--mono); font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
 .terms-h1 {
   font-family: var(--display);
   font-size: clamp(42px,6vw,72px);
@@ -2309,7 +2308,7 @@ textarea:focus-visible,[tabindex]:focus-visible{
 /* ── Credibility strip / venue marquee ── */
 .trust-strip{padding:54px 0 14px;position:relative;z-index:5;}
 .trust-kicker{text-align:center;font-family:var(--mono);font-size:10px;letter-spacing:2.6px;
-  text-transform:uppercase;color:var(--cream-faint);margin-bottom:26px;}
+  text-transform:uppercase;color:var(--cream-soft);margin-bottom:26px;}
 .trust-track-wrap{overflow:hidden;
   -webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
   mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);}
@@ -2537,20 +2536,6 @@ body.anv-paused *,body.anv-paused *::before,body.anv-paused *::after{animation-p
 /* contact page specific */
 .contact-page { position:relative; overflow:hidden; }
 </style>
-   <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Anvoxa",
-  "url": "https://anvoxa.com",
-  "logo": {
-    "@type": "ImageObject",
-    "url": "https://anvoxa.com/anvoxa-logo.png",
-    "width": 512,
-    "height": 512
-  }
-}
-</script>
 </head>
 <body>
 <a class="skip-link" href="#page-home">Skip to content</a>
@@ -2582,7 +2567,7 @@ body.anv-paused *,body.anv-paused *::before,body.anv-paused *::after{animation-p
           </button>
           <p class="hint">You'll be redirected to Google to sign in</p>
         </div>
-        <p class="footer-note">By continuing you agree to Anvoxa's <a href="#" onclick="showPage('terms');return false;">terms of service</a>.</p>
+        <p class="footer-note">By continuing you agree to Anvoxa's <a href="/terms" onclick="showPage('terms');return false;">terms of service</a>.</p>
       </div>
       <!-- ADMIN AUTH (hidden — only via ?admin=1) -->
       <div class="admin-form" id="admin-form">
@@ -2685,6 +2670,7 @@ body.anv-paused *,body.anv-paused *::before,body.anv-paused *::after{animation-p
 <!-- ══════════════════════════════════════════════════
      PAGE: HOME
 ══════════════════════════════════════════════════ -->
+<main id="page-container">
 <div class="page active" id="page-home">
 
   <!-- Hero -->
@@ -2894,9 +2880,9 @@ body.anv-paused *,body.anv-paused *::before,body.anv-paused *::after{animation-p
       <div class="intro-stage rv d2">
         <div class="intro-frame">
           <video class="intro-video" id="introVideo" autoplay muted loop playsinline preload="metadata"
-                 poster="assets/intro-poster.jpg"
+                 poster="/assets/intro-poster.jpg"
                  onerror="document.getElementById('introFallback').classList.add('show')">
-            <source src="anvoxa_intro_v3.mp4" type="video/mp4">
+            <source src="/anvoxa_intro_v3.mp4" type="video/mp4">
           </video>
           <div class="intro-fallback" id="introFallback">
             <span>Intro video — place <b>anvoxa_intro_v3.mp4</b> next to this page.</span>
@@ -3277,7 +3263,7 @@ body.anv-paused *,body.anv-paused *::before,body.anv-paused *::after{animation-p
         </details>
         <details class="faq-item rv d5">
           <summary class="faq-q">How does an engagement start?<span class="faq-chv">+</span></summary>
-          <div class="faq-a">With a conversation. Send an enquiry through the <a href="javascript:void(0)" onclick="showPage('contact')">contact page</a> and we reply within two working days — no pitch, no template, just an honest assessment of what the work would take.</div>
+          <div class="faq-a">With a conversation. Send an enquiry through the <a href="/contact" onclick="showPage('contact');return false;">contact page</a> and we reply within two working days — no pitch, no template, just an honest assessment of what the work would take.</div>
         </details>
         <details class="faq-item rv d5">
           <summary class="faq-q">How does pricing work?<span class="faq-chv">+</span></summary>
@@ -3322,8 +3308,8 @@ body.anv-paused *,body.anv-paused *::before,body.anv-paused *::after{animation-p
       <a href="https://x.com/ANVITON_ai" target="_blank" rel="noopener">Twitter / X</a>
       <a href="https://www.instagram.com/anviton.ai/" target="_blank" rel="noopener">Instagram</a>
       <span class="ft-sep">·</span>
-      <a href="javascript:void(0)" onclick="showPage('terms')">Terms of Service</a>
-      <a href="javascript:void(0)" onclick="showPage('privacy')">Privacy Policy</a>
+      <a href="/terms" onclick="showPage('terms');return false;">Terms of Service</a>
+      <a href="/privacy" onclick="showPage('privacy');return false;">Privacy Policy</a>
     </div>
     <div class="ft-copy">© 2026 Anvoxa. All rights reserved.</div>
   </footer>
@@ -3604,8 +3590,8 @@ body.anv-paused *,body.anv-paused *::before,body.anv-paused *::after{animation-p
       <a href="https://x.com/ANVITON_ai" target="_blank" rel="noopener">Twitter / X</a>
       <a href="https://www.instagram.com/anviton.ai/" target="_blank" rel="noopener">Instagram</a>
       <span class="ft-sep">·</span>
-      <a href="javascript:void(0)" onclick="showPage('terms')">Terms of Service</a>
-      <a href="javascript:void(0)" onclick="showPage('privacy')">Privacy Policy</a>
+      <a href="/terms" onclick="showPage('terms');return false;">Terms of Service</a>
+      <a href="/privacy" onclick="showPage('privacy');return false;">Privacy Policy</a>
     </div>
     <div class="ft-copy">© 2026 Anvoxa. All rights reserved.</div>
   </footer>
@@ -3739,8 +3725,8 @@ body.anv-paused *,body.anv-paused *::before,body.anv-paused *::after{animation-p
       <a href="https://x.com/ANVITON_ai" target="_blank" rel="noopener">Twitter / X</a>
       <a href="https://www.instagram.com/anviton.ai/" target="_blank" rel="noopener">Instagram</a>
       <span class="ft-sep">·</span>
-      <a href="javascript:void(0)" onclick="showPage('terms')">Terms of Service</a>
-      <a href="javascript:void(0)" onclick="showPage('privacy')">Privacy Policy</a>
+      <a href="/terms" onclick="showPage('terms');return false;">Terms of Service</a>
+      <a href="/privacy" onclick="showPage('privacy');return false;">Privacy Policy</a>
     </div>
     <div class="ft-copy">© 2026 Anvoxa. All rights reserved.</div>
   </footer>
@@ -3768,7 +3754,7 @@ body.anv-paused *,body.anv-paused *::before,body.anv-paused *::after{animation-p
     <div class="wrap">
       <div class="content-2col">
         <div>
-          <img class="inline-art rv" src="assets/art-mentorship.jpg" loading="lazy" decoding="async" alt="Gold line-art of a guide star and a smaller star connected by a dotted path, with a compass rose">
+          <img class="inline-art rv" src="/assets/art-mentorship.jpg" loading="lazy" decoding="async" alt="Gold line-art of a guide star and a smaller star connected by a dotted path, with a compass rose">
           <div class="eyebrow rv">What you get</div>
           <h2 class="sec-title rv d1" style="font-size:clamp(24px,3.5vw,40px);">Guidance that <em>compounds.</em></h2>
           <div class="feature-list">
@@ -3834,8 +3820,8 @@ body.anv-paused *,body.anv-paused *::before,body.anv-paused *::after{animation-p
       <a href="https://x.com/ANVITON_ai" target="_blank" rel="noopener">Twitter / X</a>
       <a href="https://www.instagram.com/anviton.ai/" target="_blank" rel="noopener">Instagram</a>
       <span class="ft-sep">·</span>
-      <a href="javascript:void(0)" onclick="showPage('terms')">Terms of Service</a>
-      <a href="javascript:void(0)" onclick="showPage('privacy')">Privacy Policy</a>
+      <a href="/terms" onclick="showPage('terms');return false;">Terms of Service</a>
+      <a href="/privacy" onclick="showPage('privacy');return false;">Privacy Policy</a>
     </div>
     <div class="ft-copy">© 2026 Anvoxa. All rights reserved.</div>
   </footer>
@@ -4258,8 +4244,8 @@ body.anv-paused *,body.anv-paused *::before,body.anv-paused *::after{animation-p
       <a href="https://x.com/ANVITON_ai" target="_blank" rel="noopener">Twitter / X</a>
       <a href="https://www.instagram.com/anviton.ai/" target="_blank" rel="noopener">Instagram</a>
       <span class="ft-sep">·</span>
-      <a href="javascript:void(0)" onclick="showPage('terms')">Terms of Service</a>
-      <a href="javascript:void(0)" onclick="showPage('privacy')">Privacy Policy</a>
+      <a href="/terms" onclick="showPage('terms');return false;">Terms of Service</a>
+      <a href="/privacy" onclick="showPage('privacy');return false;">Privacy Policy</a>
     </div>
     <div class="ft-copy">© 2026 Anvoxa. All rights reserved.</div>
   </footer>
@@ -4310,7 +4296,7 @@ body.anv-paused *,body.anv-paused *::before,body.anv-paused *::after{animation-p
     <div class="wrap">
       <div class="content-2col">
         <div>
-          <img class="inline-art rv" src="assets/art-roadmap.jpg" loading="lazy" decoding="async" alt="Gold line-art star chart with numbered waypoints leading to a radiant star">
+          <img class="inline-art rv" src="/assets/art-roadmap.jpg" loading="lazy" decoding="async" alt="Gold line-art star chart with numbered waypoints leading to a radiant star">
           <div class="eyebrow rv">What guidance covers</div>
           <h2 class="sec-title rv d1" style="font-size:clamp(24px,3.5vw,40px);">Deliberate, <em>not accidental.</em></h2>
           <div class="feature-list">
@@ -4377,8 +4363,8 @@ body.anv-paused *,body.anv-paused *::before,body.anv-paused *::after{animation-p
       <a href="https://x.com/ANVITON_ai" target="_blank" rel="noopener">Twitter / X</a>
       <a href="https://www.instagram.com/anviton.ai/" target="_blank" rel="noopener">Instagram</a>
       <span class="ft-sep">·</span>
-      <a href="javascript:void(0)" onclick="showPage('terms')">Terms of Service</a>
-      <a href="javascript:void(0)" onclick="showPage('privacy')">Privacy Policy</a>
+      <a href="/terms" onclick="showPage('terms');return false;">Terms of Service</a>
+      <a href="/privacy" onclick="showPage('privacy');return false;">Privacy Policy</a>
     </div>
     <div class="ft-copy">© 2026 Anvoxa. All rights reserved.</div>
   </footer>
@@ -4603,8 +4589,8 @@ body.anv-paused *,body.anv-paused *::before,body.anv-paused *::after{animation-p
       <a href="https://x.com/ANVITON_ai" target="_blank" rel="noopener">Twitter / X</a>
       <a href="https://www.instagram.com/anviton.ai/" target="_blank" rel="noopener">Instagram</a>
       <span class="ft-sep">·</span>
-      <a href="javascript:void(0)" onclick="showPage('terms')">Terms of Service</a>
-      <a href="javascript:void(0)" onclick="showPage('privacy')">Privacy Policy</a>
+      <a href="/terms" onclick="showPage('terms');return false;">Terms of Service</a>
+      <a href="/privacy" onclick="showPage('privacy');return false;">Privacy Policy</a>
     </div>
     <div class="ft-copy">© 2026 Anvoxa. All rights reserved.</div>
   </footer>
@@ -4801,8 +4787,8 @@ body.anv-paused *,body.anv-paused *::before,body.anv-paused *::after{animation-p
       <a href="https://x.com/ANVITON_ai" target="_blank" rel="noopener">Twitter / X</a>
       <a href="https://www.instagram.com/anviton.ai/" target="_blank" rel="noopener">Instagram</a>
       <span class="ft-sep">·</span>
-      <a href="javascript:void(0)" onclick="showPage('terms')">Terms of Service</a>
-      <a href="javascript:void(0)" onclick="showPage('privacy')">Privacy Policy</a>
+      <a href="/terms" onclick="showPage('terms');return false;">Terms of Service</a>
+      <a href="/privacy" onclick="showPage('privacy');return false;">Privacy Policy</a>
     </div>
     <div class="ft-copy">© 2026 Anvoxa. All rights reserved.</div>
   </footer>
@@ -5070,8 +5056,8 @@ body.anv-paused *,body.anv-paused *::before,body.anv-paused *::after{animation-p
       <a href="https://x.com/ANVITON_ai" target="_blank" rel="noopener">Twitter / X</a>
       <a href="https://www.instagram.com/anviton.ai/" target="_blank" rel="noopener">Instagram</a>
       <span class="ft-sep">·</span>
-      <a href="javascript:void(0)" onclick="showPage('terms')">Terms of Service</a>
-      <a href="javascript:void(0)" onclick="showPage('privacy')">Privacy Policy</a>
+      <a href="/terms" onclick="showPage('terms');return false;">Terms of Service</a>
+      <a href="/privacy" onclick="showPage('privacy');return false;">Privacy Policy</a>
     </div>
     <div class="ft-copy">© 2026 Anvoxa. All rights reserved.</div>
   </footer>
@@ -5408,7 +5394,7 @@ window.addEventListener('popstate',()=>{
 document.addEventListener('DOMContentLoaded',function(){
   if(location.hash.startsWith('#/') && location.hash!=='#/'){
     renderPage(pageFromHash());
-  } else if(location.pathname==='/terms' || location.pathname==='/privacy'){
+  } else if(location.pathname==='/terms' || location.pathname==='/privacy' || location.pathname==='/contact'){
     renderPage(location.pathname.slice(1));
   }
 });
@@ -6385,18 +6371,36 @@ async function handleEnquirySubmit(){
 ══════════════════════════════════════════════════ -->
 <div class="page" id="page-terms">
   <div class="terms-page">
+    <!-- Page-atmosphere decoration (matches EB1A / Contact) -->
+    <div class="pa-nebula" style="top:40px;left:-6%;width:420px;height:420px;background:radial-gradient(circle,rgba(255,185,103,0.09),transparent 70%);"></div>
+    <div class="pa-nebula" style="top:440px;right:-5%;width:360px;height:360px;background:radial-gradient(circle,rgba(169,136,255,0.08),transparent 70%);animation-delay:3s;"></div>
+    <div class="pa-grid"></div>
+    <div class="pa-corner tl" style="top:88px;left:20px;"></div>
+    <div class="pa-corner tr" style="top:88px;right:20px;"></div>
+    <div class="pa-dot" style="left:5%;top:170px;width:8px;height:8px;background:#FFB967;color:#FFB967;box-shadow:0 0 12px rgba(255,185,103,.6);"></div>
+    <div class="pa-dot" style="left:6.5%;top:470px;width:6px;height:6px;background:#A988FF;color:#A988FF;animation-delay:.8s;box-shadow:0 0 10px rgba(169,136,255,.5);"></div>
+    <div class="pa-dot" style="right:5%;top:220px;width:8px;height:8px;background:#5FF0E0;color:#5FF0E0;animation-delay:.4s;box-shadow:0 0 12px rgba(95,240,224,.6);"></div>
+    <div class="pa-dot" style="right:6.5%;top:510px;width:6px;height:6px;background:#FFB967;color:#FFB967;animation-delay:1.2s;box-shadow:0 0 10px rgba(255,185,103,.5);"></div>
+    <div class="pa-card" style="left:3.5%;top:300px;border-color:rgba(255,185,103,0.28);">
+      <div class="pa-card-num" style="color:#FFB967;font-size:22px;">&sect;</div>
+      <div class="pa-card-lbl" style="color:#FFB967;">Legally binding</div>
+    </div>
+    <div class="pa-card f2" style="right:3.5%;top:300px;border-color:rgba(95,240,224,0.28);animation-delay:.8s;">
+      <div class="pa-card-num" style="color:#5FF0E0;">21</div>
+      <div class="pa-card-lbl" style="color:#5FF0E0;">Sections</div>
+    </div>
     <div class="terms-inner">
       <div class="terms-back" onclick="showPage('home')">← Back to site</div>
       <div class="terms-doc">
-        <div class="terms-eyebrow">Legal</div>
-        <h1 class="terms-h1">Terms of<br>Service</h1>
-        <div class="terms-meta">Last updated: 2 June 2026 &nbsp;·&nbsp; Effective date: 2 June 2026</div>
+        <div class="terms-eyebrow rv">Legal</div>
+        <h1 class="terms-h1 rv d1">Terms of<br>Service</h1>
+        <div class="terms-meta rv d2">Last updated: 2 June 2026 &nbsp;·&nbsp; Effective date: 2 June 2026</div>
 
-        <p class="terms-intro">These Terms of Service (the <span class="terms-defined">"Terms"</span>) constitute a legally binding agreement between you (<span class="terms-defined">"you"</span> or the <span class="terms-defined">"User"</span>) and <strong class="terms-strong">Anvoxa</strong> (<span class="terms-defined">"we"</span>, <span class="terms-defined">"us"</span>, or <span class="terms-defined">"our"</span>), a remote-first studio founded in 2026, governing your access to and use of our website, platform, and related services (the <span class="terms-defined">"Services"</span>).</p>
+        <p class="terms-intro rv d3">These Terms of Service (the <span class="terms-defined">"Terms"</span>) constitute a legally binding agreement between you (<span class="terms-defined">"you"</span> or the <span class="terms-defined">"User"</span>) and <strong class="terms-strong">Anvoxa</strong> (<span class="terms-defined">"we"</span>, <span class="terms-defined">"us"</span>, or <span class="terms-defined">"our"</span>), a remote-first studio founded in 2026, governing your access to and use of our website, platform, and related services (the <span class="terms-defined">"Services"</span>).</p>
 
-        <div class="terms-callout"><span class="terms-legal-em">Please read these Terms carefully before using the Services.</span> By accessing or using the Services, you agree to be bound by these Terms. If you do not agree, you must not use the Services.</div>
+        <div class="terms-callout rv d4"><span class="terms-legal-em">Please read these Terms carefully before using the Services.</span> By accessing or using the Services, you agree to be bound by these Terms. If you do not agree, you must not use the Services.</div>
 
-        <nav class="terms-toc">
+        <nav class="terms-toc rv d5">
           <div class="terms-toc-title">Contents</div>
           <ol>
             <li><a href="#ts1">Definitions</a></li><li><a href="#ts2">Acceptance &amp; eligibility</a></li>
@@ -6413,7 +6417,7 @@ async function handleEnquirySubmit(){
           </ol>
         </nav>
 
-        <h2 class="terms-h2" id="ts1"><span class="terms-num">01.</span>Definitions</h2>
+        <h2 class="terms-h2 rv" id="ts1"><span class="terms-num">01.</span>Definitions</h2>
         <p class="terms-p">In these Terms, unless the context requires otherwise:</p>
         <ul class="terms-ul">
           <li><span class="terms-defined">"Account"</span> means the account you create to use certain features of the Services.</li>
@@ -6423,22 +6427,22 @@ async function handleEnquirySubmit(){
           <li><span class="terms-defined">"Applicable Law"</span> means all laws, regulations, and rules applicable to the Services or to a party's use of them.</li>
         </ul>
 
-        <h2 class="terms-h2" id="ts2"><span class="terms-num">02.</span>Acceptance and eligibility</h2>
+        <h2 class="terms-h2 rv" id="ts2"><span class="terms-num">02.</span>Acceptance and eligibility</h2>
         <p class="terms-p">By using the Services, you represent and warrant that: (a) you are at least 18 years of age; (b) you have the legal capacity to enter into a binding contract under Applicable Law; and (c) you are not barred from using the Services under any Applicable Law.</p>
         <p class="terms-p">If you use the Services on behalf of a company or other legal entity, you represent that you are authorised to bind that entity to these Terms.</p>
         <p class="terms-p">The Services are not directed to children. We do not knowingly collect personal data from any person under 18 years of age. If you believe a minor has provided us with personal data, please contact us immediately.</p>
-        <div class="terms-callout"><strong>Consumers.</strong> If you use the Services as a consumer, nothing in these Terms affects any rights you have under mandatory consumer-protection laws that cannot be waived by agreement, including the Consumer Protection Act, 2019 (India) where applicable.</div>
+        <div class="terms-callout rv"><strong>Consumers.</strong> If you use the Services as a consumer, nothing in these Terms affects any rights you have under mandatory consumer-protection laws that cannot be waived by agreement, including the Consumer Protection Act, 2019 (India) where applicable.</div>
 
-        <h2 class="terms-h2" id="ts3"><span class="terms-num">03.</span>The Services</h2>
+        <h2 class="terms-h2 rv" id="ts3"><span class="terms-num">03.</span>The Services</h2>
         <p class="terms-p">Anvoxa is an AI-native studio providing research and R&D, artificial-intelligence solutions, conversational and chatbot systems, intelligent ecosystems, and related engineering and advisory services. The precise scope, deliverables, timelines, and commercial terms of any Engagement are set out in a separate written agreement, which prevails over these Terms to the extent of any conflict.</p>
         <p class="terms-p">Our public website and introductory materials are provided for general informational purposes only and do not constitute an offer, a service commitment, or professional advice.</p>
         <p class="terms-p">Where the Services use artificial intelligence or automated systems, you acknowledge that such systems are probabilistic and may produce inaccurate or incomplete output. You are responsible for independently reviewing and validating any AI-generated output before relying on it.</p>
 
-        <h2 class="terms-h2" id="ts4"><span class="terms-num">04.</span>Accounts and registration</h2>
+        <h2 class="terms-h2 rv" id="ts4"><span class="terms-num">04.</span>Accounts and registration</h2>
         <p class="terms-p">Certain features require you to register for an Account. When you do, you agree to: provide accurate, current, and complete information; keep your login credentials confidential; be solely responsible for all activity under your Account; and notify us promptly at <a href="mailto:helloanvox@gmail.com">helloanvox@gmail.com</a> of any unauthorised use.</p>
         <p class="terms-p">We reserve the right to suspend, restrict, or terminate any Account we reasonably believe has been used in violation of these Terms or Applicable Law.</p>
 
-        <h2 class="terms-h2" id="ts5"><span class="terms-num">05.</span>Acceptable use</h2>
+        <h2 class="terms-h2 rv" id="ts5"><span class="terms-num">05.</span>Acceptable use</h2>
         <p class="terms-p">You agree that you will not, and will not permit any third party to:</p>
         <ul class="terms-ul">
           <li>use the Services in violation of any Applicable Law or third party's rights;</li>
@@ -6450,38 +6454,38 @@ async function handleEnquirySubmit(){
           <li>use any automated means to access the Services in a manner that sends more requests than a human could reasonably produce.</li>
         </ul>
 
-        <h2 class="terms-h2" id="ts6"><span class="terms-num">06.</span>User content and submissions</h2>
+        <h2 class="terms-h2 rv" id="ts6"><span class="terms-num">06.</span>User content and submissions</h2>
         <p class="terms-p">You retain all ownership rights in your User Content. By submitting User Content, you grant Anvoxa a non-exclusive, worldwide, royalty-free licence to host, store, process, and use that User Content solely as necessary to operate and improve the Services and to respond to you.</p>
         <p class="terms-p">You represent and warrant that your User Content is accurate, does not infringe any third party's rights, and does not violate any Applicable Law. We may remove or disable access to any User Content that we reasonably believe violates these Terms.</p>
 
-        <h2 class="terms-h2" id="ts7"><span class="terms-num">07.</span>Intellectual property</h2>
+        <h2 class="terms-h2 rv" id="ts7"><span class="terms-num">07.</span>Intellectual property</h2>
         <p class="terms-p">The Services and all Content (other than User Content), including the Anvoxa name, logo, branding, design, text, graphics, and underlying software, are owned by Anvoxa or its licensors and are protected by intellectual-property laws. No right, title, or interest in or to the Services or Content is transferred to you except as expressly stated in these Terms.</p>
         <p class="terms-p">Anvoxa grants you a limited, non-exclusive, non-transferable, revocable licence to access and use the Services for your own internal or personal purposes. Ownership of intellectual property created under a paid Engagement is governed by the separate written agreement for that Engagement.</p>
 
-        <h2 class="terms-h2" id="ts8"><span class="terms-num">08.</span>Feedback</h2>
+        <h2 class="terms-h2 rv" id="ts8"><span class="terms-num">08.</span>Feedback</h2>
         <p class="terms-p">If you provide us with any suggestions, ideas, or feedback regarding the Services, you grant Anvoxa a perpetual, irrevocable, worldwide, royalty-free licence to use and incorporate that feedback for any purpose, without any obligation or compensation to you.</p>
 
-        <h2 class="terms-h2" id="ts9"><span class="terms-num">09.</span>Third-party services</h2>
+        <h2 class="terms-h2 rv" id="ts9"><span class="terms-num">09.</span>Third-party services</h2>
         <p class="terms-p">The Services integrate with or rely upon third-party services — for example, Google for authentication, and our hosting, database, and communications providers. Your use of any third-party service is subject to that party's own terms and privacy policy. Anvoxa is not responsible for the acts or omissions of any third-party service provider.</p>
 
-        <h2 class="terms-h2" id="ts10"><span class="terms-num">10.</span>Fees and paid engagements</h2>
+        <h2 class="terms-h2 rv" id="ts10"><span class="terms-num">10.</span>Fees and paid engagements</h2>
         <p class="terms-p">Access to the public website is currently provided free of charge. Where the Services include a paid Engagement, the applicable fees, payment schedule, taxes, and refund terms will be set out in the separate written agreement for that Engagement. Unless that agreement states otherwise, fees are exclusive of applicable taxes. We may introduce or change fees for any part of the Services on reasonable prior notice.</p>
 
-        <h2 class="terms-h2" id="ts11"><span class="terms-num">11.</span>Privacy and data protection</h2>
-        <p class="terms-p">Our collection and use of personal data in connection with the Services is described in our <a href="javascript:void(0)" onclick="showPage('privacy')">Privacy Policy</a>, which forms part of these Terms. By using the Services, you acknowledge that you have read the Privacy Policy and consent to the processing of your personal data as described in it. We aim to handle personal data in accordance with applicable data-protection laws, including India's Digital Personal Data Protection Act and, where relevant, the GDPR and CCPA/CPRA.</p>
+        <h2 class="terms-h2 rv" id="ts11"><span class="terms-num">11.</span>Privacy and data protection</h2>
+        <p class="terms-p">Our collection and use of personal data in connection with the Services is described in our <a href="/privacy" onclick="showPage('privacy');return false;">Privacy Policy</a>, which forms part of these Terms. By using the Services, you acknowledge that you have read the Privacy Policy and consent to the processing of your personal data as described in it. We aim to handle personal data in accordance with applicable data-protection laws, including India's Digital Personal Data Protection Act and, where relevant, the GDPR and CCPA/CPRA.</p>
         <p class="terms-p">For any privacy-related question or complaint, you may contact our grievance / data-protection contact at <a href="mailto:helloanvox@gmail.com">helloanvox@gmail.com</a>.</p>
 
-        <h2 class="terms-h2" id="ts12"><span class="terms-num">12.</span>Confidentiality</h2>
+        <h2 class="terms-h2 rv" id="ts12"><span class="terms-num">12.</span>Confidentiality</h2>
         <p class="terms-p">In the course of an Engagement, either party may disclose non-public information that is designated as confidential (<span class="terms-defined">"Confidential Information"</span>). Each party agrees to protect the other's Confidential Information with at least reasonable care, to use it only as necessary to perform under these Terms or the relevant Engagement, and not to disclose it to third parties except as permitted in writing or as required by Applicable Law.</p>
 
-        <h2 class="terms-h2" id="ts13"><span class="terms-num">13.</span>Availability and modifications</h2>
+        <h2 class="terms-h2 rv" id="ts13"><span class="terms-num">13.</span>Availability and modifications</h2>
         <p class="terms-p">Anvoxa is an early-stage studio and the Services are evolving. We may at any time add, modify, suspend, or discontinue any part of the Services without liability. We will use reasonable efforts to keep the Services available but do not warrant that they will be uninterrupted, timely, secure, or error-free.</p>
 
-        <h2 class="terms-h2" id="ts14"><span class="terms-num">14.</span>Disclaimers of warranties</h2>
+        <h2 class="terms-h2 rv" id="ts14"><span class="terms-num">14.</span>Disclaimers of warranties</h2>
         <p class="terms-p terms-legal-em">The Services and all Content are provided "as is" and "as available", without warranties of any kind, whether express, implied, or statutory.</p>
         <p class="terms-p">To the fullest extent permitted by Applicable Law, Anvoxa disclaims all warranties, including any implied warranties of merchantability, fitness for a particular purpose, title, and non-infringement. Some jurisdictions do not allow the exclusion of certain warranties — where that is the case, the exclusions apply only to the extent permitted by Applicable Law.</p>
 
-        <h2 class="terms-h2" id="ts15"><span class="terms-num">15.</span>Limitation of liability</h2>
+        <h2 class="terms-h2 rv" id="ts15"><span class="terms-num">15.</span>Limitation of liability</h2>
         <p class="terms-p terms-legal-em">To the fullest extent permitted by Applicable Law:</p>
         <ul class="terms-ul">
           <li>Anvoxa and its founders, employees, contractors, and affiliates will not be liable for any indirect, incidental, special, consequential, exemplary, or punitive damages, or for any loss of profits, revenue, data, goodwill, or business opportunities; and</li>
@@ -6489,38 +6493,38 @@ async function handleEnquirySubmit(){
         </ul>
         <p class="terms-p">Nothing in these Terms excludes liability that cannot be excluded under Applicable Law, including liability for fraud or for death or personal injury caused by negligence.</p>
 
-        <h2 class="terms-h2" id="ts16"><span class="terms-num">16.</span>Indemnification</h2>
+        <h2 class="terms-h2 rv" id="ts16"><span class="terms-num">16.</span>Indemnification</h2>
         <p class="terms-p">You agree to defend, indemnify, and hold harmless Anvoxa and its founders, employees, contractors, and affiliates from and against any claims, liabilities, damages, losses, and expenses arising out of or in any way connected with: (a) your access to or use of the Services; (b) your User Content; (c) your breach of these Terms; or (d) your violation of any Applicable Law or third-party right.</p>
 
-        <h2 class="terms-h2" id="ts17"><span class="terms-num">17.</span>Term and termination</h2>
+        <h2 class="terms-h2 rv" id="ts17"><span class="terms-num">17.</span>Term and termination</h2>
         <p class="terms-p">These Terms apply from the moment you first access the Services and continue until terminated. You may stop using the Services and close your Account at any time. We may suspend or terminate your access if you breach these Terms, if required by Applicable Law, or if we reasonably determine it is necessary to protect the Services or other users.</p>
         <p class="terms-p">Upon termination, your right to use the Services ends immediately. Provisions that by their nature should survive termination — including Sections 6 to 9 and 12 to 20 — will survive.</p>
 
-        <h2 class="terms-h2" id="ts18"><span class="terms-num">18.</span>Governing law and dispute resolution</h2>
+        <h2 class="terms-h2 rv" id="ts18"><span class="terms-num">18.</span>Governing law and dispute resolution</h2>
         <p class="terms-p">These Terms are governed by and construed in accordance with the laws of India, without regard to its conflict-of-law principles.</p>
         <p class="terms-p">The parties will first attempt in good faith to resolve any dispute informally. If not resolved within thirty (30) days, either party may refer the dispute to arbitration by a sole arbitrator under the Arbitration and Conciliation Act, 1996. The seat and venue of arbitration shall be Kolkata, India, and proceedings shall be conducted in English.</p>
         <p class="terms-p">Subject to any rights you may have under mandatory local law, the courts at Kolkata, India shall have exclusive jurisdiction over any dispute not resolved by arbitration.</p>
 
-        <h2 class="terms-h2" id="ts19"><span class="terms-num">19.</span>Changes to these Terms</h2>
+        <h2 class="terms-h2 rv" id="ts19"><span class="terms-num">19.</span>Changes to these Terms</h2>
         <p class="terms-p">We may revise these Terms from time to time. When we do, we will update the "Last updated" date at the top of this page. Your continued use of the Services after the revised Terms take effect constitutes your acceptance of the changes.</p>
 
-        <h2 class="terms-h2" id="ts20"><span class="terms-num">20.</span>General provisions</h2>
-        <h3 class="terms-h3">Entire agreement</h3>
+        <h2 class="terms-h2 rv" id="ts20"><span class="terms-num">20.</span>General provisions</h2>
+        <h3 class="terms-h3 rv">Entire agreement</h3>
         <p class="terms-p">These Terms, together with our Privacy Policy and any applicable Engagement agreement, constitute the entire agreement between you and Anvoxa regarding the Services.</p>
-        <h3 class="terms-h3">Severability</h3>
+        <h3 class="terms-h3 rv">Severability</h3>
         <p class="terms-p">If any provision of these Terms is held to be invalid or unenforceable, that provision will be limited to the minimum extent necessary, and the remaining provisions will remain in full force and effect.</p>
-        <h3 class="terms-h3">No waiver</h3>
+        <h3 class="terms-h3 rv">No waiver</h3>
         <p class="terms-p">Our failure to enforce any right or provision of these Terms will not be deemed a waiver of that right or provision.</p>
-        <h3 class="terms-h3">Assignment</h3>
+        <h3 class="terms-h3 rv">Assignment</h3>
         <p class="terms-p">You may not assign or transfer these Terms without our prior written consent. We may assign these Terms freely, including in connection with a merger, acquisition, or sale of assets.</p>
-        <h3 class="terms-h3">Force majeure</h3>
+        <h3 class="terms-h3 rv">Force majeure</h3>
         <p class="terms-p">We will not be liable for any failure or delay in performance caused by circumstances beyond our reasonable control.</p>
-        <h3 class="terms-h3">Notices</h3>
+        <h3 class="terms-h3 rv">Notices</h3>
         <p class="terms-p">We may provide notices through the Services or to the contact details associated with your Account. You may send notices to us at <a href="mailto:helloanvox@gmail.com">helloanvox@gmail.com</a>.</p>
 
-        <h2 class="terms-h2" id="ts21"><span class="terms-num">21.</span>Contact us</h2>
+        <h2 class="terms-h2 rv" id="ts21"><span class="terms-num">21.</span>Contact us</h2>
         <p class="terms-p">If you have any questions, concerns, or requests regarding these Terms, please contact us:</p>
-        <div class="terms-contact-box">
+        <div class="terms-contact-box rv">
           <div><strong class="terms-strong">Anvoxa</strong></div>
           <div>Email: <a href="mailto:helloanvox@gmail.com">helloanvox@gmail.com</a></div>
           <div>Phone: <a href="tel:+916291881019">+91 62918 81019</a></div>
@@ -6565,8 +6569,8 @@ async function handleEnquirySubmit(){
       <a href="https://x.com/ANVITON_ai" target="_blank" rel="noopener">Twitter / X</a>
       <a href="https://www.instagram.com/anviton.ai/" target="_blank" rel="noopener">Instagram</a>
       <span class="ft-sep">·</span>
-      <a href="javascript:void(0)" onclick="showPage('terms')">Terms of Service</a>
-      <a href="javascript:void(0)" onclick="showPage('privacy')">Privacy Policy</a>
+      <a href="/terms" onclick="showPage('terms');return false;">Terms of Service</a>
+      <a href="/privacy" onclick="showPage('privacy');return false;">Privacy Policy</a>
     </div>
     <div class="ft-copy">© 2026 Anvoxa. All rights reserved.</div>
   </footer>
@@ -6577,18 +6581,36 @@ async function handleEnquirySubmit(){
 ══════════════════════════════════════════════════ -->
 <div class="page" id="page-privacy">
   <div class="terms-page">
+    <!-- Page-atmosphere decoration (matches EB1A / Contact) -->
+    <div class="pa-nebula" style="top:40px;left:-6%;width:400px;height:400px;background:radial-gradient(circle,rgba(95,240,224,0.08),transparent 70%);"></div>
+    <div class="pa-nebula" style="top:360px;right:-5%;width:340px;height:340px;background:radial-gradient(circle,rgba(255,185,103,0.09),transparent 70%);animation-delay:2.5s;"></div>
+    <div class="pa-grid"></div>
+    <div class="pa-corner tl" style="top:88px;left:20px;"></div>
+    <div class="pa-corner tr" style="top:88px;right:20px;"></div>
+    <div class="pa-dot" style="left:5%;top:160px;width:8px;height:8px;background:#A988FF;color:#A988FF;box-shadow:0 0 12px rgba(169,136,255,.6);"></div>
+    <div class="pa-dot" style="left:6.5%;top:400px;width:6px;height:6px;background:#5FF0E0;color:#5FF0E0;animation-delay:.6s;box-shadow:0 0 10px rgba(95,240,224,.5);"></div>
+    <div class="pa-dot" style="right:5%;top:200px;width:8px;height:8px;background:#FFB967;color:#FFB967;animation-delay:.3s;box-shadow:0 0 12px rgba(255,185,103,.6);"></div>
+    <div class="pa-dot" style="right:6.5%;top:440px;width:6px;height:6px;background:#A988FF;color:#A988FF;animation-delay:1s;box-shadow:0 0 10px rgba(169,136,255,.5);"></div>
+    <div class="pa-card" style="left:3.5%;top:260px;border-color:rgba(255,185,103,0.28);">
+      <div class="pa-card-num" style="color:#FFB967;">9</div>
+      <div class="pa-card-lbl" style="color:#FFB967;">Sections</div>
+    </div>
+    <div class="pa-card f2" style="right:3.5%;top:260px;border-color:rgba(95,240,224,0.28);animation-delay:.8s;">
+      <div class="pa-card-num" style="color:#5FF0E0;">0</div>
+      <div class="pa-card-lbl" style="color:#5FF0E0;">Data sold</div>
+    </div>
     <div class="terms-inner">
       <div class="terms-back" onclick="showPage('home')">← Back to site</div>
       <div class="terms-doc">
-        <div class="terms-eyebrow">Legal</div>
-        <h1 class="terms-h1">Privacy<br>Policy</h1>
-        <div class="terms-meta">Last updated: 2 July 2026 &nbsp;·&nbsp; Effective date: 2 July 2026</div>
+        <div class="terms-eyebrow rv">Legal</div>
+        <h1 class="terms-h1 rv d1">Privacy<br>Policy</h1>
+        <div class="terms-meta rv d2">Last updated: 2 July 2026 &nbsp;·&nbsp; Effective date: 2 July 2026</div>
 
-        <p class="terms-intro">This Privacy Policy explains what personal data <strong class="terms-strong">Anvoxa</strong> (<span class="terms-defined">"we"</span>, <span class="terms-defined">"us"</span>, <span class="terms-defined">"our"</span>) collects when you use our website and services (the <span class="terms-defined">"Services"</span>), how we use it, who we share it with, and the choices you have. It forms part of our <a href="javascript:void(0)" onclick="showPage('terms')" style="color:var(--gold);">Terms of Service</a>.</p>
+        <p class="terms-intro rv d3">This Privacy Policy explains what personal data <strong class="terms-strong">Anvoxa</strong> (<span class="terms-defined">"we"</span>, <span class="terms-defined">"us"</span>, <span class="terms-defined">"our"</span>) collects when you use our website and services (the <span class="terms-defined">"Services"</span>), how we use it, who we share it with, and the choices you have. It forms part of our <a href="/terms" onclick="showPage('terms');return false;" style="color:var(--gold);">Terms of Service</a>.</p>
 
-        <div class="terms-callout"><span class="terms-legal-em">The short version:</span> we collect only what we need to respond to you and run the Services — enquiry details you send us, sign-in details from Google when you create an account, and privacy-friendly usage analytics. We never sell your personal data.</div>
+        <div class="terms-callout rv d4"><span class="terms-legal-em">The short version:</span> we collect only what we need to respond to you and run the Services — enquiry details you send us, sign-in details from Google when you create an account, and privacy-friendly usage analytics. We never sell your personal data.</div>
 
-        <h2 class="terms-h2" id="pp1"><span class="terms-num">01.</span>Data we collect</h2>
+        <h2 class="terms-h2 rv" id="pp1"><span class="terms-num">01.</span>Data we collect</h2>
         <ul class="terms-ul">
           <li><span class="terms-strong">Enquiry details</span> — when you submit the contact form: your name, email, phone (optional), country (optional), the service you're interested in, and anything you write in your message.</li>
           <li><span class="terms-strong">Account details</span> — when you sign in with Google: your name, email address, and profile picture, provided to us through Google Firebase Authentication.</li>
@@ -6596,7 +6618,7 @@ async function handleEnquirySubmit(){
           <li><span class="terms-strong">Usage analytics</span> — we use Umami, a privacy-focused, cookie-less analytics tool that collects aggregated, anonymised page-view data. It does not track you across sites or build a profile of you.</li>
         </ul>
 
-        <h2 class="terms-h2" id="pp2"><span class="terms-num">02.</span>How we use your data</h2>
+        <h2 class="terms-h2 rv" id="pp2"><span class="terms-num">02.</span>How we use your data</h2>
         <ul class="terms-ul">
           <li>To respond to your enquiries and provide the Services you request.</li>
           <li>To create and secure your account, and keep you signed in safely.</li>
@@ -6605,7 +6627,7 @@ async function handleEnquirySubmit(){
         </ul>
         <p class="terms-p">We do not sell your personal data, and we do not use it for third-party advertising.</p>
 
-        <h2 class="terms-h2" id="pp3"><span class="terms-num">03.</span>Where your data lives</h2>
+        <h2 class="terms-h2 rv" id="pp3"><span class="terms-num">03.</span>Where your data lives</h2>
         <p class="terms-p">We rely on a small set of processors to run the Services:</p>
         <ul class="terms-ul">
           <li><span class="terms-strong">Supabase</span> (PostgreSQL database) — stores enquiries, accounts, and session records.</li>
@@ -6616,24 +6638,24 @@ async function handleEnquirySubmit(){
         </ul>
         <p class="terms-p">Each provider processes data under its own terms and safeguards. Data may be processed in regions outside your own; we choose reputable providers with appropriate protections.</p>
 
-        <h2 class="terms-h2" id="pp4"><span class="terms-num">04.</span>How long we keep it</h2>
+        <h2 class="terms-h2 rv" id="pp4"><span class="terms-num">04.</span>How long we keep it</h2>
         <p class="terms-p">Enquiries are kept for as long as needed to handle the conversation and any engagement that follows. Account data is kept while your account is active. Sign-in sessions expire automatically and are revoked when you log out. You can ask us to delete your data at any time (see Section 6).</p>
 
-        <h2 class="terms-h2" id="pp5"><span class="terms-num">05.</span>Cookies &amp; local storage</h2>
+        <h2 class="terms-h2 rv" id="pp5"><span class="terms-num">05.</span>Cookies &amp; local storage</h2>
         <p class="terms-p">We do not use advertising or tracking cookies. When you sign in, authentication tokens are stored in your browser's local storage so you stay signed in; they are removed when you sign out. Our analytics (Umami) is cookie-less.</p>
 
-        <h2 class="terms-h2" id="pp6"><span class="terms-num">06.</span>Your rights</h2>
+        <h2 class="terms-h2 rv" id="pp6"><span class="terms-num">06.</span>Your rights</h2>
         <p class="terms-p">Depending on where you live — including under India's Digital Personal Data Protection Act, the GDPR, and the CCPA/CPRA — you may have the right to access, correct, export, or delete the personal data we hold about you, and to object to or restrict certain processing.</p>
         <p class="terms-p">To exercise any of these rights, email us at <a href="mailto:helloanvox@gmail.com">helloanvox@gmail.com</a>. We respond to verified requests within a reasonable time and never charge for a reasonable request.</p>
 
-        <h2 class="terms-h2" id="pp7"><span class="terms-num">07.</span>Children</h2>
+        <h2 class="terms-h2 rv" id="pp7"><span class="terms-num">07.</span>Children</h2>
         <p class="terms-p">The Services are not directed to children and we do not knowingly collect personal data from anyone under 18. If you believe a minor has provided us with personal data, contact us and we will delete it.</p>
 
-        <h2 class="terms-h2" id="pp8"><span class="terms-num">08.</span>Changes to this policy</h2>
+        <h2 class="terms-h2 rv" id="pp8"><span class="terms-num">08.</span>Changes to this policy</h2>
         <p class="terms-p">If we change this policy, we will update the "Last updated" date above. Material changes will be flagged on the website. Continued use of the Services after a change means you accept the updated policy.</p>
 
-        <h2 class="terms-h2" id="pp9"><span class="terms-num">09.</span>Contact</h2>
-        <div class="terms-contact-box">
+        <h2 class="terms-h2 rv" id="pp9"><span class="terms-num">09.</span>Contact</h2>
+        <div class="terms-contact-box rv">
           <div><strong class="terms-strong">Anvoxa — Grievance &amp; data-protection contact</strong></div>
           <div>Email: <a href="mailto:helloanvox@gmail.com">helloanvox@gmail.com</a></div>
           <div>Phone: <a href="tel:+916291881019">+91 62918 81019</a></div>
@@ -6677,12 +6699,13 @@ async function handleEnquirySubmit(){
       <a href="https://x.com/ANVITON_ai" target="_blank" rel="noopener">Twitter / X</a>
       <a href="https://www.instagram.com/anviton.ai/" target="_blank" rel="noopener">Instagram</a>
       <span class="ft-sep">·</span>
-      <a href="javascript:void(0)" onclick="showPage('terms')">Terms of Service</a>
-      <a href="javascript:void(0)" onclick="showPage('privacy')">Privacy Policy</a>
+      <a href="/terms" onclick="showPage('terms');return false;">Terms of Service</a>
+      <a href="/privacy" onclick="showPage('privacy');return false;">Privacy Policy</a>
     </div>
     <div class="ft-copy">© 2026 Anvoxa. All rights reserved.</div>
   </footer>
 </div>
+</main>
 
 <script>
 /* Emblem pointer-parallax — subtle tilt toward cursor (delight, non-essential) */
