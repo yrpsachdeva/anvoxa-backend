@@ -39,13 +39,13 @@ app.use(cors({
 // Umami analytics beacon, and our own Railway backend.
 const CSP = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' https://www.gstatic.com https://umami-production-6624.up.railway.app https://accounts.google.com",
+  "script-src 'self' 'unsafe-inline' https://www.gstatic.com https://apis.google.com https://umami-production-6624.up.railway.app https://accounts.google.com",
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
   "font-src 'self' https://fonts.gstatic.com",
   "img-src 'self' data: https:",
   "media-src 'self'",
-  "connect-src 'self' https://*.googleapis.com https://*.firebaseapp.com https://umami-production-6624.up.railway.app https://anvoxa-backend-production.up.railway.app",
-  "frame-src https://accounts.google.com https://anvoxa-1f95c.firebaseapp.com",
+  "connect-src 'self' https://*.googleapis.com https://apis.google.com https://*.firebaseapp.com https://umami-production-6624.up.railway.app https://anvoxa-backend-production.up.railway.app",
+  "frame-src 'self' https://accounts.google.com https://anvoxa-1f95c.firebaseapp.com",
   "object-src 'none'",
   "base-uri 'self'",
   "frame-ancestors 'self'",
