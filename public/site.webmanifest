@@ -1,0 +1,23 @@
+{
+  "name": "Anvoxa",
+  "short_name": "Anvoxa",
+  "description": "The voice behind the work — research, visa documentation, AI chatbots, ebooks.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#04030a",
+  "theme_color": "#c9922a",
+  "icons": [
+    {
+      "src": "/favicon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
