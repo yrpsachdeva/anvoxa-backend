@@ -6147,8 +6147,8 @@ body.anv-paused *,body.anv-paused *::before,body.anv-paused *::after{animation-p
 <!-- Firebase loads here (end of body) so it never blocks first paint;
      classic scripts execute in order, so it is ready before the inline
      auth code below runs. -->
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js" async></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js" async></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
 <script>
 /* ── Unified Starfield Engine ──────────────────────
    One canvas, one loop. Three layers:
@@ -7449,7 +7449,11 @@ window.addEventListener('load', function initFirebase(){
     if (!document.getElementById('login-modal').classList.contains('open')) return;
     if (isAdminMode()) adminLogin();
   });
-
+  window.handleNavSignin = handleNavSignin;
+  window.closeLoginModal = closeLoginModal;
+  window.signInWithGoogle = signInWithGoogle;
+  window.adminLogin = adminLogin;
+   
   refreshSigninButton();
   const _params  = new URLSearchParams(window.location.search);
   const _isAdminUrl = window.location.pathname === '/admin-login' || _params.has('admin');
