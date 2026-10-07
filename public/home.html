@@ -2612,6 +2612,46 @@ body.anv-paused *,body.anv-paused *::before,body.anv-paused *::after{animation-p
 
 /* contact page specific */
 .contact-page { position:relative; overflow:hidden; }
+
+/* ═══════════════════════════════════════════════════
+   Partner line on inner-page heroes (chatbot page).
+   Same pill as the home hero's .hero-partner-banner, but
+   sits between the intro text and the buttons, and may
+   wrap onto two lines on a phone.
+═══════════════════════════════════════════════════ */
+.hero-partner-banner.page-partner{
+  display:flex;width:fit-content;max-width:100%;
+  margin:0 0 26px;line-height:1.7;border-radius:18px;
+  animation:rise .7s .34s var(--ease) forwards;
+}
+
+/* ═══════════════════════════════════════════════════
+   Floating hero cards — only where there is room.
+   The .pa-card stat cards are meant to float in the empty
+   margins beside a hero. On laptop and phone widths those
+   margins are narrower than the cards, so they landed on
+   top of the heading and the illustration. They now stay
+   hidden until fitHeroCards() (main script) has checked
+   that they touch nothing.
+═══════════════════════════════════════════════════ */
+.pa-card{visibility:hidden;}
+.pa-card.fits{visibility:visible;}
+
+/* ═══════════════════════════════════════════════════
+   Mobile menu — Visas opens in place.
+   As a floating panel it covered the links under it and
+   ran off the right edge of a phone. In the full-screen
+   menu it now expands inline and pushes Contact down; the
+   menu scrolls if that makes it taller than the screen
+   (auto margins keep it centred when it does fit).
+═══════════════════════════════════════════════════ */
+@media(max-width:900px){
+  .nav-links{justify-content:flex-start;overflow-y:auto;overscroll-behavior:contain;}
+  .nav-links > :first-child{margin-top:auto;}
+  .nav-links > :last-child{margin-bottom:auto;}
+  .nav-dropdown{display:flex;flex-direction:column;align-items:center;width:100%;}
+  .nav-dd-menu{position:static;width:100%;max-width:300px;min-width:0;margin:8px 0 6px;box-shadow:none;}
+}
 </style>
 </head>
 <body>
@@ -2730,6 +2770,9 @@ body.anv-paused *,body.anv-paused *::before,body.anv-paused *::after{animation-p
   <!-- Center pill: links only -->
   <div class="nav-links" id="nav-links">
     <button class="nav-link" data-page="research" onclick="showPage('research')">Research</button>
+    <button class="nav-link" data-page="ebooks" onclick="showPage('ebooks')">Ebooks</button>
+    <button class="nav-link" data-page="chatbot" onclick="showPage('chatbot')">Chatbot</button>
+    <button class="nav-link" data-page="ai-models" onclick="showPage('ai-models')">AI Models</button>
     <div class="nav-dropdown">
       <button class="nav-link nav-dd-btn" id="visas-dd-btn" onclick="toggleDD('visas',this)" aria-haspopup="true" aria-expanded="false">Visas <span class="chv">▾</span></button>
       <div class="nav-dd-menu" id="visas-menu">
@@ -2749,9 +2792,6 @@ body.anv-paused *,body.anv-paused *::before,body.anv-paused *::after{animation-p
         <div class="nav-dd-more">More countries & visas — coming soon</div>
       </div>
     </div>
-    <button class="nav-link" data-page="ebooks" onclick="showPage('ebooks')">Ebooks</button>
-    <button class="nav-link" data-page="chatbot" onclick="showPage('chatbot')">Chatbot & AI</button>
-    <button class="nav-link" data-page="ai-models" onclick="showPage('ai-models')">AI Models</button>
     <button class="nav-link" data-page="contact" onclick="showPage('contact')">Contact</button>
   </div>
 
@@ -5072,6 +5112,7 @@ body.anv-paused *,body.anv-paused *::before,body.anv-paused *::after{animation-p
         <div class="page-hero-kicker">02 · Chatbot & AI Systems</div>
         <h1 class="page-hero-title">Intelligent systems <em>that ship.</em></h1>
         <p class="page-hero-lead">Chatbot, assistant, and automation — built as one system, by one team, under one contract. You own the code, the prompts, the models. No vendor lock-in, no dependency, no ongoing licensing.</p>
+        <div class="hero-partner-banner page-partner"><span class="hero-partner-dot"></span><span>With support from our partners at <strong>AVC Automate</strong></span></div>
         <div class="page-hero-btns">
           <button class="btn-gold" onclick="showPage('contact')">Begin a conversation →</button>
           <button class="btn-outline" onclick="document.getElementById('chatbot-features').scrollIntoView({behavior:'smooth'})">See what we build</button>
@@ -6432,6 +6473,41 @@ function updateNavActive(id){
   if(vdd) vdd.classList.toggle('active', visaPages.includes(id));
 }
 
+/* ── Floating hero cards: only where there is room ──────────────────
+   Each hero has .pa-card stat cards floating in its side margins. They
+   are shown (class "fits") only if none of them comes within GAP_X / GAP_Y
+   of real content — text, buttons, form fields, illustrations. If one
+   card of a hero would collide, the whole set is hidden so the hero
+   never ends up lopsided. Re-checked on page change, on resize, and
+   once the web fonts have loaded (they change how the heading wraps). */
+function fitHeroCards(){
+  const GAP_X = 6;    // px of air kept beside a card
+  const GAP_Y = 14;   // px above/below — the cards bob up and down by about 10px
+  const pg = document.querySelector('.page.active');
+  if(!pg) return;
+  const ownText = el => [...el.childNodes].some(n => n.nodeType===3 && n.textContent.trim());
+  const scopes = new Set();
+  pg.querySelectorAll('.pa-card').forEach(c => scopes.add(c.closest('.page-hero,.subpage-hero,.terms-page') || c.parentElement));
+  scopes.forEach(scope => {
+    const cards = [...scope.querySelectorAll('.pa-card')];
+    const content = [...scope.querySelectorAll('*')].filter(el => {
+      if(el.closest('.pa-card') || el.closest('[aria-hidden="true"]')) return false;
+      if(el.matches('svg')) return !el.matches('.pa-constellation');
+      if(el.closest('svg')) return false;                      // the svg itself is measured
+      return el.matches('img,button,input,select,textarea') || ownText(el);
+    }).map(el => el.getBoundingClientRect()).filter(r => r.width && r.height);
+    const clear = cards.every(card => {
+      const c = card.getBoundingClientRect();
+      return !content.some(r => c.left-GAP_X < r.right && r.left < c.right+GAP_X && c.top-GAP_Y < r.bottom && r.top < c.bottom+GAP_Y);
+    });
+    cards.forEach(card => card.classList.toggle('fits', clear));
+  });
+}
+document.addEventListener('DOMContentLoaded', fitHeroCards);
+window.addEventListener('load', fitHeroCards);
+if(document.fonts && document.fonts.ready) document.fonts.ready.then(fitHeroCards);
+(function(){ let t; window.addEventListener('resize', () => { clearTimeout(t); t = setTimeout(fitHeroCards, 120); }); })();
+
 function renderPage(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   const t=document.getElementById('page-'+id);
@@ -6440,7 +6516,9 @@ function renderPage(id){
   window.scrollTo({top:0,behavior:'instant'});
   document.title=PAGE_TITLES[id]||PAGE_TITLES.home;
   updateNavActive(id);
+  fitHeroCards();
   setTimeout(()=>{initReveal();initTilt();initCounters();if(window.relayoutOrbits)window.relayoutOrbits();},60);
+  setTimeout(fitHeroCards,1500);   // again once the hero text has finished animating in
   const nl=document.getElementById('nav-links');
   if(nl) nl.classList.remove('open');
   const tg=document.querySelector('.nav-toggle');
