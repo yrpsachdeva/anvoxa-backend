@@ -9,9 +9,7 @@ const adminRoutes = require('./admin-routes');
 
 const app = express();
 
-// ── CORS — explicit allowlist only ────────────────────────────
-// Reflecting an arbitrary Origin with credentials enabled would let
-// any website make authenticated calls against this API.
+// ── CORS ──────────────────────────────────────────────────────
 const ALLOWED_ORIGINS = [
   'https://www.anvoxa.com',
   'https://anvoxa.com',
@@ -21,7 +19,6 @@ const ALLOWED_ORIGINS = [
 
 app.use(cors({
   origin(origin, cb) {
-    // No Origin header = same-origin request / curl — nothing to grant.
     if (!origin) return cb(null, false);
     cb(null, ALLOWED_ORIGINS.includes(origin));
   },
@@ -31,20 +28,14 @@ app.use(cors({
 }));
 
 // ── Security headers ──────────────────────────────────────────
-// CSP allows 'unsafe-inline' for script/style because the frontend is
-// large single-file HTML pages with inline <script>/<style> throughout —
-// moving that to external files or per-tag nonces is a separate, bigger
-// refactor. Every external host below is one this app actually calls:
-// Google Fonts, the Firebase SDK + auth popup/redirect domains, the
-// Umami analytics beacon, and our own Railway backend.
 const CSP = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' https://www.gstatic.com https://apis.google.com https://umami-production-6624.up.railway.app https://accounts.google.com",
+  "script-src 'self' 'unsafe-inline' https://www.gstatic.com https://apis.google.com https://umami-production-6624.up.railway.app https://accounts.google.com https://cdn.jsdelivr.net https://unpkg.com https://cdnjs.cloudflare.com",
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
   "font-src 'self' https://fonts.gstatic.com",
   "img-src 'self' data: https:",
   "media-src 'self'",
-  "connect-src 'self' https://*.googleapis.com https://apis.google.com https://*.firebaseapp.com https://umami-production-6624.up.railway.app https://anvoxa-backend-production.up.railway.app",
+  "connect-src 'self' https://*.googleapis.com https://apis.google.com https://*.firebaseapp.com https://umami-production-6624.up.railway.app https://anvoxa-backend-production.up.railway.app https://*.supabase.co",
   "frame-src 'self' https://accounts.google.com https://anvoxa-1f95c.firebaseapp.com",
   "object-src 'none'",
   "base-uri 'self'",
@@ -57,9 +48,6 @@ app.use((req, res, next) => {
   res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
   res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
   res.setHeader('Content-Security-Policy', CSP);
-  // allow-popups (not plain same-origin) — Firebase's signInWithPopup opens
-  // a popup that talks back to this window; strict same-origin COOP would
-  // sever that channel and silently break Google sign-in.
   res.setHeader('Cross-Origin-Opener-Policy', 'same-origin-allow-popups');
   if (req.secure || req.headers['x-forwarded-proto'] === 'https') {
     res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
@@ -101,12 +89,12 @@ app.get('/__/auth/iframe',  send('home.html'));
 app.get('/health', (req, res) =>
   res.json({ status: 'ok', service: 'anvoxa-backend' }));
 
-// ── Static assets — cache immutable media, never cache HTML ───
+// ── Static assets ─────────────────────────────────────────────
 app.use(express.static(path.join(__dirname, 'public'), {
   index: false,
   setHeaders(res, filePath) {
     if (/\.(png|jpe?g|webp|svg|mp4|woff2?)$/i.test(filePath)) {
-      res.setHeader('Cache-Control', 'public, max-age=604800');       // 7 days
+      res.setHeader('Cache-Control', 'public, max-age=604800');
     } else if (/\.html$/i.test(filePath)) {
       res.setHeader('Cache-Control', 'no-cache');
     }
@@ -119,7 +107,7 @@ app.use((err, req, res, _next) => {
   res.status(500).json({ error: 'Internal server error' });
 });
 
-// 404 catch-all (must be last) — starry page for browsers, JSON for APIs
+// 404 catch-all
 app.use((req, res) => {
   if (req.accepts(['html', 'json']) === 'html') {
     return res.status(404).sendFile(path.join(__dirname, 'public', '404.html'));

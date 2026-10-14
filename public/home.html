@@ -46,7 +46,11 @@
 <link rel="dns-prefetch" href="https://www.gstatic.com">
 <link rel="dns-prefetch" href="https://identitytoolkit.googleapis.com">
 <link rel="dns-prefetch" href="https://umami-production-6624.up.railway.app">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%2304030a'/%3E%3Ccircle cx='50' cy='50' r='43' fill='none' stroke='%23c9922a' stroke-width='2.5'/%3E%3Ctext x='50' y='67' font-family='Georgia,serif' font-size='50' font-weight='700' text-anchor='middle' fill='%23FFB967'%3EA%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png"/>
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
+<link rel="manifest" href="/site.webmanifest"/>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@400;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <script defer src="https://umami-production-6624.up.railway.app/script.js" data-website-id="767bf697-cec4-4594-b638-daa06f06729c"></script>
 
@@ -2187,6 +2191,158 @@ svg.u-illus{
   .eq-row { grid-template-columns: 1fr; }
 }
 
+/* ══ Book a Consultation — "Consult With Us" section ══ */
+.consult-section{
+  padding:100px 0;background:transparent;position:relative;overflow:hidden;
+}
+.consult-section::before{
+  content:'';position:absolute;left:50%;top:8%;transform:translateX(-50%);
+  width:900px;max-width:130%;height:500px;
+  background:radial-gradient(circle at 50% 30%,rgba(95,240,224,0.07),transparent 62%);
+  pointer-events:none;z-index:0;
+}
+.consult-grid{
+  display:grid;grid-template-columns:1fr 1.15fr;gap:60px;align-items:start;position:relative;z-index:1;
+}
+.consult-form-card{
+  background:rgba(10,8,26,.6);border:1px solid var(--line);border-radius:20px;
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);padding:36px;
+}
+.consult-form-card h3{
+  font-family:var(--body);font-size:28px;font-weight:700;
+  color:var(--cream-lt);margin-bottom:6px;letter-spacing:-.5px;line-height:1.15;
+}
+.consult-form-card .cs-sub{
+  font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;
+  color:rgba(255,185,103,.55);margin-bottom:26px;
+}
+/* Slot grid */
+.cs-slot-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:0;
+}
+.cs-slot{
+  padding:10px 6px;border:1px solid rgba(255,185,103,.14);border-radius:10px;
+  background:rgba(5,4,14,.45);text-align:center;cursor:pointer;
+  transition:border-color .2s,background .2s,box-shadow .2s;
+}
+.cs-slot:hover{border-color:rgba(255,185,103,.4);background:rgba(255,185,103,.06);}
+.cs-slot.selected{
+  border-color:var(--gold);background:rgba(255,185,103,.1);
+  box-shadow:0 0 18px rgba(255,185,103,.18);
+}
+.cs-slot.unavailable{opacity:.35;pointer-events:none;}
+.cs-slot-time{
+  font-family:var(--mono);font-size:11px;letter-spacing:1.2px;color:var(--cream-lt);
+  font-weight:600;margin-bottom:3px;
+}
+.cs-slot-tz{
+  font-family:var(--mono);font-size:9px;letter-spacing:.8px;
+  color:var(--cream-soft);text-transform:uppercase;
+}
+/* Timezone pill */
+.cs-tz-row{
+  display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap;
+}
+.cs-tz-label{
+  font-family:var(--mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--cream-soft);
+}
+.cs-tz-select{
+  font-family:var(--mono);font-size:11px;letter-spacing:.8px;
+  background:rgba(5,4,14,.6);border:1px solid rgba(255,185,103,.2);
+  border-radius:8px;padding:6px 30px 6px 10px;color:var(--cream-lt);
+  outline:none;appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7' viewBox='0 0 10 7' fill='none'%3E%3Cpath d='M1 1L5 5.5L9 1' stroke='%23ffb967' stroke-width='1.4' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 10px center;cursor:pointer;
+}
+.cs-local-time{
+  font-family:var(--mono);font-size:9px;letter-spacing:1px;
+  color:rgba(95,240,224,.6);margin-left:auto;
+}
+/* Service chips */
+.cs-service-grid{
+  display:flex;gap:7px;flex-wrap:wrap;margin-bottom:0;
+}
+.cs-service-chip{
+  padding:7px 14px;border:1px solid rgba(255,185,103,.18);border-radius:99px;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:1.2px;text-transform:uppercase;
+  color:var(--cream-soft);background:transparent;cursor:pointer;
+  transition:all .2s;
+}
+.cs-service-chip:hover{border-color:var(--gold);color:var(--gold);}
+.cs-service-chip.selected{
+  border-color:var(--gold);color:#04030a;background:var(--gold);
+}
+/* Day selector */
+.cs-day-row{display:flex;gap:6px;margin-bottom:6px;overflow-x:auto;padding-bottom:2px;}
+.cs-day{
+  flex-shrink:0;width:52px;padding:8px 4px;border:1px solid rgba(255,185,103,.13);
+  border-radius:10px;text-align:center;cursor:pointer;
+  transition:all .2s;background:rgba(5,4,14,.4);
+}
+.cs-day.today{border-color:rgba(95,240,224,.35);}
+.cs-day:hover:not(.cs-day-disabled){border-color:rgba(255,185,103,.35);background:rgba(255,185,103,.05);}
+.cs-day.selected-day{border-color:var(--gold);background:rgba(255,185,103,.1);}
+.cs-day-disabled{opacity:.3;pointer-events:none;}
+.cs-day-name{font-family:var(--mono);font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--cream-soft);}
+.cs-day-num{font-family:var(--mono);font-size:16px;font-weight:700;color:var(--cream-lt);line-height:1;}
+.cs-day-month{font-family:var(--mono);font-size:8px;letter-spacing:.8px;color:rgba(255,185,103,.5);}
+/* Submit */
+.cs-submit{
+  width:100%;padding:16px;
+  background:var(--gold);color:#04030a;
+  font-family:var(--mono);font-size:10px;letter-spacing:2.5px;
+  text-transform:uppercase;font-weight:700;
+  border:none;border-radius:10px;cursor:pointer;
+  transition:background .25s,transform .2s,box-shadow .25s;
+  margin-top:8px;
+}
+.cs-submit:hover{background:var(--gold-2);transform:translateY(-2px);box-shadow:0 8px 32px rgba(255,185,103,.3);}
+.cs-submit:disabled{opacity:.5;pointer-events:none;}
+/* Divider between forms */
+.contact-divider{
+  margin:60px 0;border:none;border-top:1px solid var(--line);
+  position:relative;
+}
+.contact-divider::after{
+  content:'or';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--cream-faint);background:var(--bg,#06050f);padding:0 14px;
+}
+/* Info side */
+.consult-info-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(95,240,224,.07);border:1px solid rgba(95,240,224,.2);
+  border-radius:99px;padding:6px 14px;
+  font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;
+  color:rgba(95,240,224,.7);margin-bottom:22px;
+}
+.consult-feature{
+  display:flex;align-items:flex-start;gap:14px;padding:16px 0;
+  border-bottom:1px solid rgba(255,255,255,.05);
+}
+.consult-feature:last-child{border-bottom:none;}
+.consult-feature-icon{
+  width:36px;height:36px;background:rgba(255,185,103,.08);
+  border:1px solid rgba(255,185,103,.15);border-radius:10px;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.consult-feature-icon svg{width:16px;height:16px;stroke:var(--gold);stroke-width:1.8;fill:none;}
+.consult-feature-title{
+  font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--cream-lt);margin-bottom:5px;
+}
+.consult-feature-desc{font-size:13px;color:var(--cream-soft);font-weight:300;line-height:1.65;}
+.cs-timezone-note{
+  font-family:var(--mono);font-size:9px;letter-spacing:1px;
+  color:var(--cream-faint);margin-top:10px;text-align:center;
+}
+@media(max-width:860px){
+  .consult-grid{grid-template-columns:1fr;gap:40px;}
+}
+@media(max-width:580px){
+  .cs-slot-grid{grid-template-columns:repeat(2,1fr);}
+}
 
 /* ══ Anvoxa Logo ══ */
 .anvoxa-logo-svg {
@@ -2612,46 +2768,6 @@ body.anv-paused *,body.anv-paused *::before,body.anv-paused *::after{animation-p
 
 /* contact page specific */
 .contact-page { position:relative; overflow:hidden; }
-
-/* ═══════════════════════════════════════════════════
-   Partner line on inner-page heroes (chatbot page).
-   Same pill as the home hero's .hero-partner-banner, but
-   sits between the intro text and the buttons, and may
-   wrap onto two lines on a phone.
-═══════════════════════════════════════════════════ */
-.hero-partner-banner.page-partner{
-  display:flex;width:fit-content;max-width:100%;
-  margin:0 0 26px;line-height:1.7;border-radius:18px;
-  animation:rise .7s .34s var(--ease) forwards;
-}
-
-/* ═══════════════════════════════════════════════════
-   Floating hero cards — only where there is room.
-   The .pa-card stat cards are meant to float in the empty
-   margins beside a hero. On laptop and phone widths those
-   margins are narrower than the cards, so they landed on
-   top of the heading and the illustration. They now stay
-   hidden until fitHeroCards() (main script) has checked
-   that they touch nothing.
-═══════════════════════════════════════════════════ */
-.pa-card{visibility:hidden;}
-.pa-card.fits{visibility:visible;}
-
-/* ═══════════════════════════════════════════════════
-   Mobile menu — Visas opens in place.
-   As a floating panel it covered the links under it and
-   ran off the right edge of a phone. In the full-screen
-   menu it now expands inline and pushes Contact down; the
-   menu scrolls if that makes it taller than the screen
-   (auto margins keep it centred when it does fit).
-═══════════════════════════════════════════════════ */
-@media(max-width:900px){
-  .nav-links{justify-content:flex-start;overflow-y:auto;overscroll-behavior:contain;}
-  .nav-links > :first-child{margin-top:auto;}
-  .nav-links > :last-child{margin-bottom:auto;}
-  .nav-dropdown{display:flex;flex-direction:column;align-items:center;width:100%;}
-  .nav-dd-menu{position:static;width:100%;max-width:300px;min-width:0;margin:8px 0 6px;box-shadow:none;}
-}
 </style>
 </head>
 <body>
@@ -2690,7 +2806,7 @@ body.anv-paused *,body.anv-paused *::before,body.anv-paused *::after{animation-p
       <div class="admin-form" id="admin-form">
         <div class="field-group">
           <label class="field-lbl" for="admin-email">Email address</label>
-          <input class="field-input" type="email" id="admin-email" placeholder="admin@anvoxa.com" autocomplete="email" />
+          <input class="field-input" type="email" id="admin-email" placeholder="Your email address" autocomplete="email" />
         </div>
         <div class="field-group">
           <label class="field-lbl" for="admin-password">Password</label>
@@ -2704,7 +2820,7 @@ body.anv-paused *,body.anv-paused *::before,body.anv-paused *::after{animation-p
 </div>
 
 <!-- WhatsApp — fastest channel for most clients -->
-<a class="wa-float" href="https://wa.me/916291881019?text=Hi%20Anvoxa%20%E2%80%94%20I%27d%20like%20to%20discuss%20a%20project."
+<a class="wa-float" href="https://wa.me/916291881019?text=Hi%20Anvoxa!%20%F0%9F%91%8B%0A%0AI%27d%20like%20to%20enquire%20about%20your%20services.%0A%0A*Please%20fill%20in%20the%20details%20below%3A*%0A%0A%F0%9F%93%9D%20*Name%3A*%20%0A%F0%9F%93%A7%20*Email%3A*%20%0A%F0%9F%9B%A0%20*Service%20I%20need%3A*%20(Research%20%2F%20AI-Chatbot%20%2F%20Ebook%20%2F%20EB-1A%20%2F%20Other)%0A%F0%9F%93%8B%20*Brief%20description%3A*%20%0A%0ASend%20this%20and%20we%27ll%20get%20back%20within%202%20working%20days!"
    target="_blank" rel="noopener" aria-label="Chat with Anvoxa on WhatsApp" data-umami-event="whatsapp-float">
   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.297-.497.1-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
   <span class="wa-tip">Chat on WhatsApp</span>
@@ -2770,9 +2886,6 @@ body.anv-paused *,body.anv-paused *::before,body.anv-paused *::after{animation-p
   <!-- Center pill: links only -->
   <div class="nav-links" id="nav-links">
     <button class="nav-link" data-page="research" onclick="showPage('research')">Research</button>
-    <button class="nav-link" data-page="ebooks" onclick="showPage('ebooks')">Ebooks</button>
-    <button class="nav-link" data-page="chatbot" onclick="showPage('chatbot')">Chatbot</button>
-    <button class="nav-link" data-page="ai-models" onclick="showPage('ai-models')">AI Models</button>
     <div class="nav-dropdown">
       <button class="nav-link nav-dd-btn" id="visas-dd-btn" onclick="toggleDD('visas',this)" aria-haspopup="true" aria-expanded="false">Visas <span class="chv">▾</span></button>
       <div class="nav-dd-menu" id="visas-menu">
@@ -2792,6 +2905,9 @@ body.anv-paused *,body.anv-paused *::before,body.anv-paused *::after{animation-p
         <div class="nav-dd-more">More countries & visas — coming soon</div>
       </div>
     </div>
+    <button class="nav-link" data-page="ebooks" onclick="showPage('ebooks')">Ebooks</button>
+    <button class="nav-link" data-page="chatbot" onclick="showPage('chatbot')">Chatbot & AI</button>
+    <button class="nav-link" data-page="ai-models" onclick="showPage('ai-models')">AI Models</button>
     <button class="nav-link" data-page="contact" onclick="showPage('contact')">Contact</button>
   </div>
 
@@ -4030,10 +4146,7 @@ body.anv-paused *,body.anv-paused *::before,body.anv-paused *::after{animation-p
       <div class="pa-card-num" style="color:#FFB967;font-size:15px;">EB‑1A</div>
       <div class="pa-card-lbl" style="color:#FFB967;">Extraordinary ability</div>
     </div>
-    <div class="pa-card f2" style="right:3.5%;top:30%;border-color:rgba(95,240,224,0.28);animation-delay:.8s;">
-      <div class="pa-card-num" style="color:#5FF0E0;font-size:15px;">10</div>
-      <div class="pa-card-lbl" style="color:#5FF0E0;">USCIS criteria</div>
-    </div>
+    
     <div class="pa-corner tl" style="top:20px;left:20px;"></div>
     <div class="pa-corner tr" style="top:20px;right:20px;"></div>
     <div class="pa-corner bl" style="bottom:20px;left:20px;"></div>
@@ -4085,7 +4198,7 @@ body.anv-paused *,body.anv-paused *::before,body.anv-paused *::after{animation-p
 
   <div style="height:1px;background:linear-gradient(90deg,transparent,rgba(255,185,103,.15),rgba(123,95,255,.15),transparent);margin:0;"></div>
 
-  <section class="content-sec">
+  <section class="content-sec" id="eb1a-criteria">
     <div class="wrap">
       <div class="eyebrow rv">What we build for you</div>
       <h2 class="sec-title rv d1">The ten criteria, <em>built strong.</em></h2>
@@ -5112,7 +5225,6 @@ body.anv-paused *,body.anv-paused *::before,body.anv-paused *::after{animation-p
         <div class="page-hero-kicker">02 · Chatbot & AI Systems</div>
         <h1 class="page-hero-title">Intelligent systems <em>that ship.</em></h1>
         <p class="page-hero-lead">Chatbot, assistant, and automation — built as one system, by one team, under one contract. You own the code, the prompts, the models. No vendor lock-in, no dependency, no ongoing licensing.</p>
-        <div class="hero-partner-banner page-partner"><span class="hero-partner-dot"></span><span>With support from our partners at <strong>AVC Automate</strong></span></div>
         <div class="page-hero-btns">
           <button class="btn-gold" onclick="showPage('contact')">Begin a conversation →</button>
           <button class="btn-outline" onclick="document.getElementById('chatbot-features').scrollIntoView({behavior:'smooth'})">See what we build</button>
@@ -5937,7 +6049,7 @@ body.anv-paused *,body.anv-paused *::before,body.anv-paused *::after{animation-p
           <p class="contact-detail rv d2"><a href="mailto:hello@anvoxa.com" style="color:var(--gold);">hello@anvoxa.com</a></p>
           <p class="contact-detail rv d3"><strong>+91 62918 81019</strong></p>
 
-          <a href="https://wa.me/916291881019?text=Hi%20Anvoxa%20%E2%80%94%20I%27d%20like%20to%20discuss%20a%20project."
+          <a href="https://wa.me/916291881019?text=Hi%20Anvoxa!%20%F0%9F%91%8B%0A%0AI%27d%20like%20to%20enquire%20about%20your%20services.%0A%0A*Please%20fill%20in%20the%20details%20below%3A*%0A%0A%F0%9F%93%9D%20*Name%3A*%20%0A%F0%9F%93%A7%20*Email%3A*%20%0A%F0%9F%9B%A0%20*Service%20I%20need%3A*%20(Research%20%2F%20AI-Chatbot%20%2F%20Ebook%20%2F%20EB-1A%20%2F%20Other)%0A%F0%9F%93%8B%20*Brief%20description%3A*%20%0A%0ASend%20this%20and%20we%27ll%20get%20back%20within%202%20working%20days!"
              target="_blank" rel="noopener" class="contact-linkedin-cta rv d4" data-umami-event="whatsapp-contact"
              style="background:rgba(37,211,102,.08);border-color:rgba(37,211,102,.25);">
             <div class="linkedin-icon" style="background:#25D366;"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.297-.497.1-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div>
@@ -6134,6 +6246,134 @@ body.anv-paused *,body.anv-paused *::before,body.anv-paused *::after{animation-p
     </div>
   </section>
 
+  <!-- ══ CONSULT WITH US — Book a Slot ══ -->
+  <section class="consult-section rv" id="consult-section">
+    <div class="wrap">
+      <div class="consult-grid">
+
+        <!-- LEFT: Info -->
+        <div>
+          <div class="consult-info-badge rv">
+            <svg viewBox="0 0 24 24" width="12" height="12" style="fill:none;stroke:rgba(95,240,224,.7);stroke-width:2;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Free 30-min consultation
+          </div>
+          <div class="eyebrow rv">Book a Consultation</div>
+          <h2 class="sec-title rv d1" style="font-size:clamp(30px,4.5vw,54px);margin-bottom:14px;">Consult <em>with us</em> —<br>pick your slot.</h2>
+          <p class="sec-lead rv d2" style="margin-bottom:36px;">Pick a time that works for you — anywhere in the world. We'll send a Google Meet link to your inbox before the call. No account, no downloads.</p>
+
+          <div class="consult-feature rv d2">
+            <div class="consult-feature-icon">
+              <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+            </div>
+            <div>
+              <div class="consult-feature-title">Honest, no-pressure</div>
+              <div class="consult-feature-desc">We spend 30 minutes understanding your goals — no pitch, no template. Just an honest assessment of what's possible and how we'd approach it.</div>
+            </div>
+          </div>
+
+          <div class="consult-feature rv d3">
+            <div class="consult-feature-icon">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div>
+              <div class="consult-feature-title">Works across every time zone</div>
+              <div class="consult-feature-desc">Choose your local time zone and see slots in your own time. Our admin sees all bookings in IST so the team can coordinate seamlessly.</div>
+            </div>
+          </div>
+
+          <div class="consult-feature rv d4">
+            <div class="consult-feature-icon">
+              <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+              <div class="consult-feature-title">Meeting link by email</div>
+              <div class="consult-feature-desc">Once your slot is confirmed we email a Google Meet link. No signup required from your end.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: Booking form -->
+        <div class="consult-form-card rv d1">
+          <h3>Book a Slot</h3>
+          <div class="cs-sub">Schedule a free 30-min consultation</div>
+
+          <!-- Timezone selector -->
+          <div class="eq-row full" style="margin-bottom:16px;">
+            <div class="eq-group">
+              <label class="eq-label">Your Time Zone</label>
+              <div class="cs-tz-row">
+                <select class="cs-tz-select" id="cs-tz" onchange="csRenderDays()">
+                  <!-- populated by JS -->
+                </select>
+                <span class="cs-local-time" id="cs-local-now"></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Day picker (next 7 days) -->
+          <div class="eq-row full" style="margin-bottom:16px;">
+            <div class="eq-group">
+              <label class="eq-label">Select a Day <span class="req">*</span></label>
+              <div class="cs-day-row" id="cs-day-row"></div>
+            </div>
+          </div>
+
+          <!-- Available slots -->
+          <div class="eq-row full" style="margin-bottom:20px;">
+            <div class="eq-group">
+              <label class="eq-label">Available Slots <span class="req">*</span></label>
+              <div class="cs-slot-grid" id="cs-slot-grid"></div>
+              <div class="cs-timezone-note" id="cs-tz-note"></div>
+            </div>
+          </div>
+
+          <!-- Service -->
+          <div class="eq-row full" style="margin-bottom:16px;">
+            <div class="eq-group">
+              <label class="eq-label">What would you like to discuss? <span class="req">*</span></label>
+              <div class="cs-service-grid" id="cs-service-grid">
+                <button type="button" class="cs-service-chip" onclick="csSelectService(this,'AI / Chatbot Solutions')">AI / Chatbot</button>
+                <button type="button" class="cs-service-chip" onclick="csSelectService(this,'Research &amp; Publishing')">Research</button>
+                <button type="button" class="cs-service-chip" onclick="csSelectService(this,'Ebook Production')">Ebook</button>
+                <button type="button" class="cs-service-chip" onclick="csSelectService(this,'Immigration (EB-1A / NIW)')">EB-1A / NIW</button>
+                <button type="button" class="cs-service-chip" onclick="csSelectService(this,'General Enquiry')">General</button>
+                <button type="button" class="cs-service-chip" onclick="csSelectService(this,'Other')">Other</button>
+              </div>
+              <input type="hidden" id="cs-service-val"/>
+            </div>
+          </div>
+
+          <!-- Name + Email -->
+          <div class="eq-row" style="margin-bottom:16px;">
+            <div class="eq-group">
+              <label class="eq-label" for="cs-name">Full Name <span class="req">*</span></label>
+              <input class="eq-input" type="text" id="cs-name" placeholder="Dr. Jane Smith" autocomplete="name"/>
+            </div>
+            <div class="eq-group">
+              <label class="eq-label" for="cs-email">Email <span class="req">*</span></label>
+              <input class="eq-input" type="email" id="cs-email" placeholder="you@example.com" autocomplete="email"/>
+            </div>
+          </div>
+
+          <!-- Notes -->
+          <div class="eq-row full" style="margin-bottom:20px;">
+            <div class="eq-group">
+              <label class="eq-label" for="cs-notes">Anything to share beforehand? <span class="opt">(optional)</span></label>
+              <textarea class="eq-textarea" id="cs-notes" placeholder="Project stage, goals, specific questions — helps us prepare." style="min-height:80px;"></textarea>
+            </div>
+          </div>
+
+          <button class="cs-submit" id="cs-submit-btn" type="button" onclick="handleConsultSubmit()" data-umami-event="consult-book">Book Consultation →</button>
+          <div id="cs-success" role="status" style="display:none;margin-top:14px;padding:14px 16px;background:rgba(95,240,224,.07);border:1px solid rgba(95,240,224,.25);border-radius:10px;font-family:var(--mono);font-size:9.5px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(95,240,224,.9);text-align:center;">
+            ✓ Slot requested — check your inbox for a confirmation and meeting link.
+          </div>
+          <div id="cs-error" role="alert" style="display:none;margin-top:14px;padding:14px 16px;background:rgba(255,100,100,.08);border:1px solid rgba(255,100,100,.3);border-radius:10px;font-family:var(--mono);font-size:9.5px;letter-spacing:1.5px;text-transform:uppercase;color:#ff8a8a;text-align:center;"></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <footer>
     <div class="ft-brand" style="display:flex;flex-direction:column;align-items:center;gap:0;">
       <svg style="width:56px;height:56px;display:block;margin:0 auto 6px;" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-label="Anvoxa">
@@ -6184,8 +6424,8 @@ body.anv-paused *,body.anv-paused *::before,body.anv-paused *::after{animation-p
 <!-- Firebase loads here (end of body) so it never blocks first paint;
      classic scripts execute in order, so it is ready before the inline
      auth code below runs. -->
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js" async></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js" async></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
 <script>
 /* ── Unified Starfield Engine ──────────────────────
    One canvas, one loop. Three layers:
@@ -6473,41 +6713,6 @@ function updateNavActive(id){
   if(vdd) vdd.classList.toggle('active', visaPages.includes(id));
 }
 
-/* ── Floating hero cards: only where there is room ──────────────────
-   Each hero has .pa-card stat cards floating in its side margins. They
-   are shown (class "fits") only if none of them comes within GAP_X / GAP_Y
-   of real content — text, buttons, form fields, illustrations. If one
-   card of a hero would collide, the whole set is hidden so the hero
-   never ends up lopsided. Re-checked on page change, on resize, and
-   once the web fonts have loaded (they change how the heading wraps). */
-function fitHeroCards(){
-  const GAP_X = 6;    // px of air kept beside a card
-  const GAP_Y = 14;   // px above/below — the cards bob up and down by about 10px
-  const pg = document.querySelector('.page.active');
-  if(!pg) return;
-  const ownText = el => [...el.childNodes].some(n => n.nodeType===3 && n.textContent.trim());
-  const scopes = new Set();
-  pg.querySelectorAll('.pa-card').forEach(c => scopes.add(c.closest('.page-hero,.subpage-hero,.terms-page') || c.parentElement));
-  scopes.forEach(scope => {
-    const cards = [...scope.querySelectorAll('.pa-card')];
-    const content = [...scope.querySelectorAll('*')].filter(el => {
-      if(el.closest('.pa-card') || el.closest('[aria-hidden="true"]')) return false;
-      if(el.matches('svg')) return !el.matches('.pa-constellation');
-      if(el.closest('svg')) return false;                      // the svg itself is measured
-      return el.matches('img,button,input,select,textarea') || ownText(el);
-    }).map(el => el.getBoundingClientRect()).filter(r => r.width && r.height);
-    const clear = cards.every(card => {
-      const c = card.getBoundingClientRect();
-      return !content.some(r => c.left-GAP_X < r.right && r.left < c.right+GAP_X && c.top-GAP_Y < r.bottom && r.top < c.bottom+GAP_Y);
-    });
-    cards.forEach(card => card.classList.toggle('fits', clear));
-  });
-}
-document.addEventListener('DOMContentLoaded', fitHeroCards);
-window.addEventListener('load', fitHeroCards);
-if(document.fonts && document.fonts.ready) document.fonts.ready.then(fitHeroCards);
-(function(){ let t; window.addEventListener('resize', () => { clearTimeout(t); t = setTimeout(fitHeroCards, 120); }); })();
-
 function renderPage(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   const t=document.getElementById('page-'+id);
@@ -6516,9 +6721,7 @@ function renderPage(id){
   window.scrollTo({top:0,behavior:'instant'});
   document.title=PAGE_TITLES[id]||PAGE_TITLES.home;
   updateNavActive(id);
-  fitHeroCards();
   setTimeout(()=>{initReveal();initTilt();initCounters();if(window.relayoutOrbits)window.relayoutOrbits();},60);
-  setTimeout(fitHeroCards,1500);   // again once the hero text has finished animating in
   const nl=document.getElementById('nav-links');
   if(nl) nl.classList.remove('open');
   const tg=document.querySelector('.nav-toggle');
@@ -7296,6 +7499,271 @@ function switchService(val){
   });
 }
 
+/* ══════════════════════════════════════════════════════
+   CONSULT WITH US — Booking Widget JS
+   All times the user sees are in their local tz.
+   The payload sent to the backend always includes:
+     slot_utc   (ISO string)  — ground truth
+     slot_ist   (formatted)   — for admin display in IST
+     user_tz    (IANA string) — what tz the user picked
+   ══════════════════════════════════════════════════════ */
+(function(){
+  /* ─── config ─────────────────────────────────────── */
+  // Slots available each day: 09:00 – 18:00 IST, on the hour.
+  // We store as IST hours; we'll convert to user tz for display.
+  const SLOT_HOURS_IST = [9,10,11,12,14,15,16,17]; // skip 13 (lunch)
+
+  /* ─── Popular timezones (label → IANA) ───────────── */
+  const TZ_OPTIONS = [
+    ['Detect automatically', ''],
+    ['IST — India (UTC+5:30)', 'Asia/Kolkata'],
+    ['UTC — Universal', 'UTC'],
+    ['GMT — London', 'Europe/London'],
+    ['CET — Central Europe', 'Europe/Paris'],
+    ['EET — Eastern Europe', 'Europe/Athens'],
+    ['GST — Gulf (UAE, Oman)', 'Asia/Dubai'],
+    ['SGT — Singapore / KL', 'Asia/Singapore'],
+    ['JST — Japan', 'Asia/Tokyo'],
+    ['AEST — Sydney', 'Australia/Sydney'],
+    ['EST — New York', 'America/New_York'],
+    ['CST — Chicago', 'America/Chicago'],
+    ['MST — Denver', 'America/Denver'],
+    ['PST — Los Angeles', 'America/Los_Angeles'],
+    ['BRT — Brazil / São Paulo', 'America/Sao_Paulo'],
+    ['CAT — Nairobi', 'Africa/Nairobi'],
+    ['WAT — Lagos', 'Africa/Lagos'],
+    ['PKT — Pakistan', 'Asia/Karachi'],
+    ['BST — Bangladesh', 'Asia/Dhaka'],
+    ['ICT — Bangkok', 'Asia/Bangkok'],
+    ['KST — South Korea', 'Asia/Seoul'],
+    ['CST — Shanghai / Beijing', 'Asia/Shanghai'],
+    ['HKT — Hong Kong', 'Asia/Hong_Kong'],
+    ['NZT — New Zealand', 'Pacific/Auckland'],
+  ];
+
+  let selectedDay  = null; // Date object (midnight local)
+  let selectedSlot = null; // ISO UTC string
+  let userTz       = '';
+
+  /* ─── Populate TZ select ──────────────────────────── */
+  function initTzSelect(){
+    const sel = document.getElementById('cs-tz');
+    if (!sel) return;
+    TZ_OPTIONS.forEach(([label, iana]) => {
+      const o = document.createElement('option');
+      o.value = iana;
+      o.textContent = label;
+      sel.appendChild(o);
+    });
+    // Try to pre-select based on browser tz
+    try {
+      const bTz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      const match = TZ_OPTIONS.find(([,iana]) => iana === bTz);
+      if (match) sel.value = bTz;
+    } catch(e){}
+  }
+
+  /* ─── Format a Date in a given tz ────────────────── */
+  function fmtInTz(date, tz, opts){
+    try {
+      return new Intl.DateTimeFormat('en-GB', { timeZone: tz || undefined, ...opts }).format(date);
+    } catch(e) {
+      return new Intl.DateTimeFormat('en-GB', opts).format(date);
+    }
+  }
+
+  /* ─── Get effective tz (from select, or browser) ─── */
+  function getEffectiveTz(){
+    const sel = document.getElementById('cs-tz');
+    const v = sel ? sel.value : '';
+    if (v) return v;
+    try { return Intl.DateTimeFormat().resolvedOptions().timeZone; } catch(e){ return 'UTC'; }
+  }
+
+  /* ─── Render local clock ─────────────────────────── */
+  function tickClock(){
+    const el = document.getElementById('cs-local-now');
+    if (!el) return;
+    const tz = getEffectiveTz();
+    el.textContent = fmtInTz(new Date(), tz, { hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:false }) + ' local';
+  }
+
+  /* ─── Render day pills (next 7 days) ─────────────── */
+  window.csRenderDays = function(){
+    userTz = getEffectiveTz();
+    selectedDay = null; selectedSlot = null;
+    const container = document.getElementById('cs-day-row');
+    if (!container) return;
+    container.innerHTML = '';
+    const now = new Date();
+    for(let i=0; i<7; i++){
+      const d = new Date(now);
+      d.setDate(now.getDate() + i);
+      // midnight of that calendar day in user's tz — we work with the date parts
+      const dayLabel = fmtInTz(d, userTz, { weekday:'short' });
+      const dayNum   = fmtInTz(d, userTz, { day:'numeric' });
+      const dayMonth = fmtInTz(d, userTz, { month:'short' });
+      const pill = document.createElement('div');
+      pill.className = 'cs-day' + (i===0?' today':'');
+      pill.dataset.idx = i;
+      pill.innerHTML = `<div class="cs-day-name">${dayLabel}</div><div class="cs-day-num">${dayNum}</div><div class="cs-day-month">${dayMonth}</div>`;
+      pill.addEventListener('click', () => {
+        document.querySelectorAll('.cs-day').forEach(p=>p.classList.remove('selected-day'));
+        pill.classList.add('selected-day');
+        selectedDay = d;
+        csRenderSlots();
+      });
+      container.appendChild(pill);
+    }
+    csRenderSlots(); // render with nothing selected yet
+    // update tz note
+    const note = document.getElementById('cs-tz-note');
+    if (note) note.textContent = 'Slots shown in your local time · Our team confirms within 24 h';
+  };
+
+  /* ─── Convert IST hours → ISO UTC for a given day ── */
+  // We create a Date representing the slot in IST, then get its UTC equivalent.
+  function istHourToUtcDate(dayRef, istHour){
+    // dayRef is a Date; we want to find the moment that is istHour:00 IST on the same IST calendar day
+    const istDateStr = fmtInTz(dayRef, 'Asia/Kolkata', { year:'numeric', month:'2-digit', day:'2-digit' });
+    // istDateStr → "DD/MM/YYYY" (en-GB format)
+    const [dd,mm,yyyy] = istDateStr.split('/');
+    const h = String(istHour).padStart(2,'0');
+    // Create date as IST using the offset trick: IST = UTC+5:30
+    const utcMs = Date.UTC(Number(yyyy), Number(mm)-1, Number(dd), istHour, 0, 0) - (5*60+30)*60*1000;
+    return new Date(utcMs);
+  }
+
+  /* ─── Render time slots ───────────────────────────── */
+  window.csRenderSlots = function(){
+    userTz = getEffectiveTz();
+    const grid = document.getElementById('cs-slot-grid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    selectedSlot = null;
+
+    const dayRefIst = selectedDay || new Date(); // default to today for preview
+
+    SLOT_HOURS_IST.forEach(istHour => {
+      const slotUtc = istHourToUtcDate(dayRefIst, istHour);
+      // Skip past slots (plus 30 min buffer)
+      const isPast = slotUtc.getTime() < Date.now() + 30*60*1000;
+      const localTime = fmtInTz(slotUtc, userTz, { hour:'2-digit', minute:'2-digit', hour12:false });
+      const localPeriod = fmtInTz(slotUtc, userTz, { hour:'numeric', hour12:true }).replace(/\d/g,'').trim().toUpperCase();
+      // IST label for info
+      const istTime = fmtInTz(slotUtc, 'Asia/Kolkata', { hour:'2-digit', minute:'2-digit', hour12:false });
+
+      const btn = document.createElement('div');
+      btn.className = 'cs-slot' + (isPast ? ' unavailable' : '');
+      btn.dataset.utc = slotUtc.toISOString();
+      btn.innerHTML = `<div class="cs-slot-time">${localTime}</div><div class="cs-slot-tz">${localPeriod || userTz.split('/').pop().replace('_',' ')}</div>`;
+      if (!isPast) {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.cs-slot').forEach(s=>s.classList.remove('selected'));
+          btn.classList.add('selected');
+          selectedSlot = slotUtc.toISOString();
+        });
+      }
+      grid.appendChild(btn);
+    });
+
+    if (!selectedDay) {
+      grid.innerHTML = '<div style="font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--cream-faint);padding:14px 0;text-align:center;grid-column:1/-1;">Select a day above to see available slots</div>';
+    }
+  };
+
+  /* ─── Service chip selector ───────────────────────── */
+  window.csSelectService = function(el, val){
+    document.querySelectorAll('.cs-service-chip').forEach(c=>c.classList.remove('selected'));
+    el.classList.add('selected');
+    const h = document.getElementById('cs-service-val');
+    if (h) h.value = val;
+  };
+
+  /* ─── Submit handler ──────────────────────────────── */
+  window.handleConsultSubmit = async function(){
+    const name    = document.getElementById('cs-name')?.value.trim();
+    const email   = document.getElementById('cs-email')?.value.trim();
+    const service = document.getElementById('cs-service-val')?.value;
+    const notes   = document.getElementById('cs-notes')?.value.trim();
+    const errEl   = document.getElementById('cs-error');
+    const succEl  = document.getElementById('cs-success');
+    const btn     = document.getElementById('cs-submit-btn');
+
+    if (errEl) errEl.style.display='none';
+
+    const mark = (id) => { const el=document.getElementById(id); if(el) el.style.borderColor='rgba(255,100,100,.5)'; };
+    if (!name)  { mark('cs-name'); return; }
+    if (!email) { mark('cs-email'); return; }
+    if (!service) {
+      if (errEl) { errEl.textContent='Please select what you\'d like to discuss.'; errEl.style.display='block'; }
+      return;
+    }
+    if (!selectedDay) {
+      if (errEl) { errEl.textContent='Please pick a day.'; errEl.style.display='block'; }
+      return;
+    }
+    if (!selectedSlot) {
+      if (errEl) { errEl.textContent='Please select an available time slot.'; errEl.style.display='block'; }
+      return;
+    }
+
+    // Build IST string for admin display
+    const slotDate = new Date(selectedSlot);
+    const slotIst  = fmtInTz(slotDate, 'Asia/Kolkata', {
+      weekday:'short', day:'numeric', month:'short', year:'numeric',
+      hour:'2-digit', minute:'2-digit', hour12:true
+    }) + ' IST';
+
+    const payload = {
+      name, email,
+      service_interest: service,
+      slot_utc: selectedSlot,
+      slot_ist: slotIst,
+      user_tz:  getEffectiveTz(),
+      notes:    notes || null,
+    };
+
+    const origLabel = btn ? btn.textContent : '';
+    if (btn) { btn.disabled=true; btn.textContent='Booking…'; }
+
+    try {
+      const BURL = window.location.hostname==='localhost'
+        ? 'http://localhost:4000'
+        : 'https://anvoxa-backend-production.up.railway.app';
+      const res = await fetch(BURL+'/consultations', {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) { const ed=await res.json().catch(()=>{}); throw new Error(ed?.error||'Booking failed'); }
+      if (succEl) { succEl.style.display='block'; setTimeout(()=>succEl.style.display='none',8000); }
+      // Reset
+      ['cs-name','cs-email','cs-notes'].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=''; });
+      document.getElementById('cs-service-val').value='';
+      document.querySelectorAll('.cs-service-chip').forEach(c=>c.classList.remove('selected'));
+      document.querySelectorAll('.cs-slot').forEach(s=>s.classList.remove('selected'));
+      document.querySelectorAll('.cs-day').forEach(d=>d.classList.remove('selected-day'));
+      selectedDay=null; selectedSlot=null;
+      csRenderSlots();
+    } catch(err){
+      console.error('[consult submit]',err);
+      if (errEl) { errEl.textContent=err.message||'Something went wrong — please try again or email hello@anvoxa.com'; errEl.style.display='block'; }
+    } finally {
+      if (btn) { btn.disabled=false; btn.textContent=origLabel; }
+    }
+  };
+
+  /* ─── Init ────────────────────────────────────────── */
+  document.addEventListener('DOMContentLoaded', function(){
+    initTzSelect();
+    csRenderDays();
+    setInterval(tickClock, 1000);
+    tickClock();
+  });
+})();
+/* ══════════════════════════════════════════════════════ */
+
 async function handleEnquirySubmit(e){
   if(e) e.preventDefault();
   // Honeypot check — bots fill the hidden field, humans don't
@@ -7523,7 +7991,11 @@ window.addEventListener('load', function initFirebase(){
     if (!document.getElementById('login-modal').classList.contains('open')) return;
     if (isAdminMode()) adminLogin();
   });
-
+  window.handleNavSignin = handleNavSignin;
+  window.closeLoginModal = closeLoginModal;
+  window.signInWithGoogle = signInWithGoogle;
+  window.adminLogin = adminLogin;
+   
   refreshSigninButton();
   const _params  = new URLSearchParams(window.location.search);
   const _isAdminUrl = window.location.pathname === '/admin-login' || _params.has('admin');

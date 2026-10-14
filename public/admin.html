@@ -4,7 +4,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Anvoxa — Admin Console</title>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="/supabase.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@400;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -221,6 +221,10 @@
     .modal-close:hover { color: var(--cream); }
 
     .modal-body { padding: 24px; }
+    #consult-mini-stats { grid-template-columns: repeat(4, 1fr); }
+    .detail-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: rgba(245,235,217,0.35); margin-bottom: 5px; }
+    .detail-value { font-size: 13px; color: var(--cream); line-height: 1.5; word-break: break-word; }
+    .res-tag { display: inline-block; font-family: 'JetBrains Mono', monospace; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,185,103,.65); border: 1px solid rgba(255,185,103,.18); padding: 4px 8px; border-radius: 99px; }
     .detail-row { display: grid; grid-template-columns: 140px 1fr; gap: 8px; margin-bottom: 14px; padding-bottom: 14px; border-bottom: 1px solid var(--border); align-items: start; }
     .detail-row:last-of-type { border-bottom: none; }
     .detail-key { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: rgba(245,235,217,0.3); padding-top: 2px; }
@@ -309,6 +313,15 @@
         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
         <span style="flex:1;">Other</span>
         <span class="sb-purpose-badge" id="badge-purpose-other"></span>
+      </a>
+    </nav>
+
+    <div class="sb-section-label">Consultations</div>
+    <nav class="sb-nav">
+      <a class="sb-link" onclick="showView('consultations')" id="nav-consultations">
+        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        All Bookings
+        <span id="consult-badge" style="margin-left:auto;background:rgba(95,240,224,0.15);color:#5ff0e0;font-family:'JetBrains Mono',monospace;font-size:9px;padding:1px 7px;border-radius:10px;display:none;"></span>
       </a>
     </nav>
 
@@ -537,6 +550,64 @@
       </div>
     </div>
 
+
+    <!-- ── CONSULTATIONS VIEW ── -->
+    <div class="view" id="view-consultations">
+      <div class="page-header fade-in">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(95,240,224,.5);margin-bottom:6px;">Bookings</div>
+          <div class="page-title">Consultations <em>.</em></div>
+        </div>
+        <button class="refresh-btn" onclick="loadConsultations()">
+          <svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
+          Refresh
+        </button>
+      </div>
+
+      <!-- Mini stats -->
+      <div class="mini-stats-grid fade-in" id="consult-mini-stats">
+        <div class="mini-stat-card"><div class="mini-stat-label">Pending</div><div class="mini-stat-value" id="cs-stat-pending">—</div></div>
+        <div class="mini-stat-card"><div class="mini-stat-label">Confirmed</div><div class="mini-stat-value" id="cs-stat-confirmed">—</div></div>
+        <div class="mini-stat-card"><div class="mini-stat-label">Completed</div><div class="mini-stat-value" id="cs-stat-completed">—</div></div>
+        <div class="mini-stat-card"><div class="mini-stat-label">Total</div><div class="mini-stat-value" id="cs-stat-total">—</div></div>
+      </div>
+
+      <div class="panel fade-in">
+        <div class="panel-head">
+          <span class="panel-title">Booked Slots</span>
+          <div style="display:flex;gap:8px;align-items:center;">
+            <select class="filter-select" id="cs-filter-status" onchange="filterConsultations()" style="font-size:11px;padding:6px 28px 6px 10px;">
+              <option value="">All statuses</option>
+              <option value="pending">Pending</option>
+              <option value="confirmed">Confirmed</option>
+              <option value="completed">Completed</option>
+              <option value="cancelled">Cancelled</option>
+              <option value="no_show">No-show</option>
+            </select>
+            <span id="cs-count" style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(245,235,217,0.35);"></span>
+          </div>
+        </div>
+        <div class="panel-body" style="padding:0 0 8px;">
+          <div class="table-wrap">
+            <table>
+              <thead><tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Service</th>
+                <th>Slot (IST)</th>
+                <th>Visitor TZ</th>
+                <th>Status</th>
+                <th>Booked</th>
+              </tr></thead>
+              <tbody id="consult-tbody">
+                <tr><td colspan="8"><div class="loading"><div class="spinner"></div> Loading…</div></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
 
   </main>
 </div>
@@ -1052,6 +1123,182 @@ const BACKEND = window.location.hostname === 'localhost'
     t.classList.add('show');
     setTimeout(()=>t.classList.remove('show'), 3000);
   }
+
+  /* ══════════════════════════════════════════════════════
+     CONSULTATIONS — data load, render, status update
+  ══════════════════════════════════════════════════════ */
+  let allConsultations = [];
+
+  const CONSULT_STATUS_COLORS = {
+    pending:   { cls:'new',       label:'Pending'   },
+    confirmed: { cls:'contacted', label:'Confirmed' },
+    completed: { cls:'closed',    label:'Completed' },
+    cancelled: { cls:'closed',    label:'Cancelled' },
+    no_show:   { cls:'progress',  label:'No-show'   },
+  };
+
+  async function loadConsultations() {
+    const tbody = document.getElementById('consult-tbody');
+    if (tbody) tbody.innerHTML = '<tr><td colspan="8"><div class="loading"><div class="spinner"></div> Loading…</div></td></tr>';
+    try {
+      const { data, error } = await _sb
+        .from('consultations')
+        .select('*')
+        .order('slot_utc', { ascending: true });
+      if (error) throw error;
+      allConsultations = data || [];
+      renderConsultStats();
+      renderConsultTable();
+      renderConsultBadge();
+    } catch(err) {
+      console.error('[consultations load]', err);
+      if (tbody) tbody.innerHTML = `<tr><td colspan="8" style="color:var(--red);font-family:'JetBrains Mono',monospace;font-size:11px;padding:20px;text-align:center;">Failed to load — ${esc(err.message)}</td></tr>`;
+    }
+  }
+
+  function renderConsultStats() {
+    const counts = { pending:0, confirmed:0, completed:0 };
+    allConsultations.forEach(c => {
+      if (counts[c.status] !== undefined) counts[c.status]++;
+    });
+    const s = id => document.getElementById(id);
+    if (s('cs-stat-pending'))   s('cs-stat-pending').textContent   = counts.pending;
+    if (s('cs-stat-confirmed')) s('cs-stat-confirmed').textContent = counts.confirmed;
+    if (s('cs-stat-completed')) s('cs-stat-completed').textContent = counts.completed;
+    if (s('cs-stat-total'))     s('cs-stat-total').textContent     = allConsultations.length;
+  }
+
+  function renderConsultBadge() {
+    const pending = allConsultations.filter(c => c.status === 'pending').length;
+    const badge = document.getElementById('consult-badge');
+    if (badge) {
+      badge.textContent = pending > 0 ? pending : '';
+      badge.style.display = pending > 0 ? '' : 'none';
+    }
+  }
+
+  function filterConsultations() {
+    const statusVal = document.getElementById('cs-filter-status')?.value || '';
+    const filtered = allConsultations.filter(c =>
+      !statusVal || c.status === statusVal
+    );
+    renderConsultRows(filtered);
+  }
+
+  function renderConsultTable() {
+    filterConsultations();
+  }
+
+  function renderConsultRows(list) {
+    const tbody = document.getElementById('consult-tbody');
+    const count = document.getElementById('cs-count');
+    if (count) count.textContent = list.length + ' booking' + (list.length !== 1 ? 's' : '');
+    if (!tbody) return;
+    if (!list.length) {
+      tbody.innerHTML = '<tr><td colspan="8"><div class="no-data">No bookings yet</div></td></tr>';
+      return;
+    }
+    tbody.innerHTML = list.map((c, i) => {
+      const sc = CONSULT_STATUS_COLORS[c.status] || { cls:'new', label: c.status };
+      // Format slot in IST for admin
+      const slotDisplay = c.slot_ist || (c.slot_utc
+        ? new Date(c.slot_utc).toLocaleString('en-GB', {
+            timeZone:'Asia/Kolkata', day:'numeric', month:'short', year:'numeric',
+            hour:'2-digit', minute:'2-digit', hour12:true
+          }) + ' IST'
+        : '—');
+      // Highlight upcoming pending slots
+      const isUpcoming = c.status === 'pending' && c.slot_utc && new Date(c.slot_utc) > new Date();
+      return `<tr style="${isUpcoming ? 'background:rgba(255,185,103,.04);' : ''}" onclick="openConsultModal('${c.id}')" style="cursor:pointer;">
+        <td style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(245,235,217,0.3);">${i+1}</td>
+        <td style="font-weight:500;">${esc(c.name||'—')}</td>
+        <td style="font-family:'JetBrains Mono',monospace;font-size:10px;">${esc(c.email||'—')}</td>
+        <td><span class="res-tag" style="font-size:9px;">${esc(c.service_interest||'—')}</span></td>
+        <td style="font-family:'JetBrains Mono',monospace;font-size:10px;white-space:nowrap;">${esc(slotDisplay)}</td>
+        <td style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(245,235,217,0.4);">${esc(c.user_tz||'—')}</td>
+        <td><span class="badge ${sc.cls}">${esc(sc.label)}</span></td>
+        <td style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(245,235,217,0.35);">${fmtDate(c.created_at)}</td>
+      </tr>`;
+    }).join('');
+  }
+
+  function openConsultModal(id) {
+    const c = allConsultations.find(x => x.id === id);
+    if (!c) return;
+    const sc = CONSULT_STATUS_COLORS[c.status] || { cls:'new', label: c.status };
+    const slotDisplay = c.slot_ist || (c.slot_utc
+      ? new Date(c.slot_utc).toLocaleString('en-GB', {
+          timeZone:'Asia/Kolkata', day:'numeric', month:'short', year:'numeric',
+          hour:'2-digit', minute:'2-digit', hour12:true
+        }) + ' IST'
+      : '—');
+    document.getElementById('modal-name').textContent = c.name + ' — Consultation';
+    document.getElementById('modal-body').innerHTML = `
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px 24px;margin-bottom:20px;">
+        <div><div class="detail-label">Name</div><div class="detail-value">${esc(c.name||'—')}</div></div>
+        <div><div class="detail-label">Email</div><div class="detail-value"><a href="mailto:${esc(c.email)}" style="color:var(--amber);">${esc(c.email||'—')}</a></div></div>
+        <div><div class="detail-label">Service Interest</div><div class="detail-value">${esc(c.service_interest||'—')}</div></div>
+        <div><div class="detail-label">Status</div><div class="detail-value"><span class="badge ${sc.cls}">${esc(sc.label)}</span></div></div>
+        <div><div class="detail-label">Slot (IST — admin)</div><div class="detail-value" style="font-family:'JetBrains Mono',monospace;font-size:12px;">${esc(slotDisplay)}</div></div>
+        <div><div class="detail-label">Visitor Time Zone</div><div class="detail-value" style="font-family:'JetBrains Mono',monospace;font-size:12px;">${esc(c.user_tz||'—')}</div></div>
+        <div style="grid-column:1/-1;"><div class="detail-label">Notes from visitor</div><div class="detail-value" style="white-space:pre-wrap;">${esc(c.notes||'—')}</div></div>
+        <div style="grid-column:1/-1;"><div class="detail-label">Meet Link</div><div class="detail-value">${c.meet_link ? `<a href="${esc(c.meet_link)}" target="_blank" style="color:var(--amber);">${esc(c.meet_link)}</a>` : '<span style="opacity:.4;">not set yet</span>'}</div></div>
+        <div style="grid-column:1/-1;"><div class="detail-label">Admin Notes</div><div class="detail-value" style="white-space:pre-wrap;">${esc(c.admin_notes||'—')}</div></div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;">
+        ${['pending','confirmed','completed','cancelled','no_show'].map(s => {
+          const sc2 = CONSULT_STATUS_COLORS[s] || { label:s };
+          return `<button class="refresh-btn${c.status===s?' active':''}" onclick="updateConsultStatus('${c.id}','${s}')">${sc2.label||s}</button>`;
+        }).join('')}
+      </div>
+      <div style="display:flex;gap:10px;align-items:flex-end;">
+        <div style="flex:1;">
+          <div class="detail-label" style="margin-bottom:6px;">Set / update Meet link</div>
+          <input id="cs-meet-input" type="url" placeholder="https://meet.google.com/xxx-xxxx-xxx"
+            value="${esc(c.meet_link||'')}"
+            style="width:100%;background:rgba(5,4,14,.5);border:1px solid rgba(255,185,103,.18);border-radius:8px;
+              padding:9px 12px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--cream);outline:none;"/>
+        </div>
+        <button class="refresh-btn" onclick="saveConsultMeetLink('${c.id}')">Save link</button>
+      </div>`;
+    document.getElementById('modal-overlay').classList.add('open');
+  }
+
+  async function updateConsultStatus(id, newStatus) {
+    try {
+      const { error } = await _sb.from('consultations').update({ status: newStatus }).eq('id', id);
+      if (error) throw error;
+      const c = allConsultations.find(x => x.id === id);
+      if (c) c.status = newStatus;
+      showToast('Status updated to ' + newStatus);
+      renderConsultStats(); renderConsultTable(); renderConsultBadge();
+      // Refresh modal in-place
+      openConsultModal(id);
+    } catch(err) {
+      showToast('Failed: ' + err.message, true);
+    }
+  }
+
+  async function saveConsultMeetLink(id) {
+    const val = document.getElementById('cs-meet-input')?.value.trim();
+    try {
+      const { error } = await _sb.from('consultations').update({ meet_link: val || null }).eq('id', id);
+      if (error) throw error;
+      const c = allConsultations.find(x => x.id === id);
+      if (c) c.meet_link = val || null;
+      showToast('Meet link saved');
+      openConsultModal(id);
+    } catch(err) {
+      showToast('Failed: ' + err.message, true);
+    }
+  }
+
+  /* ── Patch showView to load consultations on demand ── */
+  const _origShowView = showView;
+  showView = function(name) {
+    _origShowView(name);
+    if (name === 'consultations') loadConsultations();
+  };
 
   /* ── INIT ── */
   loadData();

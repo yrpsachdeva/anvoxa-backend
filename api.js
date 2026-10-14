@@ -77,6 +77,55 @@ router.post('/enquiries', async (req, res) => {
 });
 
 // ─────────────────────────────────────────────────────────────
+// POST /consultations — public route, called from the "Book a Slot"
+// widget on the contact page (home.html). No auth required.
+// body: { name, email, service_interest, slot_utc, slot_ist, user_tz, notes }
+//   slot_utc   — ISO 8601 UTC string (ground truth)
+//   slot_ist   — human-readable IST string for admin display
+//   user_tz    — IANA timezone the visitor used (e.g. "America/New_York")
+// ─────────────────────────────────────────────────────────────
+router.post('/consultations', async (req, res) => {
+  try {
+    const {
+      name,
+      email,
+      service_interest,
+      slot_utc,
+      slot_ist,
+      user_tz,
+      notes,
+    } = req.body || {};
+
+    if (!name || !email || !slot_utc || !service_interest) {
+      return res.status(400).json({
+        error: 'name, email, service_interest, and slot_utc are required',
+      });
+    }
+
+    const { data, error } = await getSupabase()
+      .from('consultations')
+      .insert({
+        name,
+        email,
+        service_interest,
+        slot_utc,
+        slot_ist:  slot_ist  || null,
+        user_tz:   user_tz   || null,
+        notes:     notes     || null,
+        status:    'pending',
+      })
+      .select()
+      .single();
+
+    if (error) throw error;
+    return res.status(201).json({ consultation: data });
+  } catch (err) {
+    console.error('[POST /consultations]', err);
+    return res.status(500).json({ error: 'Failed to book slot' });
+  }
+});
+
+// ─────────────────────────────────────────────────────────────
 // GET /engagements — list current user's engagements
 // (clients see their own; team sees all)
 // ─────────────────────────────────────────────────────────────
